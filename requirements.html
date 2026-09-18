@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FriendnPal & OurPadi — Product Requirements Document (PRD)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111726;
+      --card-border: #1e283d;
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 30px;
+      margin-bottom: 36px;
+    }
+
+    .status-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-purple {
+      background: rgba(139, 92, 246, 0.15);
+      color: #a78bfa;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+    }
+
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    .badge-gray {
+      background: rgba(148, 163, 184, 0.12);
+      color: #94a3b8;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      background: #003152;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      max-width: 860px;
+    }
+
+    .methodology-banner {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .methodology-title {
+      font-weight: 700;
+      color: #93c5fd;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .methodology-flow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .flow-arrow {
+      color: var(--accent-blue);
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 40px 0 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    p {
+      color: var(--text-soft);
+      margin-bottom: 16px;
+      font-size: 0.98rem;
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      margin: 20px 0 30px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    th {
+      background-color: #0d1322;
+      color: #94a3b8;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--card-border);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-soft);
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .user-story-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 14px;
+    }
+
+    .user-story-title {
+      font-weight: 700;
+      color: #93c5fd;
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+    }
+
+    .user-story-body {
+      color: var(--text-soft);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="status-bar">
+        <span class="badge badge-blue">PRD v2.1.0</span>
+        <span class="badge badge-green">Dual-Platform Production</span>
+        <span class="badge badge-purple">OurPadi iOS & Android v2.1.0</span>
+        <span class="badge badge-amber">FriendnPal Clinician RPM</span>
+      </div>
+      <h1>FriendnPal & OurPadi — Product Requirements Document</h1>
+      <p class="subtitle">
+        Comprehensive PRD defining the dual-platform digital mental health ecosystem: the <strong>OurPadi mobile application</strong> (featuring AI companion, peer communities, mindfulness/ASMR, motivational checklists, journals, and mood check-ins) and the <strong>FriendnPal Clinician Remote Patient Monitoring (RPM) Dashboard</strong>.
+      </p>
+
+      <div class="methodology-banner">
+        <span class="methodology-title">Core Methodology:</span>
+        <div class="methodology-flow">
+          <span>Prediction</span>
+          <span class="flow-arrow">→</span>
+          <span>Prevention</span>
+          <span class="flow-arrow">→</span>
+          <span>Proactive Intervention</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Problem Statement -->
+    <section>
+      <h2>1. Problem Statement</h2>
+      <div class="section-card">
+        <p>
+          Traditional mental health systems operate on a broken, reactive model (<em>"Symptoms &rarr; Acute Crisis &rarr; Emergency Diagnosis &rarr; Belated Treatment"</em>). For millions of individuals experiencing mental health conditions, severe emotional stress, depression, addiction, parental trauma, academic strain, and burnout, intervention comes too late. This leads to lost productivity, chronic physical illness, relationship collapse, and preventable suicides—a crisis compounded in developing regions like Nigeria by acute therapist shortages, social stigma, and infrastructure blackouts.
+        </p>
+        <p>
+          FriendnPal solves this by inverting the paradigm into a <strong>proactive digital health platform</strong>: utilizing the <strong>OurPadi</strong> mobile app (iOS & Android) for continuous mood tracking, AI companionship, daily motivational checklists, peer support communities, guided mindfulness/ASMR, journaling, mental health resource libraries, and clinical assessments (WHO-5, GAD-7, PHQ-9), paired with the <strong>FriendnPal Remote Patient Monitoring (RPM) Dashboard</strong> for clinicians. By identifying downward behavioral and psychological trends early, the platform delivers preventive micro-interventions and proactive clinical triage <em>before</em> a manageable struggle escalates into a catastrophic emergency.
+        </p>
+      </div>
+    </section>
+
+    <!-- Target Segments -->
+    <section>
+      <h2>2. Target User Segments (Platform Scope vs. Validation Beachhead)</h2>
+      <div class="section-card">
+        <h3 style="color:#38bdf8; margin-bottom:8px; font-size:1.1rem;">A. General Platform Population (The Broad Audience)</h3>
+        <p>
+          <strong>Who it is for:</strong> Any individual experiencing mental health challenges, emotional distress, chronic anxiety, burnout, addiction recovery, parental trauma, academic pressure, or depression. Young adults, university students, corporate employees, healthcare personnel, and working professionals (ages 18–45).
+        </p>
+        <p>
+          <strong>Job-To-Be-Done:</strong> Continuous, judgment-free mental health support, longitudinal tracking of well-being, peer community connection, guided calming tools, and timely connection to certified clinicians when risks emerge.
+        </p>
+
+        <h3 style="color:#fbbf24; margin:20px 0 8px 0; font-size:1.1rem;">B. High-Intensity Validation Persona (The "Beachhead" Scenario)</h3>
+        <p>
+          <strong>Primary Persona:</strong> The <em>"Solitary High-Stakes Remote Worker"</em> (exemplified by Amina, a 24-year-old Upwork copywriter in Garki, Abuja).
+        </p>
+        <p>
+          <strong>Role in Product Strategy:</strong> Serves as the ultimate stress-test benchmark for the platform. She faces the highest environmental friction: nocturnal US shifts (10:00 PM – 6:00 AM WAT), frequent power blackouts, generator noise, solitary caretaking of a chronically ill dependent (sickle-cell warrior brother), and acute deadline anxiety where emotional freeze directly threatens dollar earnings.
+        </p>
+      </div>
+    </section>
+
+    <!-- Functional Requirements Table -->
+    <section>
+      <h2>3. Core Functional Requirements (FR) Table</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 12%;">ID</th>
+              <th style="width: 28%;">Feature</th>
+              <th style="width: 45%;">System & Technical Description</th>
+              <th style="width: 15%;">Priority</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>FR-01</code></td>
+              <td><strong>OurPadi Mobile Client (iOS & Android)</strong></td>
+              <td>Cross-platform patient app (iOS App Store & Android v2.1.0). Provides secure biometric onboarding, 24/7 AI companion chat, taskbar community navigation, mood tracking, and offline-resilient local storage.</td>
+              <td><span class="badge badge-green">Must Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-02</code></td>
+              <td><strong>Culturally Fluent AI Companion Engine</strong></td>
+              <td>Conversational de-escalation agent supporting standard English and Nigerian Pidgin. Trained on empathetic, non-judgmental dialogue and clinical micro-interventions.</td>
+              <td><span class="badge badge-green">Must Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-03</code></td>
+              <td><strong>Clinical Assessment Engine (RPM Intake)</strong></td>
+              <td>Automated longitudinal tracking utilizing validated clinical frameworks: <strong>WHO-5</strong> (Well-Being), <strong>GAD-7</strong> (Anxiety), and <strong>PHQ-9</strong> (Depression markers). Calculates real-time severity scores.</td>
+              <td><span class="badge badge-green">Must Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-04</code></td>
+              <td><strong>Predictive Risk & Prevention Algorithm</strong></td>
+              <td>Background analytics engine detecting downward score trajectories (>30% dip over 7 days or journal sentiment shifts) to trigger preventive CBT nudges.</td>
+              <td><span class="badge badge-green">Must Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-05</code></td>
+              <td><strong>Emergency Crisis Handoff Protocol</strong></td>
+              <td>Hybrid safety net: instant crisis escalation on explicit danger keywords; direct safety confirmation question for ambiguous distress; serves immediate emergency response card with direct WhatsApp link (<code>wa.me/...</code>) and hotline (FD-01).</td>
+              <td><span class="badge badge-green">Must Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-06</code></td>
+              <td><strong>"Workday Rescue" Triage Mode</strong></td>
+              <td>Operational panic recovery tool: prompts deadline and breaks deliverables into structured 15-minute micro-sprints via quick-tap routing (<code>[Calm My Panic]</code> vs <code>[Rescue My Deadline]</code>).</td>
+              <td><span class="badge badge-green">Must Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-07</code></td>
+              <td><strong>FriendnPal Clinician RPM Dashboard</strong></td>
+              <td>Secure web portal for licensed therapists and care teams: real-time patient risk tiering (Normal, Moderate, High, Critical), longitudinal score curves, alert queue, and clinical notes.</td>
+              <td><span class="badge badge-green">Must Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-08</code></td>
+              <td><strong>Continuous Mood Check-ins & Shift Log</strong></td>
+              <td>Frictionless mood logging with emotion wheel, sleep intention, energy rating, and stress trigger tags (e.g. power outage, work deadline, caretaking).</td>
+              <td><span class="badge badge-blue">Should Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-09</code></td>
+              <td><strong>Daily Motivational Checklist & Habits</strong></td>
+              <td>Interactive daily habit checklist featuring positive affirmations, hydration tracking, mindfulness prompts, and daily self-care milestone badges.</td>
+              <td><span class="badge badge-blue">Should Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-10</code></td>
+              <td><strong>Mindfulness & Breathing Exercises Library</strong></td>
+              <td>Structured repository of somatic de-escalation exercises: 4-4-4 box breathing with visual animated guide, 5-4-3-2-1 sensory grounding, progressive muscle relaxation, and mindful breathing.</td>
+              <td><span class="badge badge-blue">Should Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-11</code></td>
+              <td><strong>ASMR & Calming Soundscapes</strong></td>
+              <td>Curated nocturnal and daytime audio player featuring high-quality relaxing soundscapes (rain, gentle streams, brown noise, whispered encouragement) designed for sleep aid and panic reduction.</td>
+              <td><span class="badge badge-blue">Should Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-12</code></td>
+              <td><strong>Peer Support Communities (Taskbar Nav)</strong></td>
+              <td>Dedicated community tab on bottom taskbar offering safe, moderated anonymous peer support groups: Parental Abuse Support Group, Addiction & Recovery Group, Student Support Group, Freelancers Group.</td>
+              <td><span class="badge badge-blue">Should Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-13</code></td>
+              <td><strong>Thought & Gratitude Journals (Journals)</strong></td>
+              <td>Private, encrypted in-app journal supporting freeform writing, sentiment tagging, guided cognitive reframing prompts, and gratitude reflection.</td>
+              <td><span class="badge badge-blue">Should Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-14</code></td>
+              <td><strong>Mental Health Resource Library</strong></td>
+              <td>Searchable repository of psychoeducational articles, clinical self-help guides, crisis hotlines, trauma management articles, and practical mental health tips.</td>
+              <td><span class="badge badge-blue">Should Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-15</code></td>
+              <td><strong>Human Therapy Marketplace Booking</strong></td>
+              <td>Integrated scheduling module allowing subscribed users to book 45-minute virtual video/voice consultations with certified Nigerian therapists at fixed session rates (7,500 – 15,000 NGN).</td>
+              <td><span class="badge badge-blue">Should Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-16</code></td>
+              <td><strong>Discreet Recurring Subscription</strong></td>
+              <td>Automated 5,000 NGN/month recurring membership via Paystack/Flutterwave with discreet bank billing descriptors ("FNP Services") to ensure absolute stigma privacy.</td>
+              <td><span class="badge badge-blue">Should Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-17</code></td>
+              <td><strong>WhatsApp Low-Bandwidth Gateway</strong></td>
+              <td>Auxiliary lightweight conversational interface connected to the central backend for users during network throttling or data exhaustion.</td>
+              <td><span class="badge badge-purple">Could Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-18</code></td>
+              <td><strong>Weekly Mental Health Digest</strong></td>
+              <td>Automated weekly report delivered to users highlighting mood stability, clinical score progress, and environmental stress correlations.</td>
+              <td><span class="badge badge-purple">Could Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-19</code></td>
+              <td><strong>32 Language Expansion</strong></td>
+              <td>NLP dialect expansion beyond English and Nigerian Pidgin. Deferred to post-scale.</td>
+              <td><span class="badge badge-gray">Won't Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-20</code></td>
+              <td><strong>Synthetic AI Voice Calling Bot</strong></td>
+              <td>Real-time speech-to-speech voice generation or outbound voice calling. Excluded to maintain privacy and data efficiency.</td>
+              <td><span class="badge badge-gray">Won't Have</span></td>
+            </tr>
+            <tr>
+              <td><code>FR-21</code></td>
+              <td><strong>Invasive Device Surveillance</strong></td>
+              <td>Continuous tracking of background keystrokes, GPS, or ambient microphone audio. Strictly barred for user trust and privacy.</td>
+              <td><span class="badge badge-gray">Won't Have</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- User Stories -->
+    <section>
+      <h2>4. User Stories</h2>
+      <div class="user-story-card">
+        <div class="user-story-title">US-01: Proactive Early Detection</div>
+        <div class="user-story-body">As a university student or professional whose well-being has declined over 2 weeks, I want OurPadi to recognize the downward trend in my WHO-5 score and suggest preventive CBT exercises, so that I correct mental fatigue before it spirals into depression.</div>
+      </div>
+      <div class="user-story-card">
+        <div class="user-story-title">US-02: Acute 3:00 AM Panic Reset & Somatic Exercises</div>
+        <div class="user-story-body">As a nocturnal gig copywriter paralyzed by panic during an urgent client delivery, I want to tap [Calm My Panic] and follow paced somatic breathing, sensory grounding, or listen to calming ASMR soundscapes, so that my heart rate normalizes and I can complete my work.</div>
+      </div>
+      <div class="user-story-card">
+        <div class="user-story-title">US-03: Workday Rescue & Deadline Salvage</div>
+        <div class="user-story-body">As an overwhelmed user facing an impending work deadline, I want the app to break my chaotic assignment into structured 15-minute focus intervals, so that I overcome task paralysis and protect my livelihood.</div>
+      </div>
+      <div class="user-story-card">
+        <div class="user-story-title">US-04: Peer Community Support & Shared Lived Experience</div>
+        <div class="user-story-body">As an individual recovering from addiction, parental abuse, or severe student stress, I want to tap the Communities tab on my navigation bar and connect anonymously with others in my specific support group, so that I overcome isolation and gain practical advice.</div>
+      </div>
+      <div class="user-story-card">
+        <div class="user-story-title">US-05: Daily Motivational Habits & Journaling</div>
+        <div class="user-story-body">As an individual working on daily emotional stability, I want to check off my daily motivational checklist, log my mood, and write in my private journal, so that I maintain positive daily momentum, express hidden thoughts safely, and cultivate gratitude.</div>
+      </div>
+      <div class="user-story-card">
+        <div class="user-story-title">US-06: Mental Health Resource Exploration</div>
+        <div class="user-story-body">As a user seeking to understand my trauma, anxiety, or panic triggers, I want quick access to an educational mental health resource library within the app, so that I learn evidence-based coping strategies at my own pace.</div>
+      </div>
+      <div class="user-story-card">
+        <div class="user-story-title">US-07: Clinician Oversight & Remote Monitoring</div>
+        <div class="user-story-body">As a licensed counselor monitoring a caseload on the FriendnPal RPM Dashboard, I want to see real-time alerts when a patient's PHQ-9 or distress score spikes into the critical threshold, so that I can proactively intervene before emergency hospitalization is required.</div>
+      </div>
+      <div class="user-story-card">
+        <div class="user-story-title">US-08: Emergency Crisis Gateway</div>
+        <div class="user-story-body">As a user in acute suicidal distress, I want the app to recognize my emergency and immediately present direct tap-to-connect links to an on-call human specialist via WhatsApp and phone hotline, so that I receive compassionate human help.</div>
+      </div>
+    </section>
+
+    <!-- Out of Scope -->
+    <section>
+      <h2>5. Explicit Out-of-Scope List (This Build)</h2>
+      <div class="section-card">
+        <ul style="padding-left: 20px; color: var(--text-soft); line-height: 1.8;">
+          <li><strong>No 32 Languages:</strong> Platform NLP supports only standard Nigerian English and Nigerian Pidgin English.</li>
+          <li><strong>No AI Voice Synthesis or Outbound Calling:</strong> All interaction is text-, card-, and audio-stream-driven (pre-recorded ASMR).</li>
+          <li><strong>No Invasive Device Surveillance:</strong> Zero background keystroke tracking, ambient listening, or GPS telemetry.</li>
+          <li><strong>No Bundled Human Therapy in the 5,000 NGN Tier:</strong> Covers unlimited AI companion triage, assessments, communities, checklists, ASMR, resource library, and journals. Human therapy is billed pay-per-session.</li>
+          <li><strong>No Medical Prescriptions or Clinical Pharmacy:</strong> Platform does not dispense medications.</li>
+          <li><strong>No Live Mid-Chat Counselor Hijacking:</strong> Crisis handoffs are delivered via direct emergency WhatsApp links (<code>wa.me/...</code>).</li>
+          <li><strong>No Autonomous Mode-Guessing:</strong> Routing is driven strictly by explicit buttons (<code>[Calm My Panic]</code> vs <code>[Rescue My Deadline]</code>).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Founder Decisions -->
+    <section>
+      <h2>6. Founder Decisions Log</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Question</th>
+              <th>Decision</th>
+              <th>Applies To</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>FD-01</strong></td>
+              <td>Emergency counselor handoff mechanism</td>
+              <td><strong>Option B (Direct Emergency Link & Hotline):</strong> Immediate crisis card with direct WhatsApp link (<code>wa.me/...</code>) and toll-free phone hotline.</td>
+              <td>FR-05</td>
+            </tr>
+            <tr>
+              <td><strong>FD-02</strong></td>
+              <td>Venting vs. life-threatening crisis evaluation</td>
+              <td><strong>Option C (Hybrid Rule Engine + Direct Confirmation):</strong> Immediate escalation on danger keywords; direct confirmation check for ambiguous distress.</td>
+              <td>FR-04, FR-05</td>
+            </tr>
+            <tr>
+              <td><strong>FD-03</strong></td>
+              <td>Triage mode routing</td>
+              <td><strong>Option A (One-Tap Menu Buttons):</strong> Explicit quick-tap buttons: <code>[Calm My Panic]</code> vs <code>[Rescue My Deadline]</code>.</td>
+              <td>FR-02, FR-06</td>
+            </tr>
+            <tr>
+              <td><strong>FD-04</strong></td>
+              <td>Production architecture and client platform</td>
+              <td><strong>Dual-Platform RPM:</strong> OurPadi mobile app (live on iOS & Android v2.1.0) with communities, checklists, mindfulness/ASMR, and journals; FriendnPal Clinician RPM Dashboard web portal.</td>
+              <td>FR-01, FR-07</td>
+            </tr>
+            <tr>
+              <td><strong>FD-05</strong></td>
+              <td>Target user scope</td>
+              <td><strong>Broad Platform with Beachhead Testing:</strong> Proactive RPM for all mental health challenges, with nocturnal freelance worker as stress-test benchmark.</td>
+              <td>Section 2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <span>FriendnPal PRD · Document Version: <code>2.1.0</code></span>
+      <span>Artifacts: <code>requirements.md</code> & <code>requirements.html</code></span>
+    </footer>
+  </div>
+</body>
+</html>

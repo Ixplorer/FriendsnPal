@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Register — FriendnPal &amp; OurPadi Ecosystem</title>
+  <meta name="description" content="Account registration for patients joining OurPadi App and clinicians joining FriendnPal Remote Patient Monitoring.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="auth-page-body">
+
+  <div class="auth-container">
+    
+    <!-- Brand Header -->
+    <div class="auth-brand-header">
+      <a href="index.html" style="text-decoration: none;">
+        <img src="friendnpal-logo.png" alt="FriendnPal Logo" class="auth-brand-logo">
+      </a>
+      <h1 class="auth-brand-title">Create Account</h1>
+      <p class="auth-brand-sub">Join the FriendnPal Proactive Digital Health Ecosystem</p>
+    </div>
+
+    <!-- Role Switcher Tabs -->
+    <div class="auth-role-tabs">
+      <button class="auth-role-tab active-patient" id="tab-patient">
+        <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        <span>Patient Account</span>
+      </button>
+      <button class="auth-role-tab" id="tab-clinician">
+        <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3M18 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 0v3a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5"/></svg>
+        <span>Clinician Account</span>
+      </button>
+    </div>
+
+    <!-- Auth Card -->
+    <div class="auth-card">
+      <h2 class="auth-card-title" id="reg-card-title">
+        <span>Patient Registration</span>
+        <span style="font-size: 0.72rem; font-weight: 700; color: #e11d48; background: #fff1f2; padding: 3px 8px; border-radius: 6px;" id="reg-role-badge">OurPadi App</span>
+      </h2>
+
+      <!-- Alert Error Box (Hidden by default) -->
+      <div class="auth-alert-error" id="auth-alert" style="display: none;">
+        <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="auth-alert-msg">Registration error.</span>
+      </div>
+
+      <!-- Registration Form -->
+      <form class="auth-form" id="register-form">
+        
+        <!-- Full Name / Alias Input -->
+        <div class="auth-form-group">
+          <label class="auth-label" for="reg-name" id="lbl-name">Full Name or Confidential Alias</label>
+          <div class="auth-input-wrap">
+            <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <input type="text" id="reg-name" class="auth-input auth-input-patient" placeholder="e.g. Amina K. or Confidential" required>
+          </div>
+        </div>
+
+        <!-- Email Input -->
+        <div class="auth-form-group">
+          <label class="auth-label" for="reg-email" id="lbl-email">Email Address</label>
+          <div class="auth-input-wrap">
+            <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <input type="email" id="reg-email" class="auth-input auth-input-patient" placeholder="yourname@domain.com" required>
+          </div>
+        </div>
+
+        <!-- Phone / WhatsApp Input -->
+        <div class="auth-form-group">
+          <label class="auth-label" for="reg-phone">Phone / WhatsApp (For Crisis Handoff Link)</label>
+          <div class="auth-input-wrap">
+            <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <input type="tel" id="reg-phone" class="auth-input auth-input-patient" placeholder="+234 800 123 4567">
+          </div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="auth-form-group">
+          <label class="auth-label" for="reg-password">Password</label>
+          <div class="auth-input-wrap">
+            <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="reg-password" class="auth-input auth-input-patient" placeholder="Minimum 6 characters" required minlength="6">
+          </div>
+        </div>
+
+        <!-- PATIENT SPECIFIC FIELDS -->
+        <div id="patient-fields" style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="auth-form-group">
+            <label class="auth-label" for="reg-carefocus">Primary Care &amp; Stress Focus</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              <select id="reg-carefocus" class="auth-select">
+                <option value="Nocturnal Freelancer &amp; Blackout Strain">Nocturnal Freelancer &amp; Work Stress</option>
+                <option value="Caregiver Strain &amp; Burnout">Caregiver Strain &amp; Burnout</option>
+                <option value="Academic Anxiety &amp; Student Strain">Academic Anxiety &amp; Student Strain</option>
+                <option value="Parental Trauma &amp; Abuse Recovery">Parental Trauma &amp; Recovery</option>
+                <option value="General Depression &amp; Emotional Wellness">General Emotional Wellness</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label class="auth-label" for="reg-language">Preferred AI Companion Dialect</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <select id="reg-language" class="auth-select">
+                <option value="Nigerian Pidgin &amp; English">Nigerian Pidgin &amp; Standard English</option>
+                <option value="Standard English Only">Standard English Only</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLINICIAN SPECIFIC FIELDS -->
+        <div id="clinician-fields" style="display: none; flex-direction: column; gap: 14px;">
+          <div class="auth-form-group">
+            <label class="auth-label" for="reg-license">Medical Council License # (MDCN)</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <input type="text" id="reg-license" class="auth-input" placeholder="e.g. MDCN-L99201">
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label class="auth-label" for="reg-specialty">Clinical Specialty</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              <select id="reg-specialty" class="auth-select">
+                <option value="Consultant Psychiatrist">Consultant Psychiatrist</option>
+                <option value="Clinical Psychologist">Clinical Psychologist</option>
+                <option value="Mental Health Nurse Practitioner">Mental Health Nurse Practitioner</option>
+                <option value="Care Coordinator / RPM Specialist">Care Coordinator / RPM Specialist</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="auth-form-group">
+            <label class="auth-label" for="reg-affiliation">Hospital / Clinic Affiliation</label>
+            <div class="auth-input-wrap">
+              <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <input type="text" id="reg-affiliation" class="auth-input" placeholder="e.g. Federal Neuropsychiatric Hospital, Yaba">
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="auth-btn-primary btn-auth-patient" id="btn-submit">
+          <span>Complete Registration &amp; Enter App</span>
+          <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </form>
+
+    </div>
+
+    <!-- Footer Links -->
+    <div class="auth-footer-nav">
+      <span>Already have an account?</span>
+      <a href="login.html?role=patient" id="link-login">Sign In to Account</a>
+      <span style="margin: 0 6px;">·</span>
+      <a href="index.html">Ecosystem Landing</a>
+    </div>
+
+  </div>
+
+  <!-- Shared Backend Telemetry & Auth Service -->
+  <script src="backend.js"></script>
+  <script>
+    let currentRole = 'patient';
+
+    const tabPatient = document.getElementById('tab-patient');
+    const tabClinician = document.getElementById('tab-clinician');
+    const regCardTitle = document.getElementById('reg-card-title');
+    const regRoleBadge = document.getElementById('reg-role-badge');
+    const patientFields = document.getElementById('patient-fields');
+    const clinicianFields = document.getElementById('clinician-fields');
+    const btnSubmit = document.getElementById('btn-submit');
+    const linkLogin = document.getElementById('link-login');
+    const authAlert = document.getElementById('auth-alert');
+    const authAlertMsg = document.getElementById('auth-alert-msg');
+    const registerForm = document.getElementById('register-form');
+
+    // Parse URL params for initial role
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('role') === 'clinician') {
+      setRole('clinician');
+    } else {
+      setRole('patient');
+    }
+
+    tabPatient.addEventListener('click', () => setRole('patient'));
+    tabClinician.addEventListener('click', () => setRole('clinician'));
+
+    function setRole(role) {
+      currentRole = role;
+      authAlert.style.display = 'none';
+
+      if (role === 'patient') {
+        tabPatient.className = 'auth-role-tab active-patient';
+        tabClinician.className = 'auth-role-tab';
+        regCardTitle.children[0].innerText = 'Patient Registration';
+        regRoleBadge.innerText = 'OurPadi App';
+        regRoleBadge.style.color = '#e11d48';
+        regRoleBadge.style.background = '#fff1f2';
+        patientFields.style.display = 'flex';
+        clinicianFields.style.display = 'none';
+        btnSubmit.className = 'auth-btn-primary btn-auth-patient';
+        btnSubmit.children[0].innerText = 'Complete Registration & Enter App';
+        linkLogin.href = 'login.html?role=patient';
+      } else {
+        tabClinician.className = 'auth-role-tab active-clinician';
+        tabPatient.className = 'auth-role-tab';
+        regCardTitle.children[0].innerText = 'Clinician Registration';
+        regRoleBadge.innerText = 'Clinician RPM';
+        regRoleBadge.style.color = '#0284c7';
+        regRoleBadge.style.background = '#f0f9ff';
+        patientFields.style.display = 'none';
+        clinicianFields.style.display = 'flex';
+        btnSubmit.className = 'auth-btn-primary btn-auth-clinician';
+        btnSubmit.children[0].innerText = 'Register & Open RPM Portal';
+        linkLogin.href = 'login.html?role=clinician';
+      }
+    }
+
+    // Form Submit Handler
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      authAlert.style.display = 'none';
+
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const phone = document.getElementById('reg-phone').value.trim();
+      const password = document.getElementById('reg-password').value.trim();
+
+      const userData = {
+        name,
+        email,
+        phone,
+        password
+      };
+
+      if (currentRole === 'patient') {
+        userData.careFocus = document.getElementById('reg-carefocus').value;
+        userData.preferredLanguage = document.getElementById('reg-language').value;
+      } else {
+        userData.license = document.getElementById('reg-license').value.trim();
+        userData.specialty = document.getElementById('reg-specialty').value;
+        userData.affiliation = document.getElementById('reg-affiliation').value.trim();
+      }
+
+      const result = window.FriendnPalBackend.registerUser(currentRole, userData);
+
+      if (result.success) {
+        if (currentRole === 'patient') {
+          window.location.href = 'mobile.html';
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+      } else {
+        authAlertMsg.innerText = result.error || 'Registration failed.';
+        authAlert.style.display = 'flex';
+      }
+    });
+  </script>
+</body>
+</html>

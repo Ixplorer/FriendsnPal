@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FriendnPal & OurPadi — Final MoSCoW Feature Prioritization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#111726',
+        primaryColor: '#3b82f6',
+        primaryTextColor: '#f8fafc',
+        primaryBorderColor: '#1e283d',
+        lineColor: '#60a5fa',
+        secondaryColor: '#1e293b',
+        tertiaryColor: '#0f172a'
+      }
+    });
+  </script>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111726;
+      --card-border: #1e283d;
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 30px;
+      margin-bottom: 36px;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    .badge-rose {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fda4af;
+      border: 1px solid rgba(244, 63, 94, 0.35);
+    }
+
+    .badge-purple {
+      background: rgba(139, 92, 246, 0.15);
+      color: #a78bfa;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      background: #003152;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      max-width: 900px;
+    }
+
+    .meta-bar {
+      display: flex;
+      gap: 24px;
+      margin-top: 18px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .meta-bar span strong {
+      color: #f1f5f9;
+    }
+
+    /* Metric Overview Strip */
+    .metric-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .metric-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+
+    .metric-card.must { border-top: 3px solid var(--accent-emerald); }
+    .metric-card.should { border-top: 3px solid var(--accent-blue); }
+    .metric-card.could { border-top: 3px solid var(--accent-amber); }
+    .metric-card.wont { border-top: 3px solid var(--accent-rose); }
+
+    .metric-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .metric-desc {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    /* Section Cards */
+    .content-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 36px;
+    }
+
+    .content-card h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Filter Controls */
+    .filter-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: #0d1322;
+      border: 1px solid var(--card-border);
+      color: var(--text-soft);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: rgba(59, 130, 246, 0.2);
+      color: #fff;
+      border-color: var(--accent-blue);
+    }
+
+    /* Table Styling */
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    th {
+      background: #0c1220;
+      color: #94a3b8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 14px 16px;
+      border-bottom: 2px solid var(--card-border);
+    }
+
+    td {
+      padding: 16px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-soft);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .feature-name {
+      font-weight: 700;
+      color: #ffffff;
+      min-width: 180px;
+    }
+
+    .feature-desc {
+      min-width: 280px;
+    }
+
+    .feature-reason {
+      min-width: 260px;
+      font-size: 0.86rem;
+    }
+
+    .feature-reason strong {
+      color: #f1f5f9;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+
+    /* Cut Justification Cards */
+    .cuts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .cut-card {
+      background: #0d1322;
+      border: 1px solid #1e283d;
+      border-left: 3px solid #f59e0b;
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .cut-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cut-card p {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    .cut-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-bar">
+        <span class="badge badge-green">Sprint Scope v2.2.0</span>
+        <span class="badge badge-blue">Exact 6 Must-Haves</span>
+        <span class="badge badge-amber">5-Day Team Build</span>
+        <span class="badge badge-purple">MoSCoW Prioritized</span>
+      </div>
+      <h1>FriendnPal &amp; OurPadi — Final MoSCoW Feature Prioritization</h1>
+      <p class="subtitle">
+        Complete feature breakdown synthesized from <code>requirements.md</code> and <code>screen-specification.md</code>. 
+        Enforces a strict 6 Must-Have maximum to guarantee an irreducible, clinically safe dual-platform release within a 5-day team sprint.
+      </p>
+      <div class="meta-bar">
+        <span><strong>Sprint Duration:</strong> 5 Days</span>
+        <span><strong>Must-Have Limit:</strong> 6 Features Maximum</span>
+        <span><strong>Target Platforms:</strong> OurPadi Mobile (iOS/Android) &amp; Clinician RPM Web</span>
+      </div>
+    </header>
+
+    <!-- Overview Metrics Strip -->
+    <section class="metric-strip" aria-label="MoSCoW Summary Metrics">
+      <div class="metric-card must">
+        <div class="metric-title">Must Have</div>
+        <div class="metric-value" style="color: #34d399;">6</div>
+        <div class="metric-desc">Critical core loop; product fails without them</div>
+      </div>
+      <div class="metric-card should">
+        <div class="metric-title">Should Have</div>
+        <div class="metric-value" style="color: #60a5fa;">8</div>
+        <div class="metric-desc">High-value engagement &amp; diagnostic depth</div>
+      </div>
+      <div class="metric-card could">
+        <div class="metric-title">Could Have</div>
+        <div class="metric-value" style="color: #fbbf24;">5</div>
+        <div class="metric-desc">Auxiliary channels &amp; commercial billing</div>
+      </div>
+      <div class="metric-card wont">
+        <div class="metric-title">Won't Have</div>
+        <div class="metric-value" style="color: #fda4af;">7</div>
+        <div class="metric-desc">Explicitly barred for safety &amp; feasibility</div>
+      </div>
+    </section>
+
+    <!-- Comprehensive Feature Table -->
+    <section class="content-card">
+      <h2>📋 Comprehensive MoSCoW Feature Table</h2>
+      
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Features (26)</button>
+        <button class="filter-btn" data-filter="must">Must Have (6)</button>
+        <button class="filter-btn" data-filter="should">Should Have (8)</button>
+        <button class="filter-btn" data-filter="could">Could Have (5)</button>
+        <button class="filter-btn" data-filter="wont">Won't Have (7)</button>
+      </div>
+
+      <div class="table-responsive">
+        <table id="features-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Description</th>
+              <th>MoSCoW Category</th>
+              <th>Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- MUST HAVE (6) -->
+            <tr data-cat="must">
+              <td class="feature-name">OurPadi Mobile Shell &amp; AI Companion Triage (Screens 1 &amp; 3)</td>
+              <td class="feature-desc">Cross-platform mobile client (iOS/Android) with offline resilience, bottom navigation, culturally fluent AI companion (Nigerian English &amp; Pidgin), and explicit 2-button triage routing (<code>[Calm My Panic]</code> vs <code>[Rescue My Deadline]</code>).</td>
+              <td><span class="badge badge-green">Must have</span></td>
+              <td class="feature-reason"><strong>Core Entrypoint &amp; Triage Gateway:</strong> The product is completely broken without a patient mobile interface to log in, communicate acute distress, and route immediately to care tools (<code>FD-03</code>).</td>
+            </tr>
+            <tr data-cat="must">
+              <td class="feature-name">Acute Somatic Reset &amp; Sensory Grounding (Screen 4)</td>
+              <td class="feature-desc">Paced 4-4-4 box breathing gauge with animated visual expanding/contracting circle, synchronized device haptics, 5-4-3-2-1 room sensory grounding inputs, and a post-exercise 1–5 distress slider.</td>
+              <td><span class="badge badge-green">Must have</span></td>
+              <td class="feature-reason"><strong>Clinical De-escalation Core:</strong> Halts acute hyperventilation, racing heart, and cognitive freeze within 10 minutes, fulfilling the primary physiological recovery mandate.</td>
+            </tr>
+            <tr data-cat="must">
+              <td class="feature-name">Emergency Crisis Handoff Protocol &amp; Crisis Card (Screen 5)</td>
+              <td class="feature-desc">Automated safety engine scanning for explicit self-harm keywords, direct confirmation check (<code>FD-02</code>), chat lockdown, and high-visibility crisis card serving direct WhatsApp link (<code>wa.me/...</code>) and 24/7 hotline (<code>FD-01</code>).</td>
+              <td><span class="badge badge-green">Must have</span></td>
+              <td class="feature-reason"><strong>Non-Negotiable Safety Net:</strong> A digital mental health app without an immediate human crisis handoff is clinically unsafe, legally unviable, and poses catastrophic liability during suicidal ideation.</td>
+            </tr>
+            <tr data-cat="must">
+              <td class="feature-name">Workday Rescue 15-Minute Sprint Engine (Screen 6)</td>
+              <td class="feature-desc">Operational deadline salvage engine that deconstructs overwhelming deliverables into structured 15-minute micro-sprints with a digital countdown timer, single-rule constraint card, and local draft submission box.</td>
+              <td><span class="badge badge-green">Must have</span></td>
+              <td class="feature-reason"><strong>Core Beachhead Value Proposition:</strong> Directly halts task freeze for remote freelancers and workers, protecting income and contracts (the primary validation metric for the beachhead persona).</td>
+            </tr>
+            <tr data-cat="must">
+              <td class="feature-name">Clinical Assessment Intake Engine — WHO-5 (Screen 2)</td>
+              <td class="feature-desc">Standardized 5-question WHO-5 Well-Being Index questionnaire with Likert selection cards (0–5 pts), automated score normalization (0–100 scale), and secure backend telemetry dispatch.</td>
+              <td><span class="badge badge-green">Must have</span></td>
+              <td class="feature-reason"><strong>Longitudinal Predictive Foundation:</strong> Without standardized quantitative screening data, the platform cannot establish a patient well-being baseline or drive Remote Patient Monitoring (RPM).</td>
+            </tr>
+            <tr data-cat="must">
+              <td class="feature-name">Clinician RPM Caseload &amp; Alert Dashboard (Screen 8)</td>
+              <td class="feature-desc">Secure web portal for licensed therapists displaying active patient caseload metrics, real-time risk tier badges (<code>NORMAL</code>, <code>MODERATE</code>, <code>CRITICAL</code>), and audio-visual emergency alert banners.</td>
+              <td><span class="badge badge-green">Must have</span></td>
+              <td class="feature-reason"><strong>RPM Ecosystem Mandate:</strong> The system is pointless as a Remote Patient Monitoring platform without provider-facing cohort monitoring and real-time crisis triage visibility.</td>
+            </tr>
+
+            <!-- SHOULD HAVE (8) -->
+            <tr data-cat="should">
+              <td class="feature-name">Predictive Trajectory Analytics &amp; 30-Day Trend Chart (Screen 8)</td>
+              <td class="feature-desc">Automated background analytics engine that calculates 14-day rolling score trajectories, detects velocity drops (>30% decline), and renders an interactive WHO-5 vs GAD-7 multi-line SVG trend chart.</td>
+              <td><span class="badge badge-blue">Should have</span></td>
+              <td class="feature-reason"><strong>Diagnostic Depth:</strong> Enhances clinician trend visibility; however, multi-week mathematical trajectory curves require 14+ days of patient history that does not exist on Day 1–5 of a new sprint.</td>
+            </tr>
+            <tr data-cat="should">
+              <td class="feature-name">Peer Support Communities on Taskbar (FR-12)</td>
+              <td class="feature-desc">Moderated anonymous discussion groups categorized by lived experience: Parental Abuse Support Group, Addiction &amp; Recovery Group, Student Support Group, Freelancers/Burnout Group.</td>
+              <td><span class="badge badge-blue">Should have</span></td>
+              <td class="feature-reason"><strong>Stigma Reduction &amp; Connection:</strong> Crucial for long-term community retention; non-essential for acute 3:15 AM physiological panic de-escalation, making it an ideal candidate for Sprint 2.</td>
+            </tr>
+            <tr data-cat="should">
+              <td class="feature-name">Private Thought &amp; Gratitude Journals (FR-13)</td>
+              <td class="feature-desc">Client-side encrypted in-app journal supporting freeform venting, guided gratitude prompts, sentiment tagging, and cognitive reframing history.</td>
+              <td><span class="badge badge-blue">Should have</span></td>
+              <td class="feature-reason"><strong>Therapeutic Depth:</strong> Encourages emotional processing; an acutely panicking nocturnal worker needs active box breathing and sprints, not a blank journaling space.</td>
+            </tr>
+            <tr data-cat="should">
+              <td class="feature-name">Curated ASMR Soundscapes &amp; Audio Player (Screen 4 / FR-11)</td>
+              <td class="feature-desc">Curated offline synthesized relaxing soundscapes (Abuja Midnight Rain, Deep Atlantic Waves, Nocturnal Brown Noise) with a 15-minute sleep timer.</td>
+              <td><span class="badge badge-blue">Should have</span></td>
+              <td class="feature-reason"><strong>Non-Verbal Calming:</strong> Provides nocturnal comfort and sleep onset; secondary to active somatic box breathing, which already successfully normalizes respiration.</td>
+            </tr>
+            <tr data-cat="should">
+              <td class="feature-name">Mental Health Psychoeducation Resource Library (FR-14)</td>
+              <td class="feature-desc">Searchable repository of psychoeducational articles, clinical self-help guides, trauma boundary setting articles, and practical mental health tips.</td>
+              <td><span class="badge badge-blue">Should have</span></td>
+              <td class="feature-reason"><strong>Psychoeducation:</strong> Equips users with self-guided coping literacy; static markdown articles can be integrated immediately after core triage mechanics are verified.</td>
+            </tr>
+            <tr data-cat="should">
+              <td class="feature-name">Continuous Mood Check-ins &amp; Shift-End Logging (Screens 1 &amp; 7 / FR-08)</td>
+              <td class="feature-desc">Quick-tap mood logging with emotion wheel (<code>[Relieved]</code>, <code>[Calm]</code>, <code>[Exhausted]</code>, etc.) and post-shift transition logging with milestone confirmation.</td>
+              <td><span class="badge badge-blue">Should have</span></td>
+              <td class="feature-reason"><strong>Behavioral Tracking:</strong> Supplies valuable subjective data to correlate with clinical scores; app still functions without real-time mood logging on Day 1.</td>
+            </tr>
+            <tr data-cat="should">
+              <td class="feature-name">Daily Motivational Checklist &amp; Wellness Habits (Screen 1 / FR-09)</td>
+              <td class="feature-desc">Interactive daily habit checklist featuring positive affirmations, hydration tracking, mindfulness prompts, and self-care milestone badges.</td>
+              <td><span class="badge badge-blue">Should have</span></td>
+              <td class="feature-reason"><strong>Daily Habit Retention:</strong> Drives daily active engagement; secondary to the core acute de-escalation loop.</td>
+            </tr>
+            <tr data-cat="should">
+              <td class="feature-name">Biometric Authentication &amp; Local Data Encryption (FR-01)</td>
+              <td class="feature-desc">Face/fingerprint scanner modal protecting stored mental health telemetry, clinical notes, and assessment history on the mobile device.</td>
+              <td><span class="badge badge-blue">Should have</span></td>
+              <td class="feature-reason"><strong>Data Privacy:</strong> Essential for production deployment; during a 5-day team prototype, standard OS device passcodes provide temporary privacy protection.</td>
+            </tr>
+
+            <!-- COULD HAVE (5) -->
+            <tr data-cat="could">
+              <td class="feature-name">Discreet Paystack / Flutterwave Billing (Screen 7 / FR-16)</td>
+              <td class="feature-desc">Recurring 5,000 NGN/month subscription processing with discreet bank statement descriptors ("FNP Services") and automated payment webhook listeners.</td>
+              <td><span class="badge badge-amber">Could have</span></td>
+              <td class="feature-reason"><strong>Commercial Integration:</strong> Product can run on a 7-day or 14-day free trial during sprint validation; live payment gateways can be finalized prior to public launch.</td>
+            </tr>
+            <tr data-cat="could">
+              <td class="feature-name">Human Therapy Marketplace Booking (FR-15)</td>
+              <td class="feature-desc">In-app directory to browse certified Nigerian therapists, select calendar slots, and pay session fees (7,500–15,000 NGN) for 45-min virtual video consultations.</td>
+              <td><span class="badge badge-amber">Could have</span></td>
+              <td class="feature-reason"><strong>Secondary Revenue Channel:</strong> Emergency counselor handoff is already solved in Must-Have via the free direct WhatsApp counselor link (<code>wa.me/...</code>).</td>
+            </tr>
+            <tr data-cat="could">
+              <td class="feature-name">WhatsApp Low-Bandwidth Auxiliary Gateway (FR-17)</td>
+              <td class="feature-desc">Auxiliary Meta Cloud API webhook gateway providing a lightweight text/button interface for users experiencing extreme 2G throttling or mobile data depletion.</td>
+              <td><span class="badge badge-amber">Could have</span></td>
+              <td class="feature-reason"><strong>Auxiliary Redundancy:</strong> The native OurPadi mobile app already caches box breathing and sprint timers offline; a third-party WhatsApp bot is a secondary fallback.</td>
+            </tr>
+            <tr data-cat="could">
+              <td class="feature-name">Weekly Longitudinal Mental Health Digest (FR-18)</td>
+              <td class="feature-desc">Automated weekly summary email or push notification highlighting mood stability, score trends, and environmental stress correlations.</td>
+              <td><span class="badge badge-amber">Could have</span></td>
+              <td class="feature-reason"><strong>Nice to Have:</strong> Adds ongoing reflection value, but does not impact real-time acute crisis de-escalation during a 5-day test window.</td>
+            </tr>
+            <tr data-cat="could">
+              <td class="feature-name">Multi-Sprint History &amp; Deliverable Archive (Screen 6)</td>
+              <td class="feature-desc">Persistent log of past completed sprint deliverables, word counts, and total client contract value protected.</td>
+              <td><span class="badge badge-amber">Could have</span></td>
+              <td class="feature-reason"><strong>Productivity Proof:</strong> Great for user motivation; single active sprint state tracking in local cache is sufficient for initial validation.</td>
+            </tr>
+
+            <!-- WON'T HAVE (7) -->
+            <tr data-cat="wont">
+              <td class="feature-name">32 Nigerian &amp; African Language Expansion (FR-19)</td>
+              <td class="feature-desc">NLP model localization and dialect datasets across 32 regional African languages.</td>
+              <td><span class="badge badge-rose">Won't have</span></td>
+              <td class="feature-reason"><strong>Scope Boundary:</strong> Sprint focuses strictly on Standard Nigerian English and Nigerian Pidgin; multilingual expansion requires extensive corpus training post-scale.</td>
+            </tr>
+            <tr data-cat="wont">
+              <td class="feature-name">Synthetic AI Voice Calling Bot (FR-20)</td>
+              <td class="feature-desc">Outbound or inbound speech-to-speech synthetic phone calling bot.</td>
+              <td><span class="badge badge-rose">Won't have</span></td>
+              <td class="feature-reason"><strong>Bandwidth &amp; Privacy:</strong> High network latency under Nigerian telecom networks, high compute costs, and severe privacy concerns in thin-walled shared apartments.</td>
+            </tr>
+            <tr data-cat="wont">
+              <td class="feature-name">Invasive Background Device Surveillance (FR-21)</td>
+              <td class="feature-desc">Background keystroke logging, ambient microphone listening, or continuous GPS surveillance.</td>
+              <td><span class="badge badge-rose">Won't have</span></td>
+              <td class="feature-reason"><strong>Trust &amp; Ethics:</strong> Strictly barred to protect patient trust, preserve mobile battery life, and comply with the Nigerian Data Protection Regulation (NDPR).</td>
+            </tr>
+            <tr data-cat="wont">
+              <td class="feature-name">Bundled Free Human Therapy in 5,000 NGN Tier</td>
+              <td class="feature-desc">Unlimited human therapy consultations bundled inside the base monthly subscription.</td>
+              <td><span class="badge badge-rose">Won't have</span></td>
+              <td class="feature-reason"><strong>Unit Economics:</strong> Private clinical rates (7,500–15,000 NGN/session) make bundled human sessions unviable at 5,000 NGN/mo. Human therapy remains pay-per-session.</td>
+            </tr>
+            <tr data-cat="wont">
+              <td class="feature-name">Medical Prescriptions &amp; Clinical Pharmacy Delivery</td>
+              <td class="feature-desc">Pharmacological management, e-prescriptions, or delivery of antidepressant/anxiolytic medications.</td>
+              <td><span class="badge badge-rose">Won't have</span></td>
+              <td class="feature-reason"><strong>Regulatory Boundary:</strong> FriendnPal is a digital triage and Remote Patient Monitoring platform, not a licensed psychiatric dispensary.</td>
+            </tr>
+            <tr data-cat="wont">
+              <td class="feature-name">Autonomous Mode-Guessing without User Tap (FD-03)</td>
+              <td class="feature-desc">Algorithmic guessing of whether to run breathing vs. deadline rescue based purely on freeform conversational text.</td>
+              <td><span class="badge badge-rose">Won't have</span></td>
+              <td class="feature-reason"><strong>Founder Decision (FD-03):</strong> Barred to avoid misinterpreting distress and frustrating panicking users; mode routing is strictly driven by explicit user taps.</td>
+            </tr>
+            <tr data-cat="wont">
+              <td class="feature-name">Live Mid-Chat Counselor Hijacking (FD-01)</td>
+              <td class="feature-desc">Multi-agent live chat switching where a human counselor silently takes over the active bot thread.</td>
+              <td><span class="badge badge-rose">Won't have</span></td>
+              <td class="feature-reason"><strong>Founder Decision (FD-01):</strong> Unreliable under erratic mobile network drops; emergency handoff is cleanly and reliably routed via direct WhatsApp links (<code>wa.me/...</code>).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Scope Management & Cut Justifications -->
+    <section class="content-card">
+      <h2>✂️ Scope Management: Which Candidates to Cut First and Why</h2>
+      <p style="color: var(--text-soft); font-size: 0.95rem; margin-bottom: 20px;">
+        To strictly enforce the <strong>5–6 feature maximum constraint for a 5-day team build</strong>, candidate features were evaluated against the core criterion: <em>"Is the dual-platform clinical loop broken or pointless without it?"</em> The following features were cut first from the Must-Have list and placed into Should-Have:
+      </p>
+
+      <div class="cuts-grid">
+        <div class="cut-card">
+          <h4>1. Predictive Trajectory Analytics <span class="cut-tag">Cut #1</span></h4>
+          <p><strong>Why cut first:</strong> Multi-week mathematical velocity algorithms require 14+ days of patient data that does not exist during a 5-day build. Raw baseline WHO-5 scores in the Clinician Dashboard satisfy immediate clinical triage on Day 1–5.</p>
+        </div>
+
+        <div class="cut-card">
+          <h4>2. Peer Support Communities <span class="cut-tag">Cut #2</span></h4>
+          <p><strong>Why cut second:</strong> Group forums require multi-user database schemas, authentication permissions, and real-time moderation queues. Acute physiological de-escalation must take precedence in a 5-day sprint.</p>
+        </div>
+
+        <div class="cut-card">
+          <h4>3. Thought &amp; Gratitude Journals <span class="cut-tag">Cut #3</span></h4>
+          <p><strong>Why cut third:</strong> An acutely hyperventilating nocturnal worker at 3:15 AM needs active box breathing and focus sprints, not a blank journaling space. Journaling is non-critical for acute stabilization.</p>
+        </div>
+
+        <div class="cut-card">
+          <h4>4. Curated ASMR Soundscapes <span class="cut-tag">Cut #4</span></h4>
+          <p><strong>Why cut fourth:</strong> The visual/haptic 4-4-4 box breathing gauge already successfully normalizes respiration; streaming or synthesizing ambient audio is secondary comfort.</p>
+        </div>
+
+        <div class="cut-card">
+          <h4>5. Daily Motivational Checklist <span class="cut-tag">Cut #5</span></h4>
+          <p><strong>Why cut fifth:</strong> Daily habit tracking is a secondary retention mechanism. A user in severe burnout or acute panic will not be saved by checking off a water glass habit.</p>
+        </div>
+
+        <div class="cut-card">
+          <h4>6. Psychoeducation Resource Library <span class="cut-tag">Cut #6</span></h4>
+          <p><strong>Why cut sixth:</strong> Passive educational reading does not rescue an active panic attack or salvage a deadline. Articles can be dropped in as static markdown content post-sprint.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5-Day Sprint Blueprint Gantt Chart -->
+    <section class="content-card">
+      <h2>📅 The 5-Day Sprint Implementation Blueprint</h2>
+      <div class="mermaid">
+gantt
+    title 5-Day Team Sprint: Exactly 6 Core Must-Have Features
+    dateFormat  YYYY-MM-DD
+    section Mobile (OurPadi)
+    Feature 1: Mobile Shell & Triage Chat (Screens 1 & 3)    :a1, 2026-09-16, 2d
+    Feature 2: Somatic Box Breathing & Grounding (Screen 4)  :a2, after a1, 1.5d
+    Feature 4: Workday Rescue 15-Min Sprints (Screen 6)      :a3, after a2, 1.5d
+    section Clinical & Backend
+    Feature 5: WHO-5 Assessment Intake Engine (Screen 2)     :b1, 2026-09-16, 2d
+    Feature 3: Safety Guardrails & Crisis Card (Screen 5)    :b2, after b1, 1.5d
+    section Clinician Portal
+    Feature 6: RPM Caseload & Alert Dashboard (Screen 8)     :c1, 2026-09-17, 3d
+    section Verification
+    Dual-Platform End-to-End Triage & Telemetry QA           :d1, 2026-09-20, 1d
+      </div>
+    </section>
+
+    <footer>
+      <div>FriendnPal Mental Health Ecosystem · Dual-Platform MoSCoW Prioritization</div>
+      <div>Aligned with <code>requirements.md</code> &amp; <code>screen-specification.md</code></div>
+    </footer>
+  </div>
+
+  <script>
+    // Interactive Table Filtering
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.getAttribute('data-filter');
+        const rows = document.querySelectorAll('#features-table tbody tr');
+        rows.forEach(row => {
+          if (filter === 'all' || row.getAttribute('data-cat') === filter) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

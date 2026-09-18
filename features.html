@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Features &amp; 8-Screen Specification — FriendnPal Ecosystem</title>
+  <meta name="description" content="Explore the 8 core screens of the FriendnPal ecosystem: WHO-5 screening, AI companion triage, 4-4-4 somatic box breathing, workday rescue sprints, and clinician RPM dashboard.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .feature-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 26px 22px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+    .screen-tag {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #0284c7;
+      background: #f0f9ff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      width: fit-content;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .feature-icon-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body class="page-boxed-frame-body">
+
+  <div class="page-boxed-container" style="padding: 30px;">
+    
+    <!-- Top Navigation Bar -->
+    <nav class="replica-nav">
+      <div class="replica-nav-left">
+        <a href="index.html" class="replica-logo-group">
+          <img src="friendnpal-logo.png" alt="FriendnPal Logo" class="replica-logo-img">
+          <span class="replica-logo-text">FriendnPal</span>
+        </a>
+
+        <ul class="replica-nav-links">
+          <li><a href="index.html" class="replica-nav-link">Home</a></li>
+          <li><a href="about.html" class="replica-nav-link">About Us</a></li>
+          <li><a href="features.html" class="replica-nav-link active">Features</a></li>
+          <li><a href="pricing.html" class="replica-nav-link">Pricing</a></li>
+          <li><a href="mobile.html" class="replica-nav-link">OurPadi App</a></li>
+          <li><a href="dashboard.html" class="replica-nav-link">Clinician RPM</a></li>
+          <li><a href="contact.html" class="replica-nav-link">Contacts</a></li>
+        </ul>
+      </div>
+
+      <div class="replica-nav-right">
+        <a href="login.html?role=patient" class="btn-nav-auth btn-nav-login" style="padding: 8px 16px; border-radius: 20px;">Sign In</a>
+        <a href="register.html?role=patient" class="btn-nav-auth btn-nav-register" style="padding: 8px 18px; border-radius: 20px; background: #003152; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">Get Started</a>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header style="text-align: center; padding: 30px 20px 10px 20px;">
+      <div class="replica-hero-tag" style="margin: 0 auto 10px auto;">
+        <span class="live-dot"></span>
+        <span>Exact 8-Screen Product Specification</span>
+      </div>
+      <h1 style="font-size: 2.3rem; font-weight: 900; color: #1e293b; margin: 0;">
+        Complete Feature Showcase &amp; System Components
+      </h1>
+      <p style="font-size: 1rem; color: #64748b; max-width: 680px; margin: 8px auto 0 auto;">
+        Every screen across the OurPadi Mobile App and FriendnPal Clinician RPM Dashboard is clinically specified and fully interactive.
+      </p>
+    </header>
+
+    <!-- 8 Screen Specification Showcase Grid -->
+    <div class="features-grid">
+      
+      <!-- SCREEN 1 -->
+      <article class="feature-card">
+        <span class="screen-tag">Screen 1 · Patient Mobile</span>
+        <div class="feature-icon-badge" style="background: #eff6ff; color: #3b82f6;">🏠</div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">Home &amp; Preventive Dashboard</h3>
+        <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin: 0;">
+          Profile avatar, greeting, biometric security button (`🔒`), WHO-5 score circular gauge ("36/100 · Moderate Strain"), daily mood check-in strip (`[Relieved]`, `[Calm]`, `[Exhausted]`), and 2x2 launcher cards.
+        </p>
+        <a href="mobile.html" style="font-size: 0.8rem; font-weight: 700; color: #0284c7; text-decoration: none;">Launch Screen 1 Preview &rarr;</a>
+      </article>
+
+      <!-- SCREEN 2 -->
+      <article class="feature-card">
+        <span class="screen-tag">Screen 2 · Clinical Intake</span>
+        <div class="feature-icon-badge" style="background: #f0fdf4; color: #16a34a;">📋</div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">WHO-5 Routine Assessment Engine</h3>
+        <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin: 0;">
+          Validated 5-question well-being screening with 20% linear stepper bar, 6 Likert radio cards (0–5 pts), normalized 0–100 score dial, velocity drop alert, and backend telemetry sync.
+        </p>
+        <a href="mobile.html" style="font-size: 0.8rem; font-weight: 700; color: #0284c7; text-decoration: none;">Launch Screen 2 Preview &rarr;</a>
+      </article>
+
+      <!-- SCREEN 3 -->
+      <article class="feature-card">
+        <span class="screen-tag">Screen 3 · AI Triage</span>
+        <div class="feature-icon-badge" style="background: #faf5ff; color: #9333ea;">💬</div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">Pidgin &amp; English AI Companion Chat</h3>
+        <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin: 0;">
+          Empathetic de-escalation agent supporting Nigerian Pidgin &amp; English, explicit 2-button triage menu (`[Calm My Panic]` vs `[Rescue My Deadline]`), and self-harm keywords safety check.
+        </p>
+        <a href="mobile.html" style="font-size: 0.8rem; font-weight: 700; color: #0284c7; text-decoration: none;">Launch Screen 3 Preview &rarr;</a>
+      </article>
+
+      <!-- SCREEN 4 -->
+      <article class="feature-card">
+        <span class="screen-tag">Screen 4 · Somatic Reset</span>
+        <div class="feature-icon-badge" style="background: #ecfeff; color: #0891b2;">🫁</div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">4-4-4 Box Breathing &amp; ASMR Audio</h3>
+        <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin: 0;">
+          Interactive pulsing breathing gauge with 4s Inhale / Hold / Exhale cadence, 5-4-3-2-1 room sensory grounding inputs, post-exercise 1–5 distress slider, and offline ASMR soundscapes.
+        </p>
+        <a href="mobile.html" style="font-size: 0.8rem; font-weight: 700; color: #0284c7; text-decoration: none;">Launch Screen 4 Preview &rarr;</a>
+      </article>
+
+      <!-- SCREEN 5 -->
+      <article class="feature-card">
+        <span class="screen-tag" style="color: #e11d48; background: #fff1f2;">Screen 5 · Safety Net</span>
+        <div class="feature-icon-badge" style="background: #fff1f2; color: #e11d48;">🚨</div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">Emergency Crisis Handoff Card</h3>
+        <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin: 0;">
+          Hybrid safety net serving direct 1-tap WhatsApp counselor link (`wa.me/...`), 24/7 toll-free phone hotline (`0800-FRIENDNPAL`), chat lockdown, and clinician dashboard emergency alert dispatch.
+        </p>
+        <a href="mobile.html" style="font-size: 0.8rem; font-weight: 700; color: #e11d48; text-decoration: none;">Launch Screen 5 Preview &rarr;</a>
+      </article>
+
+      <!-- SCREEN 6 -->
+      <article class="feature-card">
+        <span class="screen-tag">Screen 6 · Deadline Salvage</span>
+        <div class="feature-icon-badge" style="background: #fffbeb; color: #d97706;">⏱️</div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">Workday Rescue 15-Minute Sprints</h3>
+        <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin: 0;">
+          Deconstructs overwhelming deliverables into 4 structured 15-minute micro-sprints with a countdown clock, strict scope constraint card, local draft workspace, and contract value tracker.
+        </p>
+        <a href="mobile.html" style="font-size: 0.8rem; font-weight: 700; color: #0284c7; text-decoration: none;">Launch Screen 6 Preview &rarr;</a>
+      </article>
+
+      <!-- SCREEN 7 -->
+      <article class="feature-card">
+        <span class="screen-tag">Screen 7 · Post-Shift</span>
+        <div class="feature-icon-badge" style="background: #f0fdf4; color: #15803d;">🎉</div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">Shift Decompression &amp; Billing</h3>
+        <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin: 0;">
+          Work completion celebration banner ($350 contract saved), shift-end emotional state check-in, self-care wind-down checklist, and discreet 5,000 NGN/month subscription processing.
+        </p>
+        <a href="mobile.html" style="font-size: 0.8rem; font-weight: 700; color: #0284c7; text-decoration: none;">Launch Screen 7 Preview &rarr;</a>
+      </article>
+
+      <!-- SCREEN 8 -->
+      <article class="feature-card" style="border: 2px solid rgba(2, 132, 199, 0.4);">
+        <span class="screen-tag" style="color: #0284c7; background: #e0f2fe;">Screen 8 · Provider Portal</span>
+        <div class="feature-icon-badge" style="background: #e0f2fe; color: #0284c7;">🩺</div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">FriendnPal Clinician RPM Dashboard</h3>
+        <p style="font-size: 0.86rem; color: #475569; line-height: 1.5; margin: 0;">
+          High-priority alert banner, 4 KPI tiles, multi-tier caseload table (`CRITICAL`, `MODERATE`, `NORMAL`), 30-day SVG trajectory curve (WHO-5 vs GAD-7), clinical notes log, and WhatsApp escalation.
+        </p>
+        <a href="dashboard.html" style="font-size: 0.8rem; font-weight: 700; color: #0284c7; text-decoration: none;">Launch Clinician Dashboard &rarr;</a>
+      </article>
+
+    </div>
+
+    <!-- Governance Footer -->
+
+  </div>
+
+</body>
+</html>

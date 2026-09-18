@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>OurPadi — Mental Health & De-escalation Mobile Companion</title>
+  <meta name="description" content="OurPadi native mobile mental health companion for proactive intervention and crisis prevention.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Active User Session Bar -->
+  <div class="user-session-bar" id="patient-session-bar">
+    <div class="user-session-info">
+      <div class="user-session-avatar" id="patient-session-avatar" style="background: #e11d48;">A</div>
+      <span id="patient-session-label">Logged in as: Amina (Patient #8241)</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <a href="login.html?role=patient" class="btn-session-logout" style="text-decoration: none;">Switch Account</a>
+      <button class="btn-session-logout" id="btn-patient-logout">Logout</button>
+    </div>
+  </div>
+
+  <!-- Ecosystem Portal Link Bar -->
+  <header class="mobile-portal-banner">
+    <a href="index.html" class="portal-nav-link" title="Return to FriendnPal Ecosystem Gateway">
+      <span>&larr;</span> FriendnPal Ecosystem
+    </a>
+    <span class="patient-role-pill">Patient Companion App</span>
+  </header>
+<main class="device-container" id="mobile-app-container">
+    <!-- Speaker Notch -->
+    <div class="device-notch">
+      <div class="notch-speaker"></div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="app-toast" id="app-toast" role="alert" aria-live="polite">Action completed</div>
+
+    <!-- Views Viewport -->
+    <div class="views-viewport" id="views-viewport">
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 1: HOME & MOTIVATIONAL CHECKLIST              -->
+      <!-- ==================================================== -->
+      <section class="screen-view active" id="view-home" aria-label="Home and Checklist">
+        <!-- Top App Header -->
+        <header class="app-top-header">
+          <div class="header-brand-group">
+            <div class="app-avatar" title="Amina's Profile">A</div>
+            <div>
+              <h1 class="brand-text">OurPadi</h1>
+              <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: -2px;">Good day, Amina</p>
+            </div>
+          </div>
+          <div class="header-actions">
+            <button class="icon-btn" id="btn-trigger-biometric" title="Biometric Lock / Security" aria-label="Biometric Security">
+              <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </button>
+            <button class="icon-btn notification-badge" id="btn-open-notifications" aria-label="Notifications">
+              <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="badge-dot"></span>
+            </button>
+            <button class="crisis-shield-btn" id="btn-home-crisis-shield" aria-label="Emergency Crisis Support">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Emergency
+            </button>
+          </div>
+        </header>
+
+        <!-- Daily Mood Check-In Strip -->
+        <div class="app-card">
+          <div class="card-title-row">
+            <span class="card-title">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--fnp-ochre)"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              Mood Check-In
+            </span>
+            <span class="card-badge badge-amber" id="mood-streak-badge">3 Day Streak</span>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--text-soft); margin-bottom: 6px;">How are you feeling right now?</p>
+          <div class="mood-strip" id="mood-strip" role="radiogroup" aria-label="Mood selection">
+            <button class="mood-btn" data-mood="Relieved" aria-label="Relieved">
+              <span class="mood-icon-wrap">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              </span>
+              <span class="mood-label">Relieved</span>
+            </button>
+            <button class="mood-btn" data-mood="Calm" aria-label="Calm">
+              <span class="mood-icon-wrap">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 21.34"/><path d="M21 12c-3.34-1.67-5.71-3.79-7.07-6.91A6.9 6.9 0 0 0 12 3c-3.59 0-6.55 2.42-6.55 6.35a6.92 6.92 0 0 0 .77 3.14"/><path d="M15 10c-.5 1-1.5 2-3 2s-2.5-1-3-2"/></svg>
+              </span>
+              <span class="mood-label">Calm</span>
+            </button>
+            <button class="mood-btn" data-mood="Exhausted" aria-label="Exhausted">
+              <span class="mood-icon-wrap">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 8C17.5 8 17 9.5 17 10a5 5 0 0 1-10 0c0-2.21.9-4.2 2.35-5.63"/><path d="M2 2l20 20"/><path d="M7 6.5C5.17 7.73 4 9.73 4 12a8 8 0 0 0 8 8 8.03 8.03 0 0 0 7.6-5.45"/><line x1="8" y1="3" x2="8.01" y2="3"/><line x1="16" y1="3" x2="16.01" y2="3"/></svg>
+              </span>
+              <span class="mood-label">Exhausted</span>
+            </button>
+            <button class="mood-btn selected" data-mood="Anxious" aria-label="Anxious">
+              <span class="mood-icon-wrap">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </span>
+              <span class="mood-label">Anxious</span>
+            </button>
+            <button class="mood-btn" data-mood="Heavy" aria-label="Heavy">
+              <span class="mood-icon-wrap">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><line x1="8" y1="19" x2="8" y2="21"/><line x1="8" y1="13" x2="8" y2="15"/><line x1="16" y1="19" x2="16" y2="21"/><line x1="16" y1="13" x2="16" y2="15"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="12" y1="15" x2="12" y2="17"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg>
+              </span>
+              <span class="mood-label">Heavy</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Predictive Preventive Nudge Card (Step 3) -->
+        <div class="app-card preventive-nudge-card" id="card-preventive-nudge">
+          <div class="card-title-row">
+            <span class="card-title" style="color: var(--fnp-navy); display:flex; align-items:center; gap:6px;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true" style="color:#a45a1e"><line x1="12" y1="2" x2="12" y2="6"/><path d="M12 6a6 6 0 0 1 6 6c0 4-3 6-6 6s-6-2-6-6a6 6 0 0 1 6-6z"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="19.07" y1="4.93" x2="16.24" y2="7.76"/></svg>
+              Padi Preventive Care
+            </span>
+            <span class="card-badge badge-amber">Velocity Alert</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-soft); line-height: 1.45; margin-bottom: 10px;">
+            Padi noticed you've been feeling physically drained lately. Take 3 minutes to try this evening mental decompression exercise before acute stress builds up.
+          </p>
+          <div style="display: flex; gap: 8px;">
+            <button class="primary-action-btn" id="btn-try-decompression" style="margin-top: 0; padding: 8px 14px; font-size: 0.78rem; background: #003152; color: var(--fnp-cream);">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c6 0 10-4 10-10S18 2 12 2 2 6 2 12c0 2.5.9 4.8 2.4 6.5"/><path d="M12 18a6 6 0 0 0 6-6"/><path d="M8 14.5c.5 1.5 2 3 4 3"/></svg>
+              Try 3-Min Decompression
+            </button>
+            <button class="control-btn" id="btn-dismiss-nudge" style="padding: 8px 12px; font-size: 0.75rem;">Dismiss</button>
+          </div>
+        </div>
+
+        <!-- Daily Motivational Checklist -->
+        <div class="app-card">
+          <div class="card-title-row">
+            <span class="card-title" style="display:flex;align-items:center;gap:6px;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="11" y2="16"/></svg>
+              Daily Motivational Checklist
+            </span>
+            <span class="card-badge badge-emerald" id="checklist-counter-badge">2 of 4 Completed</span>
+          </div>
+          <div class="checklist-progress-bar-bg" aria-hidden="true">
+            <div class="checklist-progress-bar-fill" id="checklist-progress-fill" style="width: 50%;"></div>
+          </div>
+          <div class="checklist-items" id="checklist-items-container">
+            <div class="checklist-item completed" data-task-id="water" tabindex="0" role="checkbox" aria-checked="true">
+              <div class="checklist-checkbox"></div>
+              <span class="checklist-text">Drink 2 glasses of fresh water</span>
+            </div>
+            <div class="checklist-item completed" data-task-id="affirmation" tabindex="0" role="checkbox" aria-checked="true">
+              <div class="checklist-checkbox"></div>
+              <span class="checklist-text">Repeat morning affirmation: "I am safe and capable"</span>
+            </div>
+            <div class="checklist-item" data-task-id="breathing" tabindex="0" role="checkbox" aria-checked="false">
+              <div class="checklist-checkbox"></div>
+              <span class="checklist-text">5-minute 4-4-4 mindful breathing break</span>
+            </div>
+            <div class="checklist-item" data-task-id="journal" tabindex="0" role="checkbox" aria-checked="false">
+              <div class="checklist-checkbox"></div>
+              <span class="checklist-text">Write 1 entry in your gratitude journal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Well-Being Index Card (WHO-5 Summary) -->
+        <div class="app-card">
+          <div class="card-title-row">
+            <span class="card-title" style="display:flex;align-items:center;gap:6px;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              Well-Being Index (WHO-5)
+            </span>
+            <span class="card-badge badge-rose">Clinical Assessment</span>
+          </div>
+          <div class="gauge-flex">
+            <div class="gauge-circle" aria-label="36 out of 100 well-being score">
+              <div class="gauge-inner">
+                <span class="gauge-val" id="who5-score-val">36</span>
+                <span class="gauge-max">/100</span>
+              </div>
+            </div>
+            <div class="gauge-details">
+              <div class="gauge-status">Moderate Clinical Strain</div>
+              <div class="gauge-delta">↓ 32% velocity drop (Last 14 days)</div>
+              <button class="control-btn" id="btn-open-assessment" style="margin-top: 8px; padding: 4px 12px; font-size: 0.72rem;">
+                Take Full WHO-5 Assessment
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2x2 Quick Action Grid -->
+        <div class="action-grid">
+          <button class="action-card-btn" id="action-launch-chat">
+            <div class="action-icon-box icon-blue">
+              <svg class="fnp-icon-md" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div class="action-card-title">Talk to Padi</div>
+            <div class="action-card-sub">AI Companion triage in English &amp; Pidgin</div>
+          </button>
+          <button class="action-card-btn" id="action-launch-rescue">
+            <div class="action-icon-box icon-emerald">
+              <svg class="fnp-icon-md" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="action-card-title">Workday Rescue</div>
+            <div class="action-card-sub">15-min micro-sprints to halt task freeze</div>
+          </button>
+          <button class="action-card-btn" id="action-launch-somatic">
+            <div class="action-icon-box icon-purple">
+              <svg class="fnp-icon-md" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c6 0 10-4 10-10S18 2 12 2 2 6 2 12c0 2.5.9 4.8 2.4 6.5"/><path d="M12 18a6 6 0 0 0 6-6"/><path d="M8 14.5c.5 1.5 2 3 4 3"/></svg>
+            </div>
+            <div class="action-card-title">Somatic Reset</div>
+            <div class="action-card-sub">4-4-4 box breathing &amp; ASMR audio</div>
+          </button>
+          <button class="action-card-btn" id="action-launch-resources">
+            <div class="action-icon-box icon-amber">
+              <svg class="fnp-icon-md" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div class="action-card-title">Resource Library</div>
+            <div class="action-card-sub">Coping strategies &amp; 24/7 hotline</div>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 4: PADI AI COMPANION & TRIAGE CHAT            -->
+      <!-- ==================================================== -->
+      <section class="screen-view" id="view-chat" aria-label="AI Companion Triage Chat">
+        <!-- Chat Header -->
+        <header class="chat-screen-header">
+          <div class="chat-header-user">
+            <button class="icon-btn" id="btn-chat-back" aria-label="Back to Home">
+              <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="padi-avatar-status">
+              <div class="app-avatar" style="background: #003152;">P</div>
+              <span class="status-dot"></span>
+            </div>
+            <div>
+              <div class="chat-partner-name">Padi AI</div>
+              <div class="chat-partner-sub">Online · Empathetic Triage</div>
+            </div>
+          </div>
+          <button class="crisis-shield-btn" id="btn-chat-crisis-shield" aria-label="Emergency Crisis Assistance">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Crisis
+          </button>
+        </header>
+
+        <!-- Privacy Banner -->
+        <div class="privacy-banner">
+          <svg class="fnp-icon-xs" viewBox="0 0 24 24" aria-hidden="true" style="display:inline;vertical-align:middle;margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Encrypted &middot; Anonymous &middot; Empathetic Nigerian English &amp; Pidgin
+        </div>
+
+        <!-- Chat Message Thread -->
+        <div class="chat-messages-container" id="chat-messages" role="log" aria-live="polite">
+          <!-- Padi Greeting -->
+          <div class="chat-bubble bubble-bot">
+            I dey with you, Amina. Take a slow, deep breath with me. Wetin dey happen right now? Tell me how you dey feel, or pick wetin you need most:
+            <div class="bubble-time">Just now</div>
+          </div>
+
+          <!-- Explicit Triage Routing Buttons (FD-03) -->
+          <div class="triage-mode-options" id="triage-mode-buttons">
+            <button class="mode-card-btn mode-panic" id="btn-triage-panic">
+              <span class="mode-btn-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c6 0 10-4 10-10S18 2 12 2 2 6 2 12c0 2.5.9 4.8 2.4 6.5"/><path d="M12 18a6 6 0 0 0 6-6"/><path d="M8 14.5c.5 1.5 2 3 4 3"/></svg>
+              </span>
+              <div>
+                <div class="mode-btn-title">Calm My Panic</div>
+                <div class="mode-btn-sub">4-4-4 box breathing, sensory grounding &amp; ASMR audio</div>
+              </div>
+            </button>
+            <button class="mode-card-btn mode-deadline" id="btn-triage-deadline">
+              <span class="mode-btn-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <div>
+                <div class="mode-btn-title">Rescue My Deadline</div>
+                <div class="mode-btn-sub">Deconstruct overwhelming deliverable into 15-min sprints</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div class="chat-typing-indicator" id="chat-typing-indicator" style="display: none;" aria-live="polite">
+          <div class="typing-dots">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+          </div>
+          <span class="typing-label">Padi is typing...</span>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <form class="chat-input-row" id="chat-input-form">
+          <input type="text" class="chat-text-input" id="chat-input-text" placeholder="Type how you feel (e.g. My heart dey beat fast)..." autocomplete="off" />
+          <button type="button" class="dialect-toggle-btn active-pidgin" id="btn-toggle-dialect" title="Toggle Dialect: Pidgin / English">
+            <svg style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline;vertical-align:middle;margin-right:3px;" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Pidgin
+          </button>
+          <button type="submit" class="chat-send-btn" id="btn-send-chat" aria-label="Send message">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </form>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 5: ACUTE SOMATIC RESET & EXERCISES            -->
+      <!-- ==================================================== -->
+      <section class="screen-view" id="view-somatic" aria-label="Mindfulness, Somatic Reset and ASMR">
+        <!-- Header -->
+        <header class="somatic-header">
+          <button class="icon-btn" id="btn-somatic-back" aria-label="Back">
+            <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="tab-toggle-pill">
+            <button class="pill-option active" id="tab-pill-exercises">Somatic Reset</button>
+            <button class="pill-option" id="tab-pill-asmr">ASMR Soundscapes</button>
+          </div>
+          <button class="icon-btn" id="btn-somatic-crisis-shortcut" aria-label="Crisis shortcut" style="color: #a45a1e;">
+            <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </button>
+        </header>
+
+        <!-- Sub-View 1: Somatic Exercises (4-4-4 Box Breathing) -->
+        <div id="subview-somatic-exercises">
+          <div class="breathing-widget-card">
+            <div class="breathing-cycle-counter" id="cycle-counter-text">CYCLE 1 OF 3</div>
+
+            <!-- Pulsing Circle Animation Viewport -->
+            <div class="breathing-circle-viewport">
+              <div class="breathing-circle-outer" id="breathing-circle">
+                <div class="breathing-inner-label">
+                  <div class="phase-action-text" id="breathing-phase-label">READY</div>
+                  <div class="countdown-number" id="breathing-timer-val">4</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="breathing-control-row">
+              <button class="control-btn" id="btn-start-breathing" style="background: var(--accent-blue); border-color: var(--accent-blue);">
+                ▶ Start 4-4-4 Reset
+              </button>
+              <button class="control-btn" id="btn-reset-breathing">
+                ↺ Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- 5-4-3-2-1 Sensory Grounding Drawer -->
+          <div class="grounding-drawer" id="grounding-drawer">
+            <div class="card-title-row">
+              <span class="card-title" style="display:flex;align-items:center;gap:6px;">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M2 20c0-4 4-7 10-7s10 3 10 7"/><path d="M9 20h6"/></svg>
+                5-4-3-2-1 Sensory Grounding
+              </span>
+              <span class="card-badge badge-blue">Anchoring</span>
+            </div>
+            <p class="grounding-prompt">Look around your room right now. Name 3 physical objects you can see:</p>
+            <div class="grounding-inputs">
+              <input type="text" class="grounding-chip-input" id="grounding-obj-1" placeholder="1. E.g. Water cup" />
+              <input type="text" class="grounding-chip-input" id="grounding-obj-2" placeholder="2. E.g. Notebook" />
+              <input type="text" class="grounding-chip-input" id="grounding-obj-3" placeholder="3. E.g. Phone lamp" />
+            </div>
+
+            <!-- Distress Slider -->
+            <div class="distress-slider-box">
+              <div class="slider-label-row">
+                <span>Distress Level After Exercise:</span>
+                <strong id="distress-rating-num" style="color: var(--accent-blue); font-size: 0.9rem;">2 (Manageable)</strong>
+              </div>
+              <input type="range" class="range-slider" id="distress-slider" min="1" max="5" value="2" step="1" />
+              <div style="display: flex; justify-content: space-between; font-size: 0.65rem; color: var(--text-muted); margin-top: 4px;">
+                <span>1: Calm</span>
+                <span>2: Manageable</span>
+                <span>3: Shaky</span>
+                <span>4: Panicking</span>
+                <span>5: Crisis</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Button to Workday Rescue -->
+          <button class="primary-action-btn" id="btn-somatic-to-rescue" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Feeling Slower / Ready for Workday Rescue
+          </button>
+        </div>
+
+        <!-- Sub-View 2: ASMR Soundscapes -->
+        <div id="subview-somatic-asmr" style="display: none;">
+          <div class="app-card">
+            <div class="card-title-row">
+              <span class="card-title" style="display:flex;align-items:center;gap:6px;">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                Curated Nocturnal Soundscapes
+              </span>
+              <span class="card-badge badge-purple" id="asmr-status-badge">Ready</span>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-soft); margin-bottom: 14px;">
+              Real-time synthesized ambient audio using Web Audio API. 100% offline, soothing, and zero data cost.
+            </p>
+
+            <div class="asmr-tracks-container">
+              <!-- Track 1 -->
+              <div class="asmr-track-card" data-track="rain">
+                <div class="track-info-group">
+                  <div class="track-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="8" y1="19" x2="8" y2="21"/><line x1="8" y1="13" x2="8" y2="15"/><line x1="16" y1="19" x2="16" y2="21"/><line x1="16" y1="13" x2="16" y2="15"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="12" y1="15" x2="12" y2="17"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/></svg>
+                  </div>
+                  <div>
+                    <div class="track-name">Abuja Midnight Rain</div>
+                    <div class="track-sub">Gentle rain on zinc roof &middot; Soothing white noise</div>
+                  </div>
+                </div>
+                <button class="play-track-btn" id="btn-play-rain" aria-label="Play Rain track">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </button>
+              </div>
+
+              <!-- Track 2 -->
+              <div class="asmr-track-card" data-track="ocean">
+                <div class="track-info-group">
+                  <div class="track-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </div>
+                  <div>
+                    <div class="track-name">Deep Atlantic Waves</div>
+                    <div class="track-sub">Low-frequency rhythmic swell &middot; Sleep aid</div>
+                  </div>
+                </div>
+                <button class="play-track-btn" id="btn-play-ocean" aria-label="Play Ocean track">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </button>
+              </div>
+
+              <!-- Track 3 -->
+              <div class="asmr-track-card" data-track="brown">
+                <div class="track-info-group">
+                  <div class="track-icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+                  </div>
+                  <div>
+                    <div class="track-name">Nocturnal Brown Noise</div>
+                    <div class="track-sub">Deep warm frequency &middot; Muffles racing thoughts</div>
+                  </div>
+                </div>
+                <button class="play-track-btn" id="btn-play-brown" aria-label="Play Brown noise track">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Sleep Timer Control -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--card-border);">
+              <span style="font-size: 0.8rem; color: var(--text-soft);">15-Minute Sleep Timer:</span>
+              <button class="control-btn" id="btn-toggle-sleep-timer" style="display:flex;align-items:center;gap:5px;">
+                <svg class="fnp-icon-xs" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                15 Mins (Active)
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 6: WORKDAY RESCUE & 15-MINUTE SPRINTS         -->
+      <!-- ==================================================== -->
+      <section class="screen-view" id="view-rescue" aria-label="Workday Rescue Sprints">
+        <header class="app-top-header" style="margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="icon-btn" id="btn-rescue-back" aria-label="Back">
+              <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div>
+              <h2 style="font-size: 1.05rem; font-weight: 800; color: #fff;">Workday Rescue</h2>
+              <p style="font-size: 0.72rem; color: #34d399;">Upwork Deliverable · Due 06:00 AM</p>
+            </div>
+          </div>
+          <span class="card-badge badge-emerald">Sprint 1 of 4</span>
+        </header>
+
+        <!-- Sprint Stepper Indicator -->
+        <div class="sprint-stepper-bar">
+          <div class="step-dot active" id="step-dot-1">1</div>
+          <div class="step-line"></div>
+          <div class="step-dot" id="step-dot-2">2</div>
+          <div class="step-line"></div>
+          <div class="step-dot" id="step-dot-3">3</div>
+          <div class="step-line"></div>
+          <div class="step-dot" id="step-dot-4">4</div>
+        </div>
+
+        <!-- 15-Minute Countdown Timer Widget -->
+        <div class="app-card" style="text-align: center; padding: 22px 16px;">
+          <div class="rescue-timer-display" id="rescue-timer-display">15:00</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 14px;">Focused Sprint Countdown</div>
+          <div style="display: flex; justify-content: center; gap: 10px;">
+            <button class="control-btn" id="btn-timer-start-pause" style="background: var(--accent-emerald); border-color: var(--accent-emerald); color: #022c22; font-weight: 800;">
+              ▶ Start Sprint
+            </button>
+            <button class="control-btn" id="btn-timer-add-5">
+              +5 Mins
+            </button>
+          </div>
+        </div>
+
+        <!-- Micro-Task Directive -->
+        <div class="app-card" style="border-left: 4px solid var(--accent-emerald);">
+          <div class="card-title-row">
+            <span class="card-title" style="color:#4ade80;display:flex;align-items:center;gap:6px;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true" style="color:inherit"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Active Micro-Task
+            </span>
+            <span class="card-badge badge-emerald">Singular Rule</span>
+          </div>
+          <p style="font-size: 0.85rem; color: #f1f5f9; line-height: 1.45; font-weight: 600;">
+            Write 3 headline options only. Do NOT touch body copy or revisions yet.
+          </p>
+        </div>
+
+        <!-- Quick Draft / Submission Box -->
+        <div class="app-card">
+          <div class="card-title-row">
+            <span class="card-title" style="display:flex;align-items:center;gap:6px;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              Quick Draft Space
+            </span>
+            <span style="font-size: 0.7rem; color: var(--text-muted);" id="draft-word-count">0 words</span>
+          </div>
+          <textarea class="rescue-draft-textarea" id="rescue-draft-textarea" rows="4" placeholder="Draft your 3 headline options here... (Auto-saved locally)"></textarea>
+          <button class="primary-action-btn" id="btn-complete-sprint" style="background: #003152;">
+            ✓ Complete Sprint & Advance to Next Task
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 7: RESOURCE LIBRARY & CRISIS CARD             -->
+      <!-- ==================================================== -->
+      <section class="screen-view" id="view-resources" aria-label="Mental Health Resource Library">
+        <!-- Emergency Crisis Alert Card (High Visibility Red) -->
+        <div class="crisis-card-banner">
+          <div class="crisis-badge-strip" style="display:flex;align-items:center;justify-content:center;gap:6px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            IMMEDIATE 24/7 CRISIS SUPPORT
+          </div>
+          <h2 style="font-size: 1.1rem; font-weight: 800; color: #fff; margin-bottom: 4px;">Amina, You Are Not Alone</h2>
+          <p style="font-size: 0.78rem; color: #fecdd3; margin-bottom: 12px; line-height: 1.4;">
+            If you are in acute distress or feeling overwhelmed, please connect with a compassionate human right away:
+          </p>
+          <a class="crisis-cta-whatsapp" href="https://wa.me/2348003743637?text=Hello%20FriendnPal%2C%20I%20need%20to%20speak%20with%20an%20on-call%20counselor." target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Chat with On-Call Counselor on WhatsApp
+          </a>
+          <a class="crisis-cta-phone" href="tel:+2348003743637" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15.92z"/></svg>
+            Call Toll-Free 24/7 Hotline: 0800-FRIENDNPAL
+          </a>
+        </div>
+
+        <!-- Resource Search and Categories -->
+        <div class="app-card">
+          <div class="card-title-row">
+            <span class="card-title" style="display:flex;align-items:center;gap:6px;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              Mental Health Resource Library
+            </span>
+          </div>
+          <div class="resource-search-box">
+            <input type="text" class="resource-search-input" id="resource-search-input" placeholder="Search coping guides, articles..." />
+          </div>
+          <div class="category-pills-row" id="resource-category-pills">
+            <button class="pill-option active" data-cat="all">All</button>
+            <button class="pill-option" data-cat="panic">Panic</button>
+            <button class="pill-option" data-cat="burnout">Burnout</button>
+            <button class="pill-option" data-cat="trauma">Trauma</button>
+          </div>
+        </div>
+
+        <!-- Human Therapy Booking Card (FR-15) -->
+        <div class="app-card" style="background: rgba(37, 99, 235, 0.08); border-color: rgba(37, 99, 235, 0.35);">
+          <div class="card-title-row">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(64,117,173,0.15);border-radius:8px;color:var(--fnp-blue);">
+                  <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </span>
+                <strong style="color: #fff; font-size: 0.88rem;">1-on-1 Certified Therapists</strong>
+              </div>
+            <span class="card-badge badge-blue">₦7,500 / Session</span>
+          </div>
+          <p style="font-size: 0.76rem; color: var(--text-soft); margin: 6px 0 10px 0; line-height: 1.4;">
+            Connect for 45-minute confidential video/voice consultations with certified Nigerian clinical psychologists.
+          </p>
+          <button class="primary-action-btn" id="btn-open-therapist-booking" style="margin-top: 0; padding: 10px; font-size: 0.78rem; background: #003152; display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Browse Therapist Directory &amp; Book
+          </button>
+        </div>
+
+        <!-- Article Feed -->
+        <div class="resources-feed" id="resources-feed-container">
+          <div class="article-card" data-cat="panic">
+            <div class="article-header-row">
+              <span class="article-tag">Somatic Grounding</span>
+              <span class="article-read-time">3 min read</span>
+            </div>
+            <div class="article-title">How to Halt a Panic Attack in Under 10 Minutes</div>
+            <div class="article-snippet">Step-by-step autonomic nerve reset using the mammalian dive reflex and paced 4-4-4 respiration.</div>
+          </div>
+
+          <div class="article-card" data-cat="burnout">
+            <div class="article-header-row">
+              <span class="article-tag">Workplace Health</span>
+              <span class="article-read-time">4 min read</span>
+            </div>
+            <div class="article-title">Breaking the Freeze Cycle: Cognitive Momentum for Remote Freelancers</div>
+            <div class="article-snippet">How nocturnal deadlines trigger dopamine depletion, and how 15-minute chunking recovers agency.</div>
+          </div>
+
+          <div class="article-card" data-cat="trauma">
+            <div class="article-header-row">
+              <span class="article-tag">Family Boundaries</span>
+              <span class="article-read-time">5 min read</span>
+            </div>
+            <div class="article-title">Setting Boundaries with Toxic Relatives Without Guilt</div>
+            <div class="article-snippet">Clinical communication scripts tailored for young adults navigating familial pressure.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 2: PEER SUPPORT COMMUNITIES                   -->
+      <!-- ==================================================== -->
+      <section class="screen-view" id="view-communities" aria-label="Peer Support Communities">
+        <header class="app-top-header" style="margin-bottom: 12px;">
+          <div>
+            <h2 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Peer Communities</h2>
+            <p style="font-size: 0.72rem; color: var(--text-muted);">Posting anonymously as <span style="color: var(--accent-blue); font-weight: 700;">@Amina94</span></p>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <button class="control-btn" id="btn-open-community-modal" style="font-size: 0.72rem; padding: 5px 10px; border-color: var(--accent-blue); color: #93c5fd;">+ New Post</button>
+            <span class="card-badge badge-emerald">Safe &amp; Moderated</span>
+          </div>
+        </header>
+
+        <div class="communities-category-tabs">
+          <button class="pill-option active" data-comm="all">All Groups</button>
+          <button class="pill-option" data-comm="trauma">Parental Trauma</button>
+          <button class="pill-option" data-comm="recovery">Addiction</button>
+          <button class="pill-option" data-comm="burnout">Freelancers</button>
+        </div>
+
+        <div class="community-groups-list">
+          <div class="community-group-card">
+            <div class="group-header">
+              <span class="group-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              <div style="flex: 1;">
+                <div class="group-title">Parental Abuse & Trauma Recovery</div>
+                <div class="group-meta">1,420 members · Active now</div>
+              </div>
+              <button class="control-btn" style="font-size: 0.7rem; padding: 4px 10px;">Joined</button>
+            </div>
+            <p class="group-snippet">"How do you deal with family members who demand financial support while emotionally abusing you?"</p>
+            <div class="group-footer">
+              <button class="reaction-btn" data-reactions="42">
+                <svg class="fnp-icon-xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>42</span> support you
+              </button>
+              <span style="font-size: 0.7rem; color: var(--text-muted);">18 replies</span>
+            </div>
+          </div>
+
+          <div class="community-group-card">
+            <div class="group-header">
+              <span class="group-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </span>
+              <div style="flex: 1;">
+                <div class="group-title">Freelancer & Nocturnal Burnout</div>
+                <div class="group-meta">1,890 members · 23 online</div>
+              </div>
+              <button class="control-btn" style="font-size: 0.7rem; padding: 4px 10px;">Join</button>
+            </div>
+            <p class="group-snippet">"Power blackout in Garki at 2:00 AM with client deadline in 4 hours. Anyone else battling panic?"</p>
+            <div class="group-footer">
+              <button class="reaction-btn" data-reactions="67">
+                <svg class="fnp-icon-xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>67</span> support you
+              </button>
+              <span style="font-size: 0.7rem; color: var(--text-muted);">34 replies</span>
+            </div>
+          </div>
+
+          <div class="community-group-card">
+            <div class="group-header">
+              <span class="group-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </span>
+              <div style="flex: 1;">
+                <div class="group-title">Addiction & Substance Recovery</div>
+                <div class="group-meta">980 members · Daily Check-In</div>
+              </div>
+              <button class="control-btn" style="font-size: 0.7rem; padding: 4px 10px;">Join</button>
+            </div>
+            <p class="group-snippet">"Day 14 alcohol-free. Nights are the hardest, but grateful for this safe space."</p>
+            <div class="group-footer">
+              <button class="reaction-btn" data-reactions="89">
+                <svg class="fnp-icon-xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <span>89</span> support you
+              </button>
+              <span style="font-size: 0.7rem; color: var(--text-muted);">26 replies</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 3: THOUGHT & GRATITUDE JOURNALS               -->
+      <!-- ==================================================== -->
+      <section class="screen-view" id="view-journals" aria-label="Private Thought & Gratitude Journals">
+        <header class="app-top-header" style="margin-bottom: 12px;">
+          <div>
+            <h2 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Private Journal</h2>
+            <p style="font-size: 0.72rem; color: var(--text-muted); display:flex;align-items:center;gap:4px;">
+              <svg class="fnp-icon-xs" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Client-Side AES Encrypted
+            </p>
+          </div>
+          <span class="card-badge badge-blue">New Entry</span>
+        </header>
+
+        <!-- Prompt Card -->
+        <div class="app-card" style="background: rgba(59, 130, 246, 0.08); border-color: rgba(59, 130, 246, 0.3);">
+          <div style="font-size: 0.72rem; color: #93c5fd; font-weight: 700; text-transform: uppercase;">Guided Nightly Reflection</div>
+          <p style="font-size: 0.85rem; color: #fff; margin-top: 4px;">
+            "What is one heavy expectation you can give yourself permission to put down tonight?"
+          </p>
+        </div>
+
+        <!-- Journal Composer -->
+        <div class="app-card">
+          <input type="text" class="journal-title-input" id="journal-title-input" placeholder="Entry Title (e.g. Midnight thoughts before client deadline)" />
+          <div style="display: flex; gap: 8px; margin: 10px 0;">
+            <select class="journal-select" id="journal-sentiment-select">
+              <option value="Anxious">Sentiment: Anxious</option>
+              <option value="Grateful">Sentiment: Grateful</option>
+              <option value="Calm">Sentiment: Calm</option>
+              <option value="Heavy">Sentiment: Heavy</option>
+              <option value="Relieved">Sentiment: Relieved</option>
+            </select>
+          </div>
+          <textarea class="rescue-draft-textarea" id="journal-content-textarea" rows="4" placeholder="Write freely. No one else has access to this device log..."></textarea>
+          <button class="primary-action-btn" id="btn-save-journal" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Save Journal Entry
+          </button>
+        </div>
+
+        <!-- Saved Entries List -->
+        <div class="saved-journals-list" id="saved-journals-container">
+          <div class="app-card">
+            <div class="card-title-row">
+              <strong style="font-size: 0.88rem; color: #fff;">Surviving the late-night panic</strong>
+              <span class="card-badge badge-amber">Anxious</span>
+            </div>
+            <p style="font-size: 0.78rem; color: var(--text-soft); line-height: 1.4;">
+              Did the 4-4-4 box breathing when my chest tightened up. Reminded myself that my worth isn't defined by a single client deadline.
+            </p>
+            <div style="font-size: 0.65rem; color: var(--text-muted); margin-top: 8px;">Yesterday · 03:22 AM</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN: CLINICAL ASSESSMENT INTAKE ENGINE (WHO-5)    -->
+      <!-- ==================================================== -->
+      <section class="screen-view" id="view-assessment" aria-label="Clinical Assessment Intake Engine">
+        <!-- Assessment Header -->
+        <header class="app-top-header" style="margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="icon-btn" id="btn-assessment-back" aria-label="Back to Home">
+              <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div>
+              <h2 style="font-size: 1.05rem; font-weight: 800; color: #fff;">WHO-5 Index</h2>
+              <p style="font-size: 0.72rem; color: #60a5fa;">Validated Well-Being Screening · FR-03</p>
+            </div>
+          </div>
+          <span class="card-badge badge-blue" id="assessment-progress-badge">Item 1 of 5</span>
+        </header>
+
+        <!-- Stepper Progress Bar -->
+        <div class="assessment-progress-track">
+          <div class="assessment-progress-fill" id="assessment-progress-fill" style="width: 20%;"></div>
+        </div>
+
+        <!-- Question View Container (Step 1 to 5) -->
+        <div id="assessment-flow-container">
+          <div class="app-card assessment-prompt-card">
+            <div class="card-title-row">
+              <span class="card-title" style="color: #93c5fd; display:flex;align-items:center;gap:6px;">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1" ry="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="11" y2="16"/></svg>
+                Past 14 Days Recall
+              </span>
+              <span class="card-badge badge-amber" id="assessment-q-number">Question 1 / 5</span>
+            </div>
+            <p class="assessment-instruction">
+              Please indicate for each of the five statements which is closest to how you have been feeling over the last two weeks:
+            </p>
+            <div class="assessment-statement-box" id="assessment-statement-text">
+              "Over the last 2 weeks, I have felt cheerful and in good spirits"
+            </div>
+          </div>
+
+          <!-- Likert Selection Cards (0 to 5) -->
+          <div class="likert-grid" id="likert-options-container" role="radiogroup" aria-label="Likert Scale Options">
+            <button class="likert-card" data-score="5">
+              <span class="likert-radio-dot"></span>
+              <span class="likert-label">All of the time</span>
+              <span class="likert-score-chip">5 pts</span>
+            </button>
+            <button class="likert-card" data-score="4">
+              <span class="likert-radio-dot"></span>
+              <span class="likert-label">Most of the time</span>
+              <span class="likert-score-chip">4 pts</span>
+            </button>
+            <button class="likert-card" data-score="3">
+              <span class="likert-radio-dot"></span>
+              <span class="likert-label">More than half of the time</span>
+              <span class="likert-score-chip">3 pts</span>
+            </button>
+            <button class="likert-card" data-score="2">
+              <span class="likert-radio-dot"></span>
+              <span class="likert-label">Less than half of the time</span>
+              <span class="likert-score-chip">2 pts</span>
+            </button>
+            <button class="likert-card" data-score="1">
+              <span class="likert-radio-dot"></span>
+              <span class="likert-label">Some of the time</span>
+              <span class="likert-score-chip">1 pt</span>
+            </button>
+            <button class="likert-card" data-score="0">
+              <span class="likert-radio-dot"></span>
+              <span class="likert-label">At no time</span>
+              <span class="likert-score-chip">0 pts</span>
+            </button>
+          </div>
+
+          <!-- Assessment Navigation Footer -->
+          <div class="assessment-nav-row">
+            <button class="control-btn" id="btn-assessment-prev" disabled>
+              ← Prev
+            </button>
+            <div class="assessment-step-dots" id="assessment-step-dots">
+              <span class="assessment-dot active" data-step="0">1</span>
+              <span class="assessment-dot" data-step="1">2</span>
+              <span class="assessment-dot" data-step="2">3</span>
+              <span class="assessment-dot" data-step="3">4</span>
+              <span class="assessment-dot" data-step="4">5</span>
+            </div>
+            <button class="control-btn" id="btn-assessment-next" style="background: var(--accent-blue); border-color: var(--accent-blue);">
+              Next →
+            </button>
+          </div>
+        </div>
+
+        <!-- Results & Diagnostic Feedback Card (Shown after completing all 5 questions) -->
+        <div id="assessment-results-container" style="display: none;">
+          <div class="app-card" style="border: 1px solid rgba(59, 130, 246, 0.4); text-align: center; padding: 20px 14px;">
+            <div class="card-title-row" style="justify-content: center; margin-bottom: 12px;">
+              <span class="card-badge badge-blue">Clinical Assessment Complete</span>
+            </div>
+
+            <!-- Score Summary Dial -->
+            <div class="assessment-score-gauge-wrap">
+              <div class="assessment-score-circle" id="assessment-result-circle">
+                <div class="assessment-score-inner">
+                  <div class="assessment-score-val" id="assessment-result-normalized">36</div>
+                  <div class="assessment-score-max">/100</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="assessment-severity-title" id="assessment-severity-title">Moderate Clinical Strain</div>
+            <p class="assessment-severity-desc" id="assessment-severity-desc">
+              Your score of 36/100 indicates noticeable depressive impairment over the past 14 days, with a 32% drop below your baseline.
+            </p>
+
+            <!-- Score Breakdown Pills -->
+            <div class="assessment-breakdown-row">
+              <div class="breakdown-pill">
+                <span class="pill-k">Raw:</span>
+                <strong class="pill-v" id="assessment-result-raw">9 / 25</strong>
+              </div>
+              <div class="breakdown-pill">
+                <span class="pill-k">Delta:</span>
+                <strong class="pill-v" id="assessment-result-delta" style="color: #fbbf24;">↓ 32%</strong>
+              </div>
+              <div class="breakdown-pill">
+                <span class="pill-k">Risk Tier:</span>
+                <strong class="pill-v" id="assessment-result-tier" style="color: #fbbf24;">MODERATE</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Targeted Clinical Recommendations Card -->
+          <div class="app-card" id="assessment-recommendation-card" style="margin-top: 10px;">
+            <div class="card-title-row">
+              <span class="card-title" id="rec-title" style="display:flex;align-items:center;gap:6px;">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Clinical Recommendation
+              </span>
+              <span class="card-badge badge-amber" id="rec-badge">Preventive Care</span>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-soft); line-height: 1.45; margin-bottom: 12px;" id="rec-body">
+              A downward trajectory was flagged. We recommend grounding your nervous system with 4-4-4 box breathing or halting work freeze with a 15-minute sprint:
+            </p>
+            <div style="display: flex; gap: 8px;" id="rec-actions">
+              <button class="control-btn" id="btn-rec-somatic" style="flex: 1; padding: 8px 6px; font-size: 0.75rem; display:flex;align-items:center;justify-content:center;gap:5px;">
+                <svg class="fnp-icon-xs" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c6 0 10-4 10-10S18 2 12 2 2 6 2 12c0 2.5.9 4.8 2.4 6.5"/><path d="M12 18a6 6 0 0 0 6-6"/></svg>
+                Somatic Reset
+              </button>
+              <button class="control-btn" id="btn-rec-rescue" style="flex: 1; padding: 8px 6px; font-size: 0.75rem; display:flex;align-items:center;justify-content:center;gap:5px;">
+                <svg class="fnp-icon-xs" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Workday Rescue
+              </button>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <button class="primary-action-btn" id="btn-submit-assessment" style="background: #003152; display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Sync Telemetry to Clinician Chart &amp; Home
+          </button>
+          <button class="control-btn" id="btn-retake-assessment" style="width: 100%; margin-top: 10px; padding: 10px;">
+            ↺ Retake Assessment
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 7: POST-SHIFT DECOMPRESSION & SUBSCRIPTION    -->
+      <!-- ==================================================== -->
+      <section class="screen-view" id="view-postshift" aria-label="Post-Shift Decompression and Subscription">
+        <header class="app-top-header" style="margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="icon-btn" id="btn-postshift-back" aria-label="Back">
+              <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div>
+              <h2 style="font-size: 1.05rem; font-weight: 800; color: #fff;">Shift Completion</h2>
+              <p style="font-size: 0.72rem; color: #34d399;">06:00 AM WAT · Shift End</p>
+            </div>
+          </div>
+          <button class="icon-btn" id="btn-postshift-close" aria-label="Close">
+            <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </header>
+
+        <!-- Work Completion & Contract Saved Celebration Banner -->
+        <div class="app-card postshift-celebration-card">
+          <div class="celebration-badge-row">
+            <span class="confetti-icon" aria-hidden="true">
+              <svg class="fnp-icon-xl" viewBox="0 0 24 24" style="color:var(--fnp-ochre)"><circle cx="12" cy="8" r="2"/><path d="M12 2v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M2 12h2"/><path d="M18.36 6.36l1.41-1.41"/><path d="M22 12h-2"/><path d="M12 18v2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M19.07 19.07l-1.41-1.41"/></svg>
+            </span>
+            <span class="card-badge badge-emerald">Contract Saved</span>
+          </div>
+          <h2 style="font-size: 1.2rem; font-weight: 800; color: #fff; margin-top: 6px;">You Did It, Amina!</h2>
+          <p style="font-size: 0.8rem; color: var(--text-soft); margin: 6px 0 14px 0; line-height: 1.45;">
+            You pushed through a midnight blackout, calmed acute panic, and protected your client contract. We are proud of your resilience.
+          </p>
+          <div class="contract-milestone-grid">
+            <div class="milestone-pill">
+              <span class="milestone-icon" style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(64,117,173,0.15);border-radius:8px;color:var(--fnp-blue);">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <div>
+                <div class="milestone-title">On Time</div>
+                <div class="milestone-sub">Submitted at 05:48 AM</div>
+              </div>
+            </div>
+            <div class="milestone-pill">
+              <span class="milestone-icon" style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(64,117,173,0.15);border-radius:8px;color:var(--fnp-blue);">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <div>
+                <div class="milestone-title">4 Sprints</div>
+                <div class="milestone-sub">Complete deliverable</div>
+              </div>
+            </div>
+            <div class="milestone-pill">
+              <span class="milestone-icon" style="display:flex;align-items:center;justify-content:center;width:28px;height:28px;background:rgba(64,117,173,0.15);border-radius:8px;color:var(--fnp-ochre);">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </span>
+              <div>
+                <div class="milestone-title">$350 USD</div>
+                <div class="milestone-sub">Contract income secured</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shift-End Mood Check-in Card (Step 11) -->
+        <div class="app-card">
+          <div class="card-title-row">
+            <span class="card-title" style="display:flex;align-items:center;gap:6px;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--fnp-ochre)"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+              Post-Shift State
+            </span>
+            <span class="card-badge badge-blue">Resolution Telemetry</span>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--text-soft); margin-bottom: 10px;">
+            Your shift is officially over. How do you feel entering your sleep window?
+          </p>
+          <div class="shift-mood-row" id="shift-mood-row">
+            <button class="shift-mood-btn selected" data-shift-mood="Relieved">
+              <span style="display:flex;align-items:center;justify-content:center;">
+                <svg class="fnp-icon-md" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              </span>
+              <span style="font-size: 0.75rem; font-weight: 700;">Relieved</span>
+            </button>
+            <button class="shift-mood-btn" data-shift-mood="Exhausted">
+              <span style="display:flex;align-items:center;justify-content:center;">
+                <svg class="fnp-icon-md" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              </span>
+              <span style="font-size: 0.75rem; font-weight: 700;">Exhausted</span>
+            </button>
+            <button class="shift-mood-btn" data-shift-mood="Anxious">
+              <span style="display:flex;align-items:center;justify-content:center;">
+                <svg class="fnp-icon-md" viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              </span>
+              <span style="font-size: 0.75rem; font-weight: 700;">Anxious</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Post-Shift Somatic Wind-Down Checklist -->
+        <div class="app-card">
+          <div class="card-title-row">
+            <span class="card-title" style="display:flex;align-items:center;gap:6px;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--fnp-sky)"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+              Somatic Wind-Down Checklist
+            </span>
+            <span class="card-badge badge-purple" id="winddown-progress-badge">1 of 4 Completed</span>
+          </div>
+          <div class="winddown-checklist" id="winddown-checklist">
+            <label class="winddown-item completed">
+              <input type="checkbox" checked data-winddown-id="shut-laptop" />
+              <span>Shut laptop screen and mute client Slack</span>
+            </label>
+            <label class="winddown-item">
+              <input type="checkbox" data-winddown-id="drink-water" />
+              <span>Drink a full glass of fresh water</span>
+            </label>
+            <label class="winddown-item">
+              <input type="checkbox" data-winddown-id="check-brother" />
+              <span>Check on brother (resting peacefully)</span>
+            </label>
+            <label class="winddown-item">
+              <input type="checkbox" data-winddown-id="sleep-audio" />
+              <span>Get into bed and start nocturnal sleep audio</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Discreet Monthly Subscription Card (FR-16 / Step 11) -->
+        <div class="app-card subscription-highlight-card">
+          <div class="card-title-row">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(64,117,173,0.15);border-radius:8px;color:var(--fnp-blue);">
+                <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              <strong style="color: #fff; font-size: 0.9rem;">Protect Your Peace &amp; Career</strong>
+            </div>
+            <span class="card-badge badge-amber">Trial Ending</span>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--text-soft); line-height: 1.45; margin: 8px 0 12px 0;">
+            Enjoy uninterrupted 24/7 AI companion triage, priority clinician remote monitoring, and unlimited workday rescue sprints for <strong>₦5,000 / month</strong>.
+          </p>
+          <div class="discreet-guarantee-box">
+            <span style="display:flex;align-items:center;justify-content:center;width:22px;height:22px;flex-shrink:0;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--fnp-sky)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            <span style="font-size: 0.72rem; color: #93c5fd; line-height: 1.35;">
+              <strong>Zero Stigma Guarantee:</strong> Billed discreetly on your bank statement as <em>"FNP Services"</em>. No mental health labels.
+            </span>
+          </div>
+          <button class="primary-action-btn" id="btn-open-paystack-modal" style="margin-top: 12px; background: #003152; display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Activate Monthly Membership (&#x20A6;5,000)
+          </button>
+          <button class="control-btn" id="btn-continue-free-trial" style="width: 100%; margin-top: 8px; padding: 10px;">
+            Continue with Free Trial &amp; Return Home
+          </button>
+        </div>
+      </section>
+
+    </div><!-- /views-viewport -->
+
+    <!-- ==================================================== -->
+    <!-- BOTTOM TASKBAR NAVIGATION (5 TABS)                   -->
+    <!-- ==================================================== -->
+    <nav class="taskbar-nav" aria-label="Bottom Navigation">
+      <button class="nav-tab-btn active" data-target-view="view-home" aria-label="Home">
+        <span class="nav-tab-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </span>
+        <span class="nav-tab-label">Home</span>
+      </button>
+      <button class="nav-tab-btn" data-target-view="view-communities" aria-label="Communities">
+        <span class="nav-tab-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </span>
+        <span class="nav-tab-label">Communities</span>
+      </button>
+      <button class="nav-tab-btn" data-target-view="view-chat" aria-label="Companion Chat">
+        <span class="nav-tab-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </span>
+        <span class="nav-tab-label">Companion</span>
+      </button>
+      <button class="nav-tab-btn" data-target-view="view-journals" aria-label="Journals">
+        <span class="nav-tab-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </span>
+        <span class="nav-tab-label">Journals</span>
+      </button>
+      <button class="nav-tab-btn" data-target-view="view-resources" aria-label="Resources">
+        <span class="nav-tab-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        <span class="nav-tab-label">Resources</span>
+      </button>
+    </nav>
+
+    <!-- ==================================================== -->
+    <!-- EMERGENCY CRISIS MODAL OVERLAY (FD-01 / FD-02)       -->
+    <!-- ==================================================== -->
+    <div class="emergency-modal-overlay" id="crisis-modal" role="dialog" aria-modal="true" aria-labelledby="crisis-modal-title">
+      <div class="crisis-card-modal">
+        <div class="crisis-badge-strip" style="display:flex;align-items:center;justify-content:center;gap:6px;">
+          <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          CRITICAL CRISIS SAFETY PROTOCOL
+        </div>
+        <h3 class="crisis-modal-title" id="crisis-modal-title">We Care About You, Amina</h3>
+        <p class="crisis-modal-text">
+          You are not alone. There is human help right this second. Please connect directly with an on-call mental health counselor or call the toll-free crisis hotline:
+        </p>
+        <a class="crisis-cta-whatsapp" href="https://wa.me/2348003743637?text=Hello%2C%20I%20need%20immediate%20crisis%20assistance." target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+          <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Connect on WhatsApp with Counselor
+        </a>
+        <a class="crisis-cta-phone" href="tel:+2348003743637" style="display:flex;align-items:center;justify-content:center;gap:8px;">
+          <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.42 2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 15.92z"/></svg>
+          Dial 24/7 Hotline: +234-800-FRIENDNPAL
+        </a>
+        <div class="crisis-close-link" id="btn-close-crisis-modal">
+          Return to App (I am safe)
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- BIOMETRIC AUTHENTICATION MODAL (FR-01)               -->
+    <!-- ==================================================== -->
+    <div class="biometric-modal-overlay" id="biometric-modal" role="dialog" aria-modal="true" aria-label="Biometric Authentication">
+      <div class="biometric-modal-card">
+        <div class="biometric-icon-wrap" id="biometric-icon-wrap">
+          <span class="biometric-scanner-ring" id="biometric-scanner-ring"></span>
+          <span class="biometric-glyph" id="biometric-glyph">
+            <svg class="fnp-icon-xl" viewBox="0 0 24 24" aria-hidden="true" style="color:#9AD0E2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+        </div>
+        <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-top: 14px;">OurPadi Biometric Auth</h3>
+        <p style="font-size: 0.8rem; color: var(--text-soft); margin: 6px 0 18px 0; line-height: 1.45;">
+          Touch fingerprint sensor or look into front camera to decrypt your health telemetry & clinical assessments.
+        </p>
+          <button class="primary-action-btn" id="btn-authenticate-biometrics" style="margin-top: 0; padding: 12px; background: #003152; display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Authenticate with Biometrics
+          </button>
+        <button class="control-btn" id="btn-bypass-biometrics" style="width: 100%; margin-top: 10px; padding: 10px;">
+          Use Device Passcode / Bypass
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- NOTIFICATIONS DRAWER OVERLAY                         -->
+    <!-- ==================================================== -->
+    <div class="notifications-drawer-overlay" id="notifications-overlay" role="dialog" aria-modal="true" aria-label="Notifications Drawer">
+      <div class="notifications-drawer-card">
+        <div class="card-title-row" style="margin-bottom: 14px;">
+          <span class="card-title" style="color: #fff; display:flex;align-items:center;gap:6px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Care Alerts &amp; Notifications
+          </span>
+          <button class="icon-btn" id="btn-close-notifications" aria-label="Close notifications">
+            <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="notifications-list" id="notifications-list">
+          <div class="notification-item unread" id="notif-preventive-item">
+            <div class="notif-icon">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="6"/><path d="M12 6a6 6 0 0 1 6 6c0 4-3 6-6 6s-6-2-6-6a6 6 0 0 1 6-6z"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
+            </div>
+            <div class="notif-content">
+              <div class="notif-title">Preventive Care Nudge · Velocity Alert</div>
+              <div class="notif-desc">Padi detected a 32% drop in well-being score. Take a 3-minute decompression reset before your shift.</div>
+              <div class="notif-time">10 mins ago</div>
+            </div>
+            <button class="notif-action-btn" id="btn-notif-decompression">Reset</button>
+          </div>
+          <div class="notification-item">
+            <div class="notif-icon">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1" ry="1"/></svg>
+            </div>
+            <div class="notif-content">
+              <div class="notif-title">Scheduled WHO-5 Assessment Ready</div>
+              <div class="notif-desc">Your weekly 5-question well-being index assessment is available.</div>
+              <div class="notif-time">Yesterday · 08:00 PM</div>
+            </div>
+            <button class="notif-action-btn" id="btn-notif-assessment">Take</button>
+          </div>
+          <div class="notification-item">
+            <div class="notif-icon">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="notif-content">
+              <div class="notif-title">Security &amp; Privacy Active</div>
+              <div class="notif-desc">Client-side encryption active. Telemetry secured for remote clinician oversight.</div>
+              <div class="notif-time">2 days ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- PAYSTACK DISCREET CHECKOUT MODAL (FR-16)            -->
+    <!-- ==================================================== -->
+    <div class="custom-modal-overlay" id="paystack-modal" role="dialog" aria-modal="true" aria-label="Discreet Paystack Checkout">
+      <div class="custom-modal-card">
+        <div class="card-title-row" style="margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(64,117,173,0.15);border-radius:8px;color:var(--fnp-blue);">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </span>
+            <strong style="color: #fff; font-size: 1rem;">Paystack Secure Checkout</strong>
+          </div>
+          <button class="icon-btn" id="btn-close-paystack-modal" aria-label="Close checkout">
+            <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="paystack-amount-box">
+          <span style="font-size: 0.75rem; color: #94a3b8;">Subscription Amount</span>
+          <div style="font-size: 1.4rem; font-weight: 800; color: #34d399;">₦5,000 / month</div>
+          <span style="font-size: 0.7rem; color: #93c5fd;">OurPadi Complete Care · Cancel anytime</span>
+        </div>
+        <div class="discreet-guarantee-box" style="margin: 12px 0;">
+          <span style="display:flex;align-items:center;justify-content:center;width:18px;height:18px;flex-shrink:0;">
+            <svg class="fnp-icon-xs" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--fnp-sky)"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <span style="font-size: 0.7rem; color: #93c5fd;">
+            <strong>Discreet Bank Descriptor:</strong> This charge appears as <em>"FNP Services"</em> on your bank statements and SMS alerts. Zero mention of mental health.
+          </span>
+        </div>
+        <form id="paystack-form" style="display: flex; flex-direction: column; gap: 10px;">
+          <div>
+            <label style="font-size: 0.7rem; color: var(--text-soft); display: block; margin-bottom: 4px;">Card Number</label>
+            <input type="text" class="custom-input" id="paystack-card-num" value="5399 4120 •••• 8421" placeholder="Card number" required />
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+              <label style="font-size: 0.7rem; color: var(--text-soft); display: block; margin-bottom: 4px;">Expiry Date</label>
+              <input type="text" class="custom-input" id="paystack-card-exp" value="09/28" placeholder="MM/YY" required />
+            </div>
+            <div style="flex: 1;">
+              <label style="font-size: 0.7rem; color: var(--text-soft); display: block; margin-bottom: 4px;">CVV</label>
+              <input type="password" class="custom-input" id="paystack-card-cvv" value="•••" placeholder="CVV" required />
+            </div>
+          </div>
+          <button type="submit" class="primary-action-btn" id="btn-submit-paystack" style="margin-top: 10px; background: #003152; display:flex;align-items:center;justify-content:center;gap:8px;">
+            <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Authorize &#x20A6;5,000 (FNP Services)
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- THERAPIST MARKETPLACE BOOKING MODAL (FR-15)          -->
+    <!-- ==================================================== -->
+    <div class="custom-modal-overlay" id="therapist-booking-modal" role="dialog" aria-modal="true" aria-label="Therapist Marketplace Booking">
+      <div class="custom-modal-card">
+        <div class="card-title-row" style="margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(64,117,173,0.15);border-radius:8px;color:var(--fnp-blue);">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </span>
+            <strong style="color: #fff; font-size: 1rem;">Book Certified Therapist</strong>
+          </div>
+          <button class="icon-btn" id="btn-close-therapist-modal" aria-label="Close directory">
+            <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-soft); margin-bottom: 12px;">
+          45-minute confidential virtual consultation via secure video/voice. Fixed session rate: ₦7,500.
+        </p>
+        <div class="therapist-list-compact" style="display: flex; flex-direction: column; gap: 8px;">
+          <label class="therapist-option-card selected">
+            <input type="radio" name="selected-therapist" checked value="Folake Adeyemi, MSc" />
+            <div style="flex: 1;">
+              <div style="font-weight: 700; color: #fff; font-size: 0.85rem;">Folake Adeyemi, MSc</div>
+              <div style="font-size: 0.7rem; color: var(--text-muted);">Clinical Psychologist · Trauma &amp; Burnout Specialist (Lagos)</div>
+            </div>
+            <span class="card-badge badge-emerald">Available Today</span>
+          </label>
+          <label class="therapist-option-card">
+            <input type="radio" name="selected-therapist" value="Dr. Chidi Okafor, FWACP" />
+            <div style="flex: 1;">
+              <div style="font-weight: 700; color: #fff; font-size: 0.85rem;">Dr. Chidi Okafor, FWACP</div>
+              <div style="font-size: 0.7rem; color: var(--text-muted);">Consultant Psychiatrist · Somatic Anxiety (Abuja)</div>
+            </div>
+            <span class="card-badge badge-blue">Tomorrow</span>
+          </label>
+        </div>
+        <div style="display: flex; gap: 8px; margin: 12px 0;">
+          <div style="flex: 1;">
+            <label style="font-size: 0.7rem; color: var(--text-soft); display: block; margin-bottom: 4px;">Session Time</label>
+            <select class="custom-input" id="therapist-date-select">
+              <option>Today · 08:00 PM WAT</option>
+              <option>Tomorrow · 10:00 AM WAT</option>
+              <option>Friday · 06:00 PM WAT</option>
+            </select>
+          </div>
+        </div>
+        <button class="primary-action-btn" id="btn-confirm-therapist-booking" style="background: #003152; display:flex;align-items:center;justify-content:center;gap:8px;">
+          <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Confirm Consultation (&#x20A6;7,500)
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- ARTICLE READER MODAL (FR-14)                         -->
+    <!-- ==================================================== -->
+    <div class="custom-modal-overlay" id="article-reader-modal" role="dialog" aria-modal="true" aria-label="Psychoeducational Article">
+      <div class="custom-modal-card article-reader-card">
+        <div class="card-title-row" style="margin-bottom: 10px;">
+          <span class="card-badge badge-blue" id="reader-category-badge">Clinical Guide</span>
+          <button class="icon-btn" id="btn-close-article-reader" aria-label="Close article">
+            <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <h2 id="reader-article-title" style="font-size: 1.15rem; font-weight: 800; color: #fff; line-height: 1.35; margin-bottom: 6px;">How to Halt a Panic Attack in Under 10 Minutes</h2>
+        <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 14px;" id="reader-article-meta">3 min read · Reviewed by Dr. Chidi Okafor</div>
+        <div class="article-reader-body" id="reader-article-body" style="font-size: 0.82rem; color: var(--text-soft); line-height: 1.6; max-height: 50vh; overflow-y: auto;">
+          <!-- Content rendered dynamically -->
+        </div>
+        <button class="control-btn" id="btn-reader-to-somatic" style="margin-top: 14px; width: 100%; padding: 10px; display:flex;align-items:center;justify-content:center;gap:8px;">
+          <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c6 0 10-4 10-10S18 2 12 2 2 6 2 12c0 2.5.9 4.8 2.4 6.5"/><path d="M12 18a6 6 0 0 0 6-6"/></svg>
+          Practice Box Breathing Now
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================================================== -->
+    <!-- NEW COMMUNITY POST MODAL (FR-12)                     -->
+    <!-- ==================================================== -->
+    <div class="custom-modal-overlay" id="community-post-modal" role="dialog" aria-modal="true" aria-label="Share in Community">
+      <div class="custom-modal-card">
+        <div class="card-title-row" style="margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(64,117,173,0.15);border-radius:8px;color:var(--fnp-blue);">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </span>
+            <strong style="color: #fff; font-size: 1rem;">Share Anonymously</strong>
+          </div>
+          <button class="icon-btn" id="btn-close-community-modal" aria-label="Close modal">
+            <svg class="fnp-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-soft); margin-bottom: 10px;">
+          Your post is 100% anonymous as <strong style="color: #60a5fa;">@Amina94</strong>. Zero phone number or real name is ever shared.
+        </p>
+        <select class="custom-input" id="community-group-select" style="margin-bottom: 10px;">
+          <option value="burnout">Freelancers &amp; Nocturnal Burnout</option>
+          <option value="trauma">Parental Abuse &amp; Family Pressure</option>
+          <option value="recovery">Addiction &amp; Substance Recovery</option>
+          <option value="students">Student &amp; Academic Stress</option>
+        </select>
+        <textarea class="rescue-draft-textarea" id="community-post-textarea" rows="4" placeholder="Share what you are feeling or ask for encouragement..."></textarea>
+        <button class="primary-action-btn" id="btn-submit-community-post" style="margin-top: 10px; background: #003152;">
+          Post to Community
+        </button>
+      </div>
+    </div>
+
+    <!-- ==================================================== -->
+    </main>
+  <!-- Shared Backend Telemetry Engine & Patient Application Logic -->
+  <script src="backend.js"></script>
+  <script src="mobile.js"></script>
+  <script>
+    // Initialize Patient Session Handler
+    document.addEventListener('DOMContentLoaded', () => {
+      const session = window.FriendnPalBackend ? window.FriendnPalBackend.getCurrentSession() : null;
+      const avatarEl = document.getElementById('patient-session-avatar');
+      const labelEl = document.getElementById('patient-session-label');
+      const logoutBtn = document.getElementById('btn-patient-logout');
+
+      if (session && session.name) {
+        if (avatarEl) {
+          avatarEl.innerText = session.avatar || session.name.charAt(0).toUpperCase();
+          avatarEl.style.background = session.avatarBg || '#e11d48';
+        }
+        if (labelEl) {
+          labelEl.innerText = `Logged in as: ${session.name} (${session.role.toUpperCase()} #${session.patientId || 'New'})`;
+        }
+      }
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          if (window.FriendnPalBackend) {
+            window.FriendnPalBackend.logoutUser();
+          }
+          window.location.href = 'login.html?role=patient';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

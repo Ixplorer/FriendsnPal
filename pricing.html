@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Discreet Pricing &amp; Subscriptions — FriendnPal Ecosystem</title>
+  <meta name="description" content="Transparent, stigma-free pricing for OurPadi Digital Companion App (5,000 NGN/mo) and Pay-per-session Human Therapy Marketplace (7,500 - 15,000 NGN).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-top: 24px;
+    }
+    .pricing-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px 28px;
+      border: 1.5px solid #e2e8f0;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      position: relative;
+    }
+    .pricing-card-featured {
+      border-color: #0284c7;
+      box-shadow: 0 16px 40px rgba(2, 132, 199, 0.15);
+    }
+    .popular-badge {
+      position: absolute;
+      top: -12px;
+      right: 28px;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .price-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #1e293b;
+    }
+    .price-unit {
+      font-size: 0.9rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="page-boxed-frame-body">
+
+  <div class="page-boxed-container" style="padding: 30px;">
+    
+    <!-- Top Navigation Bar -->
+    <nav class="replica-nav">
+      <div class="replica-nav-left">
+        <a href="index.html" class="replica-logo-group">
+          <img src="friendnpal-logo.png" alt="FriendnPal Logo" class="replica-logo-img">
+          <span class="replica-logo-text">FriendnPal</span>
+        </a>
+
+        <ul class="replica-nav-links">
+          <li><a href="index.html" class="replica-nav-link">Home</a></li>
+          <li><a href="about.html" class="replica-nav-link">About Us</a></li>
+          <li><a href="features.html" class="replica-nav-link">Features</a></li>
+          <li><a href="pricing.html" class="replica-nav-link active">Pricing</a></li>
+          <li><a href="mobile.html" class="replica-nav-link">OurPadi App</a></li>
+          <li><a href="dashboard.html" class="replica-nav-link">Clinician RPM</a></li>
+          <li><a href="contact.html" class="replica-nav-link">Contacts</a></li>
+        </ul>
+      </div>
+
+      <div class="replica-nav-right">
+        <a href="login.html?role=patient" class="btn-nav-auth btn-nav-login" style="padding: 8px 16px; border-radius: 20px;">Sign In</a>
+        <a href="register.html?role=patient" class="btn-nav-auth btn-nav-register" style="padding: 8px 18px; border-radius: 20px; background: #003152; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">Get Started</a>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header style="text-align: center; padding: 30px 20px 10px 20px;">
+      <div class="replica-hero-tag" style="margin: 0 auto 10px auto;">
+        <span class="live-dot"></span>
+        <span>Stigma-Free &amp; Transparent Billing</span>
+      </div>
+      <h1 style="font-size: 2.3rem; font-weight: 900; color: #1e293b; margin: 0;">
+        Simple Pricing Designed to Protect Your Peace &amp; Career
+      </h1>
+      <p style="font-size: 1rem; color: #64748b; max-width: 680px; margin: 8px auto 0 auto;">
+        No hidden fees, no stigma. Charges appear discreetly on your bank statement as <strong>"FNP Services"</strong>.
+      </p>
+    </header>
+
+    <!-- Pricing Cards Grid -->
+    <div class="pricing-grid">
+      
+      <!-- Tier 1: Digital Membership -->
+      <article class="pricing-card pricing-card-featured">
+        <span class="popular-badge">Most Popular</span>
+        <div>
+          <span style="font-size: 0.78rem; font-weight: 800; color: #0284c7; text-transform: uppercase;">OurPadi Unlimited Membership</span>
+          <h2 style="font-size: 1.3rem; font-weight: 800; color: #1e293b; margin: 6px 0 12px 0;">Digital Triage &amp; RPM Access</h2>
+          <div>
+            <span class="price-num">5,000 NGN</span>
+            <span class="price-unit">/ month</span>
+          </div>
+          <p style="font-size: 0.84rem; color: #64748b; margin-top: 6px;">Includes a 7-day free trial. Cancel anytime.</p>
+
+          <ul style="font-size: 0.88rem; color: #334155; line-height: 1.8; margin-top: 16px; padding-left: 18px;">
+            <li>Unlimited 24/7 Pidgin &amp; English AI Companion Triage</li>
+            <li>WHO-5 Well-Being Clinical Intake &amp; Score Tracking</li>
+            <li>4-4-4 Somatic Box Breathing &amp; ASMR Audio Player</li>
+            <li>15-Minute Workday Rescue Deadline Sprints</li>
+            <li>24/7 One-Tap WhatsApp Counselor Crisis Handoff</li>
+            <li>Anonymous Peer Support Communities</li>
+            <li>Client-Side AES Encrypted Thought Journals</li>
+            <li>Priority Clinician RPM Telemetry Sync</li>
+          </ul>
+        </div>
+
+        <div>
+          <a href="register.html?role=patient" class="btn-pill-orange" style="width: 100%; text-align: center; justify-content: center; box-sizing: border-box;">
+            <span>Start 7-Day Free Trial</span>
+          </a>
+          <p style="font-size: 0.74rem; color: #94a3b8; text-align: center; margin: 8px 0 0 0;">
+            🔒 Billed discreetly as "FNP Services"
+          </p>
+        </div>
+      </article>
+
+      <!-- Tier 2: Human Therapy Marketplace -->
+      <article class="pricing-card">
+        <div>
+          <span style="font-size: 0.78rem; font-weight: 800; color: #d97706; text-transform: uppercase;">Human Therapy Marketplace</span>
+          <h2 style="font-size: 1.3rem; font-weight: 800; color: #1e293b; margin: 6px 0 12px 0;">Certified Therapist Consultations</h2>
+          <div>
+            <span class="price-num">7,500 – 15,000 NGN</span>
+            <span class="price-unit">/ 45-min session</span>
+          </div>
+          <p style="font-size: 0.84rem; color: #64748b; margin-top: 6px;">Pay-per-session booking with MDCN-certified specialists.</p>
+
+          <ul style="font-size: 0.88rem; color: #334155; line-height: 1.8; margin-top: 16px; padding-left: 18px;">
+            <li>45-Minute Private Video or Voice Consultations</li>
+            <li>Match with Consultant Psychiatrists &amp; Psychologists</li>
+            <li>Comprehensive Mental Health Diagnosis &amp; Care Plan</li>
+            <li>Seamless Longitudinal Trajectory Review in RPM</li>
+            <li>Flexible Rescheduling &amp; Confidential Intake</li>
+            <li>Direct Emergency WhatsApp Standby</li>
+          </ul>
+        </div>
+
+        <div>
+          <a href="login.html?role=patient" class="btn-pill-teal" style="width: 100%; text-align: center; justify-content: center; box-sizing: border-box;">
+            <span>Book Therapist Session</span>
+          </a>
+          <p style="font-size: 0.74rem; color: #94a3b8; text-align: center; margin: 8px 0 0 0;">
+            Pay-per-session · Zero monthly lock-in
+          </p>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Governance Footer -->
+
+  </div>
+
+</body>
+</html>

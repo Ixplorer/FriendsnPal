@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FriendnPal & OurPadi — Core User Flow Specification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#111726',
+        primaryColor: '#3b82f6',
+        primaryTextColor: '#f8fafc',
+        primaryBorderColor: '#1e283d',
+        lineColor: '#60a5fa',
+        secondaryColor: '#1e293b',
+        tertiaryColor: '#0f172a'
+      }
+    });
+  </script>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111726;
+      --card-border: #1e283d;
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+      --app-bubble-bot: #1e293b;
+      --app-bubble-user: #1e3a8a;
+      --app-bg: #0f172a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 30px;
+      margin-bottom: 36px;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-purple {
+      background: rgba(139, 92, 246, 0.15);
+      color: #a78bfa;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+    }
+
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      background: #003152;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      max-width: 860px;
+    }
+
+    .methodology-box {
+      background: rgba(59, 130, 246, 0.08);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .methodology-title {
+      font-weight: 700;
+      color: #93c5fd;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .methodology-flow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+    }
+
+    .flow-arrow {
+      color: var(--accent-blue);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 44px 0 20px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .diagram-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 36px;
+      overflow-x: auto;
+    }
+
+    .phase-divider {
+      background: #003152;
+      border-left: 4px solid var(--accent-blue);
+      padding: 12px 18px;
+      margin: 36px 0 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .phase-divider h3 {
+      font-size: 1.15rem;
+      color: #93c5fd;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .step-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .step-card:hover {
+      border-color: #334155;
+    }
+
+    .step-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .step-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .step-number {
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .step-meta {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .step-body {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    .step-body p {
+      margin-bottom: 12px;
+    }
+
+    .step-body strong {
+      color: #f8fafc;
+    }
+
+    .ui-simulation {
+      background: var(--app-bg);
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 18px;
+      margin: 16px 0;
+      font-size: 0.92rem;
+    }
+
+    .ui-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 8px;
+    }
+
+    .chat-bubble {
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      max-width: 85%;
+      line-height: 1.5;
+    }
+
+    .bubble-bot {
+      background: var(--app-bubble-bot);
+      color: #e2e8f0;
+      align-self: flex-start;
+      border-bottom-left-radius: 2px;
+    }
+
+    .bubble-user {
+      background: var(--app-bubble-user);
+      color: #eff6ff;
+      margin-left: auto;
+      border-bottom-right-radius: 2px;
+    }
+
+    .bubble-crisis {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.4);
+      color: #fecdd3;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .action-button {
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #38bdf8;
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .action-button-danger {
+      background: rgba(244, 63, 94, 0.2);
+      color: #fda4af;
+      border: 1px solid #f43f5e;
+    }
+
+    .rpm-telemetry-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(139, 92, 246, 0.12);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #c4b5fd;
+      font-size: 0.78rem;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-top: 8px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 20px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    th {
+      background-color: #0d1322;
+      color: #94a3b8;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--card-border);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-soft);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-bar">
+        <span class="badge badge-blue">Specification v2.0.0</span>
+        <span class="badge badge-green">Dual-Platform RPM</span>
+        <span class="badge badge-purple">OurPadi iOS & Android v2.1.0</span>
+        <span class="badge badge-amber">Clinician Portal</span>
+      </div>
+      <h1>FriendnPal & OurPadi — Core User Flow</h1>
+      <p class="subtitle">
+        End-to-end operational user flow connecting the <strong>OurPadi mobile application</strong> with the <strong>FriendnPal Clinician Remote Patient Monitoring (RPM) Dashboard</strong>, spanning longitudinal predictive intake, acute midnight de-escalation, and closed-loop provider telemetry.
+      </p>
+
+      <div class="methodology-box">
+        <span class="methodology-title">Core Operating Philosophy:</span>
+        <div class="methodology-flow">
+          <span>Prediction</span>
+          <span class="flow-arrow">→</span>
+          <span>Prevention</span>
+          <span class="flow-arrow">→</span>
+          <span>Proactive Intervention</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Architecture & Flow Diagram -->
+    <section>
+      <h2>Ecosystem Flow Architecture</h2>
+      <div class="diagram-card">
+        <pre class="mermaid">
+graph TD
+    subgraph "Phase 1: Longitudinal Prediction (Routine Intake)"
+        A1["Step 1: Routine Check-in & WHO-5 Assessment<br>(Completed in OurPadi Mobile App)"] --> A2["Step 2: Predictive Risk Trajectory Engine<br>(Backend evaluates 14-day well-being trend)"]
+        A2 -->|Score Drops >30%| A3["Step 3: Preventive Micro-Intervention<br>(OurPadi serves CBT nudge; RPM flags Moderate Risk)"]
+        A2 -->|Score Stable| A1
+    end
+
+    subgraph "Phase 2: Acute Crisis & Triage (The 3:15 AM Beachhead)"
+        B1["Step 4: Acute Midnight Trigger<br>(Nocturnal panic, generator blackout, looming deadline)"] --> B2["Step 5: OurPadi Triage Menu<br>(Explicit Buttons: [Calm My Panic] vs [Rescue My Deadline])"]
+        B2 -->|Taps 'Calm My Panic'| B3["Step 6A: Somatic De-escalation<br>(4-4-4 Box Breathing & 5-4-3-2-1 Sensory Grounding)"]
+        B2 -->|Taps 'Rescue My Deadline'| B5["Step 7: Workday Rescue Engine<br>(Deconstructs work into 15-min focus sprints)"]
+        B3 --> B4{"Step 6B: Continuous Safety Gate<br>(Red-flag keywords or self-harm confirmation?)"}
+        B4 -->|Confirmed Critical Risk| E1["Step 6C: Emergency Crisis Card (FD-01/02)<br>(Direct WhatsApp wa.me/ link + Phone Hotline)"]
+        E1 --> E2["Clinician RPM High-Priority Alert<br>(Websocket alert to On-Call Therapist)"]
+        B4 -->|Stabilized (Score 1-2)| B5
+    end
+
+    subgraph "Phase 3: Execution, Resolution & Clinical Closed-Loop"
+        B5 --> C1["Step 8: Timeboxed Sprint Execution<br>(15-minute micro-deliverable milestones)"]
+        C1 --> C2["Step 9: Milestone Submission & Contract Saved<br>(Work submitted on time; acute relief)"]
+        C2 --> C3["Step 10: Clinician RPM Sync & Closed-Loop<br>(RPM Dashboard updates patient curve: Stabilized)"]
+        C3 --> C4["Step 11: Shift-End Mood Log & Discreet Subscription<br>(06:00 AM check-in; 'FNP Services' 5,000 NGN/mo)"]
+    end
+        </pre>
+      </div>
+    </section>
+
+    <!-- Phase 1 -->
+    <div class="phase-divider">
+      <h3>Phase 1: Longitudinal Prediction & Prevention (Routine Intake)</h3>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">
+          <span class="step-number">Step 1</span>
+          Routine Assessment & Longitudinal Intake
+        </div>
+        <div class="step-meta">Platform: OurPadi Mobile App (iOS / Android)</div>
+      </div>
+      <div class="step-body">
+        <p><strong>Actor:</strong> General Platform User (or Beachhead User: Amina).</p>
+        <p>Upon opening OurPadi for an evening wind-down, the app prompts the user to complete their weekly 5-question <strong>WHO-5 Well-Being Index</strong> (evaluating cheerful spirits, calm relaxation, active energy, refreshing sleep, and daily interest over the past 14 days).</p>
+        
+        <div class="ui-simulation">
+          <div class="ui-header">📱 OurPadi Screen: Weekly Well-Being Check-in</div>
+          <div class="chat-bubble bubble-bot">
+            <em>"Over the past 2 weeks, how often have you felt calm and relaxed?"</em>
+          </div>
+          <div class="button-group">
+            <span class="action-button">All of the time (5)</span>
+            <span class="action-button">More than half (3)</span>
+            <span class="action-button" style="border-color:#f59e0b; color:#fbbf24;">Some of the time (1)</span>
+          </div>
+        </div>
+
+        <p>The app computes the standardized score (0–100 scale) and securely transmits the telemetry to the FriendnPal API backend.</p>
+        <div class="rpm-telemetry-tag">📡 Telemetry Dispatched: <code>WHO5_SCORE_RECORDED · Value: 36/100 (-28% vs baseline)</code></div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">
+          <span class="step-number">Step 2</span>
+          Predictive Trajectory Analysis & Risk Stratification
+        </div>
+        <div class="step-meta">Platform: FriendnPal Backend & Clinician RPM Portal</div>
+      </div>
+      <div class="step-body">
+        <p><strong>System Action (Predictive Risk Engine - FR-04):</strong> The background analytics service cross-references the latest WHO-5 score with historical 30-day moving averages.</p>
+        <p>Because the well-being trajectory exhibits a velocity decline exceeding 30% over a 7-day window, the user is stratified into the <strong>Moderate Risk (Prevention Cohort)</strong>.</p>
+        <div class="ui-simulation">
+          <div class="ui-header">💻 Clinician RPM Dashboard Alert Feed</div>
+          <p style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #fbbf24;">
+            ⚠️ [PREDICTIVE ALERT] Patient #8241 (Amina - Garki Cohort) · WHO-5 dipped 32% (52 → 36). Downward trend detected. Preventive micro-intervention queued.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">
+          <span class="step-number">Step 3</span>
+          Preventive Micro-Intervention Delivery
+        </div>
+        <div class="step-meta">Platform: OurPadi Mobile App</div>
+      </div>
+      <div class="step-body">
+        <p><strong>System Action:</strong> Instead of waiting for an emotional or physical collapse, OurPadi proactively delivers a gentle in-app micro-intervention card during an optimal low-stress window:</p>
+        
+        <div class="ui-simulation">
+          <div class="ui-header">📱 OurPadi In-App Preventive Nudge</div>
+          <div class="chat-bubble bubble-bot">
+            <strong>Padi:</strong> <em>"I noticed you've been feeling physically drained lately, Amina. Take 3 minutes to try this evening mental decompression exercise before bed."</em>
+          </div>
+          <div class="button-group">
+            <span class="action-button">🌱 Start 3-Min Decompression</span>
+            <span class="action-button">Maybe Later</span>
+          </div>
+        </div>
+        <p>This early engagement builds user trust and therapeutic literacy well before acute crisis states emerge.</p>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-divider">
+      <h3>Phase 2: Acute Midnight Crisis & Triage (The Beachhead Stress Test)</h3>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">
+          <span class="step-number">Step 4</span>
+          The Acute Midnight Breaking Point
+        </div>
+        <div class="step-meta">Context: 03:15 AM WAT · Garki, Abuja</div>
+      </div>
+      <div class="step-body">
+        <p><strong>Environmental Shock:</strong> The neighborhood generator dies. Amina's apartment is pitch dark. In the adjacent room, her sickle-cell warrior brother moans in pain. Her Upwork client sends a scathing rejection demanding 5 rewritten headlines and body copy by 6:00 AM.</p>
+        <p><strong>Physical Reaction:</strong> Intense panic attack—hyperventilation, racing heart, tunnel vision, total task freeze.</p>
+        <p><strong>User Action:</strong> She unlocks her phone and launches the <strong>OurPadi</strong> mobile app (or WhatsApp fallback).</p>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">
+          <span class="step-number">Step 5</span>
+          Empathetic Greeting & Triage Mode Routing
+        </div>
+        <div class="step-meta">Rules: FD-03 · FR-02 · FR-06</div>
+      </div>
+      <div class="step-body">
+        <p>Within 1.5 seconds, Padi delivers culturally fluent, empathetic support and presents two explicit quick-tap mode buttons:</p>
+        
+        <div class="ui-simulation">
+          <div class="ui-header">📱 OurPadi Companion Screen</div>
+          <div class="chat-bubble bubble-bot">
+            <strong>Padi:</strong> <em>"I'm right here with you, Amina. You're not alone. Take a slow, gentle breath—we will handle this together step by step.<br>What do you need most right this second?"</em>
+          </div>
+          <div class="button-group">
+            <span class="action-button" style="border-color:#38bdf8; background:rgba(56,189,248,0.15); color:#38bdf8;">🔘 [Calm My Panic]</span>
+            <span class="action-button">🔘 [Rescue My Deadline]</span>
+          </div>
+        </div>
+        <p><strong>User Action:</strong> Paralyzed by tachycardia and shallow breathing, Amina taps <strong><code>[Calm My Panic]</code></strong>.</p>
+      </div>
+    </div>
+
+    <!-- Step 6A & 6B -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">
+          <span class="step-number">Step 6A & 6B</span>
+          Somatic De-escalation & Continuous Safety Gate
+        </div>
+        <div class="step-meta">Rules: FD-01 · FD-02 · FR-04 · FR-05</div>
+      </div>
+      <div class="step-body">
+        <p><strong>Somatic Reset:</strong> OurPadi triggers an interactive 4-4-4 box breathing animation with gentle haptic cadence.</p>
+        
+        <div class="ui-simulation">
+          <div class="ui-header">📱 OurPadi Guided Somatic Reset</div>
+          <div class="chat-bubble bubble-bot">
+            <strong>Padi:</strong> <em>"Look away from your screen. Place both feet flat on the floor.<br>
+            Inhale slowly as the circle expands... 1... 2... 3... 4.<br>
+            Hold gently... 1... 2... 3... 4.<br>
+            Exhale smoothly... 1... 2... 3... 4."</em>
+          </div>
+          <div class="chat-bubble bubble-user">
+            <em>"ok, feeling a bit slower"</em>
+          </div>
+          <div class="chat-bubble bubble-bot">
+            <strong>Padi:</strong> <em>"Tell me 3 physical objects you can see around you right now using your phone light."</em>
+          </div>
+          <div class="chat-bubble bubble-user">
+            <em>"My water bottle, my laptop charger, my brother's blanket."</em>
+          </div>
+          <div class="chat-bubble bubble-bot">
+            <strong>Padi:</strong> <em>"You are safe in this room. Your brother is resting. The work can be solved. How intense is your anxiety right now (1-5)?"</em>
+          </div>
+          <div class="button-group">
+            <span class="action-button">1 - Calm</span>
+            <span class="action-button" style="border-color:#34d399; color:#34d399;">2 - Manageable</span>
+            <span class="action-button">3 - Shaky</span>
+            <span class="action-button">4 - Panicking</span>
+            <span class="action-button action-button-danger">5 - Critical</span>
+          </div>
+        </div>
+
+        <p><strong>Continuous Safety Check (FD-02):</strong> If critical danger keywords are confirmed, the system immediately locks automated chatter and delivers the emergency card:</p>
+
+        <div class="ui-simulation">
+          <div class="ui-header" style="color:#f43f5e;">🚨 Emergency Crisis Card (FD-01 / FR-05 Exception)</div>
+          <div class="chat-bubble bubble-crisis">
+            <strong>🚨 Immediate Human Support:</strong><br>
+            <em>"Amina, your life matters and you do not have to carry this alone. Please connect directly with our on-call clinical specialist right now:"</em>
+            <div class="button-group" style="margin-top:10px;">
+              <span class="action-button action-button-danger">📲 [Chat with On-Call Counselor (WhatsApp wa.me/...)]</span>
+              <span class="action-button">📞 [Call Crisis Hotline: +234-800-FRIENDNPAL]</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase-divider">
+      <h3>Phase 3: Workday Rescue & Clinical Closed-Loop</h3>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">
+          <span class="step-number">Step 7</span>
+          Transition to "Workday Rescue" Triage Mode
+        </div>
+        <div class="step-meta">Rule: FR-06</div>
+      </div>
+      <div class="step-body">
+        <p>With her panic normalized (distress score 2/5), Amina transitions into deadline recovery:</p>
+        
+        <div class="ui-simulation">
+          <div class="ui-header">📱 OurPadi Workday Rescue Intake</div>
+          <div class="chat-bubble bubble-bot">
+            <strong>Padi:</strong> <em>"Your heart rate is steady now. Let's make sure you don't lose this client milestone. What exact deliverable is due, and what time must it be submitted?"</em>
+          </div>
+          <div class="chat-bubble bubble-user">
+            <em>"5 email headlines and 1 body copy draft by 6:00 AM."</em>
+          </div>
+          <div class="chat-bubble bubble-bot">
+            <strong>Padi:</strong> <em>"It is 3:35 AM—we have 2 hours and 25 minutes. That is plenty of time.<br>
+            Rule: Do not write the body copy right now. Only write 3 headline options.<br>
+            15-minute sprint timer started. Go!"</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 8 & 9 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">
+          <span class="step-number">Step 8 & 9</span>
+          Timeboxed Sprint Execution & Goal Completion
+        </div>
+        <div class="step-meta">Time: 03:35 AM → 05:10 AM WAT</div>
+      </div>
+      <div class="step-body">
+        <p>Amina executes four focused 15-minute sprints without cognitive paralysis. At 5:10 AM WAT (50 minutes before deadline), she uploads the completed draft to Upwork.</p>
+        
+        <div class="ui-simulation">
+          <div class="ui-header">📱 Milestone Submission & Celebration</div>
+          <div class="chat-bubble bubble-user">
+            <em>"Done! Submitted on Upwork! Thank God."</em>
+          </div>
+          <div class="chat-bubble bubble-bot">
+            <strong>Padi:</strong> <em>"You did it! 🎉 You pushed through a blackout and a severe panic attack, protected your client contract, and saved your income. I am so proud of you.<br>Now please shut your laptop, drink water, check on your brother, and rest."</em>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 10 & 11 -->
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-title">
+          <span class="step-number">Step 10 & 11</span>
+          Clinician RPM Telemetry Sync & Retention Loop
+        </div>
+        <div class="step-meta">Time: 06:00 AM WAT · Closed-Loop Telemetry</div>
+      </div>
+      <div class="step-body">
+        <p><strong>Clinician RPM Closed-Loop:</strong> The session telemetry syncs back to the FriendnPal RPM Dashboard:</p>
+        <div class="rpm-telemetry-tag">📊 RPM Audit Log: Patient #8241 · Acute episode de-escalated in 12m · Sprints completed: 4 · Workday rescued · Risk status: STABILIZED</div>
+        
+        <p style="margin-top:14px;"><strong>Post-Shift Decompression (06:00 AM WAT):</strong> OurPadi triggers the scheduled wind-down check-in and presents the discreet monthly subscription:</p>
+
+        <div class="ui-simulation">
+          <div class="ui-header">📱 Post-Shift Mood Log & Discreet Subscription</div>
+          <div class="chat-bubble bubble-bot">
+            <strong>Padi:</strong> <em>"Good morning Amina. Shift is officially over. Quick 1-tap check-in: How do you feel entering your sleep window?"</em>
+          </div>
+          <div class="button-group">
+            <span class="action-button" style="border-color:#34d399; color:#34d399;">🔘 [Relieved]</span>
+            <span class="action-button">🔘 [Exhausted]</span>
+            <span class="action-button">🔘 [Anxious]</span>
+          </div>
+          <div class="chat-bubble bubble-bot" style="margin-top:12px;">
+            <strong>Padi:</strong> <em>"Rest well today. Keep your 24/7 night-shift lifeline active for 5,000 NGN/month.<br>
+            <span style='font-size:0.85rem; color:#94a3b8;'>🔒 Discreet billing: appears as 'FNP Services' on your bank alert.</span>"</em>
+          </div>
+          <div class="button-group">
+            <span class="action-button" style="background:#2563eb; color:#ffffff; border-color:#3b82f6;">🔒 Activate Monthly Lifeline (5,000 NGN)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edge Cases Table -->
+    <section>
+      <h2>Edge Cases & Resilience Matrix</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>System Behavior & Technical Failsafe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Complete Network Drop / 2G Throttling</strong></td>
+              <td>OurPadi caches somatic box breathing, sensory grounding, and countdown sprint timers locally on device; syncs telemetry to RPM Dashboard when connection restores.</td>
+            </tr>
+            <tr>
+              <td><strong>User Sends Incoherent Distress ("...", crying emojis)</strong></td>
+              <td>Padi responds with low-friction reassurance: <em>"I'm here. No need to explain anything right now. Just tap [Calm My Panic] to breathe with me."</em></td>
+            </tr>
+            <tr>
+              <td><strong>Direct Self-Harm Confirmation (FD-01 / FD-02)</strong></td>
+              <td>Bot halts automated conversation; immediately renders red Emergency Crisis Card (wa.me/... link + phone hotline); pushes urgent websocket alert to Clinician RPM Dashboard.</td>
+            </tr>
+            <tr>
+              <td><strong>User Refuses Breathing Exercises</strong></td>
+              <td>Padi smoothly pivots: <em>"Totally fine. Let's do an unstructured brain dump instead. What is the single biggest thing worrying you right now?"</em></td>
+            </tr>
+            <tr>
+              <td><strong>Generator Shuts Down During Active Sprint</strong></td>
+              <td>App state is saved in local SQLite/AsyncStorage; sprint timer continues accurately via device clock.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <span>FriendnPal & OurPadi Core User Flow Specification · PRD Baseline: <code>requirements.md v2.0.0</code></span>
+      <span>Artifacts: <code>user-flow.md</code> & <code>user-flow.html</code></span>
+    </footer>
+  </div>
+</body>
+</html>

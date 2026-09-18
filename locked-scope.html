@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FriendnPal & OurPadi — Locked Scope</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111726;
+      --card-border: #1e283d;
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --text-main: #f8fafc;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: var(--bg); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; line-height: 1.65; padding: 40px 20px; }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { border-bottom: 1px solid var(--card-border); padding-bottom: 24px; margin-bottom: 30px; }
+    .badge { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; padding: 5px 12px; border-radius: 6px; display: inline-flex; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+    h1 { font-size: 2rem; margin: 12px 0 6px 0; }
+    .table-wrapper { overflow-x: auto; border-radius: 10px; border: 1px solid var(--card-border); background: var(--card-bg); margin-top: 20px; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { background: #0d1322; color: #94a3b8; padding: 12px 16px; border-bottom: 1px solid var(--card-border); font-size: 0.75rem; text-transform: uppercase; }
+    td { padding: 12px 16px; border-bottom: 1px solid var(--card-border); color: var(--text-soft); }
+    tr:last-child td { border-bottom: none; }
+    code { font-family: 'JetBrains Mono', monospace; color: #93c5fd; background: rgba(59, 130, 246, 0.1); padding: 2px 6px; border-radius: 4px; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Locked Scope Specification</span>
+      <h1>FriendnPal & OurPadi — Locked Scope</h1>
+      <p style="color:var(--text-soft);">Strict 5-day team build scope reflecting <code>final-feature-list.md</code>.</p>
+    </header>
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr><th>#</th><th>Feature</th><th>Description</th><th>Category</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td>
+            <td><strong>OurPadi Mobile Shell & Triage Chat (Screens 1 & 4)</strong></td>
+            <td>Cross-platform client with taskbar nav, AI companion in Nigerian English/Pidgin, and explicit 2-button triage routing.</td>
+            <td><span class="badge">Must Have (#1 Priority)</span></td>
+          </tr>
+          <tr>
+            <td><strong>2</strong></td>
+            <td><strong>Acute Somatic Reset & Exercises (Screen 5)</strong></td>
+            <td>Visual 4-4-4 box breathing gauge, haptics, 5-4-3-2-1 sensory grounding, and distress rating slider.</td>
+            <td><span class="badge">Must Have</span></td>
+          </tr>
+          <tr>
+            <td><strong>3</strong></td>
+            <td><strong>Emergency Crisis Handoff Protocol (Screen 7)</strong></td>
+            <td>Hybrid safety engine, confirmation check, and red emergency card serving direct WhatsApp link (<code>wa.me/...</code>).</td>
+            <td><span class="badge">Must Have</span></td>
+          </tr>
+          <tr>
+            <td><strong>4</strong></td>
+            <td><strong>Workday Rescue 15-Minute Sprint Engine (Screen 6)</strong></td>
+            <td>Operational deadline recovery tool breaking tasks into 15-min focus sprints.</td>
+            <td><span class="badge">Must Have</span></td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td>
+            <td><strong>Clinical Assessment Intake Engine (WHO-5)</strong></td>
+            <td>Standardized 5-question WHO-5 screening with automated score normalization.</td>
+            <td><span class="badge">Must Have</span></td>
+          </tr>
+          <tr>
+            <td><strong>6</strong></td>
+            <td><strong>Clinician RPM Caseload & Alert Dashboard (Screen 8)</strong></td>
+            <td>Secure web portal for therapists displaying patient cohort metrics and real-time alert banners.</td>
+            <td><span class="badge">Must Have</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

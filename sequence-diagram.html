@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FriendnPal & OurPadi — Sequence Diagrams</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#111726',
+        primaryColor: '#3b82f6',
+        primaryTextColor: '#f8fafc',
+        primaryBorderColor: '#1e283d',
+        lineColor: '#60a5fa',
+        secondaryColor: '#1e293b',
+        tertiaryColor: '#0f172a',
+        actorBkg: '#1e293b',
+        actorBorder: '#3b82f6',
+        actorTextColor: '#f8fafc',
+        signalColor: '#60a5fa',
+        signalTextColor: '#e2e8f0',
+        labelBoxBkgColor: '#1e293b',
+        labelBoxBorderColor: '#334155',
+        labelTextColor: '#f8fafc'
+      }
+    });
+  </script>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111726;
+      --card-border: #1e283d;
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 30px;
+      margin-bottom: 36px;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-purple {
+      background: rgba(139, 92, 246, 0.15);
+      color: #a78bfa;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+    }
+
+    .badge-rose {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fda4af;
+      border: 1px solid rgba(244, 63, 94, 0.35);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      background: #003152;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      max-width: 880px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 44px 0 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-desc {
+      color: var(--text-soft);
+      margin-bottom: 20px;
+      font-size: 0.95rem;
+    }
+
+    .diagram-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+    }
+
+    .participant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .participant-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .participant-title {
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: #93c5fd;
+      margin-bottom: 4px;
+    }
+
+    .participant-detail {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 20px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    th {
+      background-color: #0d1322;
+      color: #94a3b8;
+      font-weight: 600;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--card-border);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--card-border);
+      color: var(--text-soft);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-bar">
+        <span class="badge badge-blue">Architecture v2.0.0</span>
+        <span class="badge badge-green">Dual-Platform Sequence</span>
+        <span class="badge badge-purple">OurPadi & Clinician RPM</span>
+        <span class="badge badge-rose">Clinical Safety Protocol</span>
+      </div>
+      <h1>FriendnPal & OurPadi — System Sequence Diagrams</h1>
+      <p class="subtitle">
+        Architectural data flow across the <strong>Patient Client (OurPadi Mobile)</strong>, the <strong>Predictive Analytics Backend</strong>, and the <strong>Clinician Remote Patient Monitoring (RPM) Dashboard</strong>, capturing longitudinal well-being intake, acute somatic reset, workday rescue, and real-time emergency clinical triage.
+      </p>
+    </header>
+
+    <!-- Participants Overview -->
+    <section>
+      <h2>System Participants</h2>
+      <div class="participant-grid">
+        <div class="participant-card">
+          <div class="participant-title">👤 Patient (User)</div>
+          <div class="participant-detail">Individual managing mental health or high-stress freelance demands (e.g. Amina).</div>
+        </div>
+        <div class="participant-card">
+          <div class="participant-title">📱 OurPadi Mobile App</div>
+          <div class="participant-detail">iOS App Store & Android v2.1.0 client with biometric auth and offline resilience.</div>
+        </div>
+        <div class="participant-card">
+          <div class="participant-title">⚙️ API & Predictive Engine</div>
+          <div class="participant-detail">FriendnPal central server computing WHO-5 trajectories, CBT routing, and safety checks.</div>
+        </div>
+        <div class="participant-card">
+          <div class="participant-title">💾 Central Database</div>
+          <div class="participant-detail">Encrypted store for longitudinal clinical scores, sessions, and emergency incident logs.</div>
+        </div>
+        <div class="participant-card">
+          <div class="participant-title">💻 Clinician RPM Dashboard</div>
+          <div class="participant-detail">Web portal providing licensed care teams real-time cohort tracking and acute risk alerts.</div>
+        </div>
+        <div class="participant-card">
+          <div class="participant-title">🩺 Licensed Clinician</div>
+          <div class="participant-detail">Certified counselor or therapist conducting remote triage and crisis interventions.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sequence Diagram 1 -->
+    <section>
+      <h2>1. Main Flow: Longitudinal Prediction, Acute De-escalation & RPM Telemetry Sync</h2>
+      <p class="section-desc">
+        Traces the standard successful path: routine weekly WHO-5 assessment, predictive downward trend detection with a preventive nudge, acute 3:15 AM nocturnal panic de-escalation, structured 15-minute workday rescue sprints, and closed-loop telemetry sync to the Clinician RPM Dashboard.
+      </p>
+      <div class="diagram-card">
+        <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor User as Patient (User)
+    participant App as OurPadi Mobile App (iOS/Android)
+    participant API as FriendnPal API & Predictive Engine
+    participant DB as Database (Profiles, Scores, Risk)
+    participant RPM as Clinician RPM Dashboard
+    actor Clinician as Licensed Clinician
+
+    %% Phase 1: Longitudinal Prediction & Prevention
+    rect rgb(15, 23, 42)
+    Note over User, Clinician: PHASE 1: Longitudinal Predictive Monitoring (Routine Intake)
+    User->>App: Opens OurPadi for evening wind-down
+    App-->>User: Prompts weekly 5-question WHO-5 Well-Being Index
+    User->>App: Completes WHO-5 assessment (Score: 36/100, -32% vs baseline)
+    App->>API: POST /api/v1/assessments {type: "WHO_5", score: 36, answers: [...]}
+    API->>DB: Store Assessment & Calculate 14-Day Trajectory Delta
+    DB-->>API: Trend: Velocity decline >30% (Risk: MODERATE_AT_RISK)
+    API->>RPM: WebSocket Event: patient_risk_updated {patient_id: "usr_8241", tier: "MODERATE", delta: -32}
+    RPM-->>Clinician: Flags patient into "Moderate Risk - Prevention Cohort"
+    API-->>App: Return Predictive Nudge: [Suggested 3-Min Evening Decompression]
+    App-->>User: Displays gentle preventive mental health card
+    end
+
+    %% Phase 2: Acute Midnight Crisis & Somatic Reset
+    rect rgb(20, 29, 47)
+    Note over User, Clinician: PHASE 2: Acute Midnight Trigger & Triage (03:15 AM WAT)
+    Note over User: Neighborhood generator dies; client deadline in 3 hrs; brother moaning in pain; hyperventilating
+    User->>App: Launches OurPadi & opens Padi Companion chat
+    App->>API: POST /api/v1/sessions/start {trigger: "ACUTE_NIGHT_SHIFT"}
+    API->>DB: Initialize active session (state: "TRIAGE_ROUTING")
+    API-->>App: Empathetic greeting + Quick-Tap Buttons: [Calm My Panic] / [Rescue My Deadline]
+    App-->>User: Displays Padi Reassurance & Mode Buttons (FD-03)
+    
+    User->>App: Taps "[Calm My Panic]"
+    App->>API: POST /api/v1/sessions/mode {mode: "SOMATIC_BOX_BREATHING"}
+    API->>DB: Update state (state: "SOMATIC_DE_ESCALATION", initial_distress: 5)
+    API-->>App: Stream 4-4-4 Box Breathing cadence & 5-4-3-2-1 Sensory prompts
+    App-->>User: Renders animated expanding/contracting breathing visual + haptics
+    Note over User, App: User performs 3 breathing cycles; heart rate slows
+    
+    User->>App: Taps "[Heart Rate Slower]" & enters 3 objects ("bottle, charger, blanket")
+    User->>App: Rates current anxiety: "2 - Manageable" (down from 5)
+    App->>API: POST /api/v1/sessions/log-distress {current_distress: 2, status: "STABILIZED"}
+    API->>DB: Log distress reduction (from 5 to 2)
+    API->>RPM: WebSocket Event: patient_telemetry {patient_id: "usr_8241", status: "STABILIZED_POST_BREATHING"}
+    RPM-->>Clinician: Real-time telemetry: Patient de-escalated successfully (12 mins)
+    end
+
+    %% Phase 3: Workday Rescue & Closed-Loop Resolution
+    rect rgb(15, 23, 42)
+    Note over User, Clinician: PHASE 3: Workday Rescue & Closed-Loop Sync
+    App-->>User: Prompts: "Heart rate steady. What deliverable is due at what time?"
+    User->>App: Submits scope: "5 email headlines + body copy due at 6:00 AM"
+    App->>API: POST /api/v1/rescue/create-plan {deadline: "06:00 WAT", scope: "5 headlines + copy"}
+    API->>DB: Generate structured 15-minute micro-sprint plan (4 sprints)
+    API-->>App: Return Sprint 1: "Write 3 subject lines only (15 mins)"
+    App-->>User: Displays Sprint 1 countdown timer & focus boundary
+    
+    Note over User, App: User completes Sprint 1, 2, 3, and 4 via structured timeboxes
+    User->>App: Submits final work to Upwork & texts: "Done! Submitted on Upwork!" (05:10 AM)
+    App->>API: POST /api/v1/rescue/complete {status: "SAVED_ON_TIME", contract_value: 500}
+    API->>DB: Close active session (rescue_success: true, final_distress: 1)
+    
+    API->>RPM: WebSocket Event: patient_resolved {patient_id: "usr_8241", tier: "STABILIZED", outcome: "WORK_SAVED"}
+    RPM-->>Clinician: Updates patient curve to Green (Stabilized); logs complete session audit trail
+    
+    App-->>User: Celebratory card: "🎉 Contract Protected! Shut laptop, hydrate, and rest."
+    end
+        </pre>
+      </div>
+    </section>
+
+    <!-- Sequence Diagram 2 -->
+    <section>
+      <h2>2. Exception Path: Acute Crisis Detection & Urgent RPM Escalation</h2>
+      <p class="section-desc">
+        Illustrates the life-saving exception protocol: danger keyword detection, safety confirmation gate (FD-02), instant automated chat lock, presentation of the Emergency Crisis Card (FD-01), and simultaneous high-priority WebSocket dispatch to the on-call therapist on the FriendnPal RPM Dashboard.
+      </p>
+      <div class="diagram-card">
+        <pre class="mermaid">
+sequenceDiagram
+    autonumber
+    actor User as Patient in Crisis (User)
+    participant App as OurPadi Mobile App (iOS/Android)
+    participant API as FriendnPal API & Safety Guardrails
+    participant DB as Database (Crisis Log, Audit)
+    participant RPM as Clinician RPM Dashboard
+    actor Clinician as On-Call Licensed Clinician
+
+    %% 1. Inbound Danger Keyword
+    User->>App: Types: "I can't take this pain anymore, I want to end my life"
+    App->>API: POST /api/v1/chat/message {text: "I want to end my life"}
+    
+    %% 2. Hybrid Safety Rule Engine (FD-02)
+    API->>API: Scan text against Red-Flag Clinical Lexicon (match: "end my life")
+    API->>DB: Create Flagged Safety Record (alert_type: "SUICIDE_RISK_SUSPECTED")
+    API-->>App: Direct Safety Confirmation Prompt (FD-02)
+    App-->>User: Renders direct confirmation: "Amina, are you thinking about hurting yourself right now?"
+
+    %% 3. User Confirms Crisis
+    User->>App: Taps / Types: "Yes"
+    App->>API: POST /api/v1/chat/safety-response {confirmed_harm_intent: true}
+
+    %% 4. Immediate Automated Lock & Dual-Escalation
+    critical Emergency Lock & Multi-Channel Escalation (FD-01 / FR-05)
+        API->>DB: Lock session (is_locked_for_crisis: true, risk_tier: "CRITICAL")
+        API->>DB: Create EmergencyCrisisIncident {severity: "CRITICAL", timestamp: now()}
+        
+        %% Patient Emergency Card
+        API-->>App: Return Emergency Crisis Response Card (FD-01)
+        App-->>User: Displays Red Emergency Card:<br>• Direct WhatsApp Link (wa.me/234XXXXXXXXXX)<br>• 24/7 Phone Hotline (+234-800-FRIENDNPAL)
+        
+        %% Real-time Clinician RPM Alert
+        API->>RPM: WebSocket Push: CRITICAL_CRISIS_ALERT {patient_id: "usr_8241", name: "Amina", phone: "+2348012345678", score: 10/10}
+        RPM-->>Clinician: 🚨 High-Priority Audio-Visual Alarm & Modal Alert on Dashboard
+        API->>Clinician: Dispatches High-Priority SMS & Outbound Call to On-Call Phone
+    end
+
+    %% 5. Clinician Reviews & Closed-Loop Outreach
+    Clinician->>RPM: Acknowledges Alert & Opens Patient Detail Profile
+    RPM-->>Clinician: Displays 30-Day WHO-5/PHQ-9 Trend + Exact Trigger Transcript
+    
+    par Patient-Initiated Contact (Option B)
+        User->>App: Taps "[Chat with On-Call Counselor (WhatsApp)]"
+        App->>User: Opens direct WhatsApp link: wa.me/234XXXXXXXXXX
+        User->>Clinician: Direct WhatsApp message: "Hello, FriendnPal referred me for emergency help..."
+    and Provider Backup Telephony
+        Note over Clinician: If patient does not initiate within 3 minutes, clinician dials patient phone directly
+    end
+
+    Note over User, Clinician: Licensed human de-escalation and clinical crisis care initiated
+    Clinician->>RPM: Logs Clinical Intervention Note: "Emergency contact established. Patient de-escalating."
+    RPM->>DB: Update Incident Status (status: "IN_CLINICAL_MANAGEMENT")
+        </pre>
+      </div>
+    </section>
+
+    <!-- Event Payloads Table -->
+    <section>
+      <h2>Telemetry Event Payloads Reference</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Event Name</th>
+              <th>Producer</th>
+              <th>Consumer</th>
+              <th>Payload Attributes & Schema</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>WHO5_SCORE_RECORDED</code></td>
+              <td>OurPadi App</td>
+              <td>API / DB / RPM</td>
+              <td><code>patient_id, score (0-100), delta_7d, risk_tier (NORMAL, MODERATE, HIGH)</code></td>
+            </tr>
+            <tr>
+              <td><code>SOMATIC_RESET_START</code></td>
+              <td>OurPadi App</td>
+              <td>API / DB</td>
+              <td><code>session_id, technique (BOX_BREATHING_444), initial_distress (1-5)</code></td>
+            </tr>
+            <tr>
+              <td><code>SOMATIC_RESET_END</code></td>
+              <td>OurPadi App</td>
+              <td>API / RPM</td>
+              <td><code>session_id, duration_seconds, final_distress (1-5), status (STABILIZED)</code></td>
+            </tr>
+            <tr>
+              <td><code>WORKDAY_SPRINT_UPDATE</code></td>
+              <td>OurPadi App</td>
+              <td>API / DB</td>
+              <td><code>sprint_index, target_duration_mins, task_scope, submission_status</code></td>
+            </tr>
+            <tr>
+              <td><code>CRITICAL_CRISIS_ALERT</code></td>
+              <td>Safety Engine</td>
+              <td>RPM / Clinician</td>
+              <td><code>patient_id, severity (CRITICAL), transcript_snippet, counselor_phone</code></td>
+            </tr>
+            <tr>
+              <td><code>CLINICIAN_INTERVENTION_LOG</code></td>
+              <td>RPM Dashboard</td>
+              <td>API / DB</td>
+              <td><code>incident_id, clinician_id, intervention_type (WHATSAPP, CALL), notes</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <span>FriendnPal Sequence Diagrams · PRD Baseline: <code>requirements.md v2.0.0</code></span>
+      <span>Artifacts: <code>sequence-diagram.md</code> & <code>sequence-diagram.html</code></span>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Login — FriendnPal &amp; OurPadi Ecosystem</title>
+  <meta name="description" content="Role-based login portal for patients accessing OurPadi App and healthcare providers accessing FriendnPal Clinician RPM.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="auth-page-body">
+
+  <div class="auth-container">
+    
+    <!-- Brand Header -->
+    <div class="auth-brand-header">
+      <a href="index.html" style="text-decoration: none;">
+        <img src="friendnpal-logo.png" alt="FriendnPal Logo" class="auth-brand-logo">
+      </a>
+      <h1 class="auth-brand-title">Welcome to FriendnPal</h1>
+      <p class="auth-brand-sub">Select your account role to continue to your dashboard</p>
+    </div>
+
+    <!-- Role Switcher Tabs -->
+    <div class="auth-role-tabs">
+      <button class="auth-role-tab active-patient" id="tab-patient">
+        <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        <span>Patient App</span>
+      </button>
+      <button class="auth-role-tab" id="tab-clinician">
+        <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3M18 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 0v3a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5"/></svg>
+        <span>Clinician RPM</span>
+      </button>
+    </div>
+
+    <!-- Auth Card -->
+    <div class="auth-card">
+      <h2 class="auth-card-title" id="auth-card-title">
+        <span>Patient Companion Login</span>
+        <span style="font-size: 0.72rem; font-weight: 700; color: #e11d48; background: #fff1f2; padding: 3px 8px; border-radius: 6px;" id="auth-role-badge">OurPadi App</span>
+      </h2>
+
+      <!-- Alert Error Box (Hidden by default) -->
+      <div class="auth-alert-error" id="auth-alert" style="display: none;">
+        <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="auth-alert-msg">Invalid credentials. Please try again.</span>
+      </div>
+
+      <!-- Login Form -->
+      <form class="auth-form" id="login-form">
+        
+        <!-- Email Input -->
+        <div class="auth-form-group">
+          <label class="auth-label" for="login-email" id="lbl-email">Email or Account Alias</label>
+          <div class="auth-input-wrap">
+            <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <input type="email" id="login-email" class="auth-input auth-input-patient" placeholder="amina@ourpadi.app" required>
+          </div>
+        </div>
+
+        <!-- Password Input -->
+        <div class="auth-form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label class="auth-label" for="login-password">Password</label>
+            <a href="#" style="font-size: 0.75rem; color: #0284c7; text-decoration: none; font-weight: 600;" onclick="alert('For demo accounts, use password123 (Patient) or license123 (Clinician).'); return false;">Forgot?</a>
+          </div>
+          <div class="auth-input-wrap">
+            <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="login-password" class="auth-input auth-input-patient" placeholder="••••••••" required>
+          </div>
+        </div>
+
+        <!-- Extra Clinician License field (Only visible when Clinician active) -->
+        <div class="auth-form-group" id="group-license" style="display: none;">
+          <label class="auth-label" for="login-license">MDCN License Number (Optional verification)</label>
+          <div class="auth-input-wrap">
+            <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <input type="text" id="login-license" class="auth-input" placeholder="MDCN-L88412">
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="auth-btn-primary btn-auth-patient" id="btn-submit">
+          <span>Sign In to OurPadi App</span>
+          <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </form>
+
+      <!-- Quick 1-Click Demo Fill Box -->
+      <div class="auth-demo-box">
+        <div class="auth-demo-title">
+          <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #f59e0b;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>Instant 1-Click Demo Credentials</span>
+        </div>
+        <button type="button" class="auth-demo-chip" id="btn-demo-fill">
+          <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px;">
+            <strong id="demo-name">Amina (Patient)</strong>
+            <span style="font-size: 0.7rem; color: #64748b;" id="demo-email">amina@ourpadi.app</span>
+          </div>
+          <span style="font-size: 0.72rem; font-weight: 700; color: #0284c7;">Fill &amp; Login &rarr;</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Footer Links -->
+    <div class="auth-footer-nav">
+      <span>Don't have an account?</span>
+      <a href="register.html?role=patient" id="link-register">Register as Patient</a>
+      <span style="margin: 0 6px;">·</span>
+      <a href="index.html">Back to Ecosystem Landing</a>
+    </div>
+
+  </div>
+
+  <!-- Shared Backend Telemetry & Auth Service -->
+  <script src="backend.js"></script>
+  <script>
+    let currentRole = 'patient';
+
+    const tabPatient = document.getElementById('tab-patient');
+    const tabClinician = document.getElementById('tab-clinician');
+    const cardTitle = document.getElementById('auth-card-title');
+    const roleBadge = document.getElementById('auth-role-badge');
+    const lblEmail = document.getElementById('lbl-email');
+    const groupLicense = document.getElementById('group-license');
+    const btnSubmit = document.getElementById('btn-submit');
+    const demoName = document.getElementById('demo-name');
+    const demoEmail = document.getElementById('demo-email');
+    const btnDemoFill = document.getElementById('btn-demo-fill');
+    const linkRegister = document.getElementById('link-register');
+    const authAlert = document.getElementById('auth-alert');
+    const authAlertMsg = document.getElementById('auth-alert-msg');
+    const inputEmail = document.getElementById('login-email');
+    const inputPassword = document.getElementById('login-password');
+    const loginForm = document.getElementById('login-form');
+
+    // Parse URL params for initial role
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('role') === 'clinician') {
+      setRole('clinician');
+    } else {
+      setRole('patient');
+    }
+
+    tabPatient.addEventListener('click', () => setRole('patient'));
+    tabClinician.addEventListener('click', () => setRole('clinician'));
+
+    function setRole(role) {
+      currentRole = role;
+      authAlert.style.display = 'none';
+
+      if (role === 'patient') {
+        tabPatient.className = 'auth-role-tab active-patient';
+        tabClinician.className = 'auth-role-tab';
+        cardTitle.children[0].innerText = 'Patient Companion Login';
+        roleBadge.innerText = 'OurPadi App';
+        roleBadge.style.color = '#e11d48';
+        roleBadge.style.background = '#fff1f2';
+        lblEmail.innerText = 'Email or Account Alias';
+        inputEmail.placeholder = 'amina@ourpadi.app';
+        groupLicense.style.display = 'none';
+        btnSubmit.className = 'auth-btn-primary btn-auth-patient';
+        btnSubmit.children[0].innerText = 'Sign In to OurPadi App';
+        demoName.innerText = 'Amina (Patient · Nocturnal Freelancer)';
+        demoEmail.innerText = 'amina@ourpadi.app / password123';
+        linkRegister.href = 'register.html?role=patient';
+        linkRegister.innerText = 'Register as Patient';
+        inputEmail.value = '';
+        inputPassword.value = '';
+      } else {
+        tabClinician.className = 'auth-role-tab active-clinician';
+        tabPatient.className = 'auth-role-tab';
+        cardTitle.children[0].innerText = 'Clinician RPM Portal Login';
+        roleBadge.innerText = 'Clinician RPM';
+        roleBadge.style.color = '#0284c7';
+        roleBadge.style.background = '#f0f9ff';
+        lblEmail.innerText = 'Professional Work Email';
+        inputEmail.placeholder = 'dr.okafor@friendnpal.org';
+        groupLicense.style.display = 'block';
+        btnSubmit.className = 'auth-btn-primary btn-auth-clinician';
+        btnSubmit.children[0].innerText = 'Sign In to Clinician Dashboard';
+        demoName.innerText = 'Dr. Chidi Okafor (Consultant Psychiatrist)';
+        demoEmail.innerText = 'dr.okafor@friendnpal.org / license123';
+        linkRegister.href = 'register.html?role=clinician';
+        linkRegister.innerText = 'Register as Clinician';
+        inputEmail.value = '';
+        inputPassword.value = '';
+      }
+    }
+
+    // 1-Click Demo Fill & Submit
+    btnDemoFill.addEventListener('click', () => {
+      if (currentRole === 'patient') {
+        inputEmail.value = 'amina@ourpadi.app';
+        inputPassword.value = 'password123';
+      } else {
+        inputEmail.value = 'dr.okafor@friendnpal.org';
+        inputPassword.value = 'license123';
+      }
+      performLogin();
+    });
+
+    // Form Submit Handler
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      performLogin();
+    });
+
+    function performLogin() {
+      authAlert.style.display = 'none';
+      const email = inputEmail.value.trim();
+      const password = inputPassword.value.trim();
+
+      const result = window.FriendnPalBackend.loginUser(currentRole, email, password);
+
+      if (result.success) {
+        // Redirection based on role
+        if (currentRole === 'patient') {
+          window.location.href = 'mobile.html';
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+      } else {
+        authAlertMsg.innerText = result.error || 'Authentication failed.';
+        authAlert.style.display = 'flex';
+      }
+    }
+  </script>
+</body>
+</html>

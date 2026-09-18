@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FriendnPal & OurPadi — Data Structure Specification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#111726',
+        primaryColor: '#3b82f6',
+        primaryTextColor: '#f8fafc',
+        primaryBorderColor: '#1e283d',
+        lineColor: '#60a5fa',
+        secondaryColor: '#1e293b',
+        tertiaryColor: '#0f172a'
+      }
+    });
+  </script>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111726;
+      --card-border: #1e283d;
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 30px;
+      margin-bottom: 36px;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-purple {
+      background: rgba(139, 92, 246, 0.15);
+      color: #a78bfa;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+    }
+
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      background: #003152;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      max-width: 880px;
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 40px 0 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .diagram-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 30px;
+      overflow-x: auto;
+    }
+
+    .entity-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .entity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .entity-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .entity-num {
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .entity-desc {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .entity-why {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    th {
+      background-color: #0d1322;
+      color: #94a3b8;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-bottom: 1px solid #1e293b;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #1e293b;
+      color: var(--text-soft);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-bar">
+        <span class="badge badge-blue">Schema v2.1.0</span>
+        <span class="badge badge-green">Dual-Platform Entities</span>
+        <span class="badge badge-purple">OurPadi & Clinician RPM</span>
+        <span class="badge badge-amber">Communities, ASMR, Journals</span>
+      </div>
+      <h1>FriendnPal & OurPadi — Data Structure Specification</h1>
+      <p class="subtitle">
+        Comprehensive catalog of entities remembered by the <strong>OurPadi mobile client</strong> and the <strong>FriendnPal Clinician Remote Patient Monitoring (RPM) Dashboard</strong>, including peer support communities, motivational checklists, mindfulness exercises, ASMR soundscapes, journals, and mood check-ins.
+      </p>
+    </header>
+
+    <!-- ER Diagram -->
+    <section>
+      <h2>Entity Relationship Diagram (ERD)</h2>
+      <div class="diagram-card">
+        <pre class="mermaid">
+erDiagram
+    User ||--o{ ClinicalAssessment : "completes"
+    User ||--o{ DailyChecklistTask : "checks_off"
+    User ||--o{ JournalEntry : "authors"
+    User ||--o{ MoodLog : "logs"
+    User ||--o{ SomaticExerciseLog : "performs"
+    User ||--o{ ConversationSession : "initiates"
+    User ||--o{ Subscription : "maintains"
+    
+    User }o--o{ CommunityGroup : "joins"
+    CommunityGroup ||--o{ CommunityPost : "contains"
+    User ||--o{ CommunityPost : "publishes_anonymously"
+    
+    Clinician ||--o{ User : "monitors_in_rpm"
+    Clinician ||--o{ EmergencyCrisisAlert : "receives_emergency"
+    
+    ConversationSession ||--o| WorkdayRescuePlan : "runs"
+    ConversationSession ||--o| EmergencyCrisisAlert : "triggers"
+        </pre>
+      </div>
+    </section>
+
+    <!-- Entity 1: User -->
+    <div class="entity-card">
+      <div class="entity-header">
+        <div class="entity-title"><span class="entity-num">1</span> Patient Profile (<code>User</code>)</div>
+        <span class="badge badge-blue">Mobile Client Profile</span>
+      </div>
+      <p class="entity-desc">The individual using OurPadi (student, corporate employee, addiction recovery seeker, or nocturnal Upwork freelancer like Amina).</p>
+      <p class="entity-why"><strong>Why store it:</strong> To authenticate across mobile and web platforms, personalize AI tone, assign to clinical cohorts and peer communities, and track subscription standing.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Data Type</th><th>Description & Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>user_id</code></td><td>UUID</td><td>Unique primary key (e.g. <code>usr_8241a7c2</code>).</td></tr>
+            <tr><td><code>client_platform</code></td><td>Enum</td><td><code>OURPADI_IOS</code>, <code>OURPADI_ANDROID</code>, <code>WHATSAPP_AUXILIARY</code>.</td></tr>
+            <tr><td><code>phone_number</code></td><td>String</td><td>International mobile number (e.g. <code>+2348012345678</code>).</td></tr>
+            <tr><td><code>email</code></td><td>String</td><td>User contact email.</td></tr>
+            <tr><td><code>display_name</code></td><td>String</td><td>Preferred pseudonym or community alias (e.g. <code>"Amina"</code>).</td></tr>
+            <tr><td><code>preferred_language</code></td><td>Enum</td><td><code>NIGERIAN_ENGLISH</code>, <code>NIGERIAN_PIDGIN</code>.</td></tr>
+            <tr><td><code>city_location</code></td><td>String</td><td>Primary city location (e.g. <code>"Garki, Abuja"</code>).</td></tr>
+            <tr><td><code>occupation_category</code></td><td>Enum</td><td><code>REMOTE_FREELANCER</code>, <code>CORPORATE_EMPLOYEE</code>, <code>STUDENT</code>.</td></tr>
+            <tr><td><code>joined_community_ids</code></td><td>Array[UUID]</td><td>IDs of joined peer communities.</td></tr>
+            <tr><td><code>assigned_clinician_id</code></td><td>UUID</td><td>Foreign key to managing Clinician on RPM Dashboard.</td></tr>
+            <tr><td><code>current_risk_tier</code></td><td>Enum</td><td><code>NORMAL</code>, <code>MODERATE_AT_RISK</code>, <code>HIGH_RISK</code>, <code>CRITICAL</code>.</td></tr>
+            <tr><td><code>account_status</code></td><td>Enum</td><td><code>TRIAL</code>, <code>ACTIVE_SUBSCRIBER</code>, <code>PAST_DUE</code>, <code>CRISIS_SUSPENDED</code>.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Entity 2: CommunityGroup -->
+    <div class="entity-card">
+      <div class="entity-header">
+        <div class="entity-title"><span class="entity-num">2</span> Peer Support Community (<code>CommunityGroup</code>)</div>
+        <span class="badge badge-purple">Taskbar Communities</span>
+      </div>
+      <p class="entity-desc">A moderated anonymous peer support community accessible from the bottom taskbar.</p>
+      <p class="entity-why"><strong>Why store it:</strong> Implements FR-12 to provide safe spaces for shared lived experience (Parental Abuse, Addiction, Student Pressure, etc.).</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Data Type</th><th>Description & Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>community_id</code></td><td>UUID</td><td>Unique community identifier (e.g. <code>com_parental_abuse</code>).</td></tr>
+            <tr><td><code>title</code></td><td>String</td><td><code>"Parental Abuse Support Group"</code>, <code>"Addiction & Recovery Support"</code>, <code>"Student Stress & Exams"</code>.</td></tr>
+            <tr><td><code>description</code></td><td>Text</td><td>Safety guidelines, community purpose, and ground rules.</td></tr>
+            <tr><td><code>category</code></td><td>Enum</td><td><code>TRAUMA</code>, <code>SUBSTANCE_RECOVERY</code>, <code>ACADEMIC</code>, <code>OCCUPATIONAL</code>.</td></tr>
+            <tr><td><code>member_count</code></td><td>Integer</td><td>Total active anonymous participants.</td></tr>
+            <tr><td><code>is_anonymous_posting_enforced</code></td><td>Boolean</td><td>True to mandate anonymous screen aliases.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Entity 3: CommunityPost -->
+    <div class="entity-card">
+      <div class="entity-header">
+        <div class="entity-title"><span class="entity-num">3</span> Community Post & Reply (<code>CommunityPost</code>)</div>
+        <span class="badge badge-purple">Peer Content</span>
+      </div>
+      <p class="entity-desc">An anonymous discussion post or supportive reply shared within a peer support group.</p>
+      <p class="entity-why"><strong>Why store it:</strong> Allows users to share coping stories and read empathetic responses without judgment.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Data Type</th><th>Description & Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>post_id</code></td><td>UUID</td><td>Unique post identifier.</td></tr>
+            <tr><td><code>community_id</code></td><td>UUID</td><td>Foreign key to CommunityGroup.</td></tr>
+            <tr><td><code>author_alias</code></td><td>String</td><td>Anonymous screen alias (e.g. <code>"Warrior94"</code>).</td></tr>
+            <tr><td><code>post_content</code></td><td>Text</td><td>Narrative body text.</td></tr>
+            <tr><td><code>support_reactions_count</code></td><td>Integer</td><td>Number of supportive reaction taps.</td></tr>
+            <tr><td><code>flagged_for_moderation</code></td><td>Boolean</td><td>True if content requires safety review.</td></tr>
+            <tr><td><code>created_at</code></td><td>Timestamp</td><td>Post creation timestamp.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Entity 4: DailyChecklistTask -->
+    <div class="entity-card">
+      <div class="entity-header">
+        <div class="entity-title"><span class="entity-num">4</span> Daily Motivational Checklist (<code>DailyChecklistTask</code>)</div>
+        <span class="badge badge-green">Habit Formation</span>
+      </div>
+      <p class="entity-desc">A structured daily self-care habit or positive affirmation prompt for user well-being.</p>
+      <p class="entity-why"><strong>Why store it:</strong> Implements FR-09 to help users build positive daily momentum and track small self-care wins.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Data Type</th><th>Description & Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>task_id</code></td><td>UUID</td><td>Unique task item identifier.</td></tr>
+            <tr><td><code>user_id</code></td><td>UUID</td><td>Foreign key to Patient Profile.</td></tr>
+            <tr><td><code>title</code></td><td>String</td><td><em>"Drink 2 glasses of water"</em>, <em>"Repeat daily affirmation"</em>, <em>"5-min mindful breathing"</em>.</td></tr>
+            <tr><td><code>category</code></td><td>Enum</td><td><code>HYDRATION</code>, <code>MINDFULNESS</code>, <code>AFFIRMATION</code>, <code>PHYSICAL_MOVEMENT</code>.</td></tr>
+            <tr><td><code>is_completed</code></td><td>Boolean</td><td>True if checked off today.</td></tr>
+            <tr><td><code>completed_at</code></td><td>Timestamp</td><td>Completion timestamp.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Entity 5: JournalEntry -->
+    <div class="entity-card">
+      <div class="entity-header">
+        <div class="entity-title"><span class="entity-num">5</span> Thought & Gratitude Journal (<code>JournalEntry</code>)</div>
+        <span class="badge badge-blue">Private Journaling</span>
+      </div>
+      <p class="entity-desc">A private, encrypted personal journal entry written by the user in OurPadi.</p>
+      <p class="entity-why"><strong>Why store it:</strong> Implements FR-13 to enable emotional release, cognitive reframing, and gratitude reflection.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Data Type</th><th>Description & Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>journal_id</code></td><td>UUID</td><td>Unique journal entry identifier.</td></tr>
+            <tr><td><code>user_id</code></td><td>UUID</td><td>Foreign key to Patient Profile.</td></tr>
+            <tr><td><code>entry_title</code></td><td>String</td><td>Heading or prompt title (e.g. <code>"Late Night Generator Anxiety"</code>).</td></tr>
+            <tr><td><code>body_text</code></td><td>Text</td><td>Encrypted private reflection text.</td></tr>
+            <tr><td><code>entry_type</code></td><td>Enum</td><td><code>FREEFORM</code>, <code>GRATITUDE_PROMPT</code>, <code>COGNITIVE_REFRAME</code>, <code>VENTING</code>.</td></tr>
+            <tr><td><code>sentiment_tag</code></td><td>Enum</td><td><code>CALM</code>, <code>HEAVY</code>, <code>FRUSTRATED</code>, <code>HOPEFUL</code>.</td></tr>
+            <tr><td><code>is_private_encrypted</code></td><td>Boolean</td><td>True to enforce client-side encryption.</td></tr>
+            <tr><td><code>created_at</code></td><td>Timestamp</td><td>Entry creation timestamp.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Entity 6: ResourceLibraryArticle -->
+    <div class="entity-card">
+      <div class="entity-header">
+        <div class="entity-title"><span class="entity-num">6</span> Mental Health Resource (<code>ResourceLibraryArticle</code>)</div>
+        <span class="badge badge-blue">Psychoeducation Library</span>
+      </div>
+      <p class="entity-desc">A curated psychoeducation article, self-care guide, or crisis coping strategy in OurPadi.</p>
+      <p class="entity-why"><strong>Why store it:</strong> Implements FR-14 to give users quick access to evidence-based mental health education.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Data Type</th><th>Description & Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>article_id</code></td><td>UUID</td><td>Unique article identifier.</td></tr>
+            <tr><td><code>title</code></td><td>String</td><td>Title (e.g. <code>"How to Ground Yourself During a Sudden Panic Attack"</code>).</td></tr>
+            <tr><td><code>topic_tag</code></td><td>Enum</td><td><code>PANIC_DISORDER</code>, <code>DEPRESSION_COPING</code>, <code>PARENTAL_TRAUMA</code>, <code>ADDICTION_TRIGGERS</code>.</td></tr>
+            <tr><td><code>estimated_read_time_mins</code></td><td>Integer</td><td>Estimated reading duration (e.g. <code>3</code>).</td></tr>
+            <tr><td><code>content_markdown</code></td><td>Text</td><td>Formatted psychoeducational content.</td></tr>
+            <tr><td><code>author_clinician_id</code></td><td>UUID</td><td>Foreign key to vetting clinician.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Entity 7: ASMRTrack -->
+    <div class="entity-card">
+      <div class="entity-header">
+        <div class="entity-title"><span class="entity-num">7</span> ASMR & Calming Soundscape (<code>ASMRTrack</code>)</div>
+        <span class="badge badge-purple">Audio Relaxation</span>
+      </div>
+      <p class="entity-desc">A curated high-quality audio file designed for nocturnal decompression, relaxation, and sleep aid.</p>
+      <p class="entity-why"><strong>Why store it:</strong> Implements FR-11 to provide non-verbal somatic calming tools during midnight stress.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Data Type</th><th>Description & Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>track_id</code></td><td>UUID</td><td>Unique audio track identifier.</td></tr>
+            <tr><td><code>title</code></td><td>String</td><td><em>"Midnight Abuja Rainstorm"</em>, <em>"Gentle Ocean Swell"</em>, <em>"Whispered Affirmations"</em>.</td></tr>
+            <tr><td><code>category</code></td><td>Enum</td><td><code>NATURE_SOUNDS</code>, <code>WHISPERED_ASMR</code>, <code>BINAURAL_BEATS</code>, <code>WHITE_NOISE</code>.</td></tr>
+            <tr><td><code>duration_seconds</code></td><td>Integer</td><td>Track duration (e.g. <code>1800</code> for 30 minutes).</td></tr>
+            <tr><td><code>audio_stream_url</code></td><td>String</td><td>Low-bandwidth audio stream URL.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Entity 8: MoodLog -->
+    <div class="entity-card">
+      <div class="entity-header">
+        <div class="entity-title"><span class="entity-num">8</span> Mood Check-in & Shift Log (<code>MoodLog</code>)</div>
+        <span class="badge badge-green">Self-Tracking</span>
+      </div>
+      <p class="entity-desc">Continuous mood check-in entries and post-shift reflection records.</p>
+      <p class="entity-why"><strong>Why store it:</strong> Implements FR-08 to track emotional valence throughout the day and correlate with triggers.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Data Type</th><th>Description & Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>mood_log_id</code></td><td>UUID</td><td>Unique mood entry identifier.</td></tr>
+            <tr><td><code>user_id</code></td><td>UUID</td><td>Foreign key to Patient Profile.</td></tr>
+            <tr><td><code>mood_rating</code></td><td>Enum</td><td><code>RELIEVED</code>, <code>EXHAUSTED</code>, <code>ANXIOUS</code>, <code>DEFEATED</code>, <code>HOPEFUL</code>.</td></tr>
+            <tr><td><code>stress_triggers</code></td><td>Array[String]</td><td>Tags (e.g. <code>["POWER_BLACKOUT", "CLIENT_REJECTION", "PARENTAL_STRAIN"]</code>).</td></tr>
+            <tr><td><code>logged_at</code></td><td>Timestamp</td><td>Log timestamp.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Entity 9: ClinicalAssessment -->
+    <div class="entity-card">
+      <div class="entity-header">
+        <div class="entity-title"><span class="entity-num">9</span> Standardized Assessment (<code>ClinicalAssessment</code>)</div>
+        <span class="badge badge-green">Longitudinal Telemetry</span>
+      </div>
+      <p class="entity-desc">Standardized mental health screenings completed in OurPadi (WHO-5, GAD-7, PHQ-9).</p>
+      <p class="entity-why"><strong>Why store it:</strong> Powers the Prediction &rarr; Prevention engine and Clinician RPM Dashboard.</p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr><th>Field Name</th><th>Data Type</th><th>Description & Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>assessment_id</code></td><td>UUID</td><td>Unique assessment record identifier.</td></tr>
+            <tr><td><code>user_id</code></td><td>UUID</td><td>Foreign key to Patient Profile.</td></tr>
+            <tr><td><code>assessment_type</code></td><td>Enum</td><td><code>WHO_5_WELLBEING</code>, <code>GAD_7_ANXIETY</code>, <code>PHQ_9_DEPRESSION</code>.</td></tr>
+            <tr><td><code>raw_score</code></td><td>Integer</td><td>Raw total score (e.g. <code>9</code> out of 25).</td></tr>
+            <tr><td><code>normalized_score</code></td><td>Float</td><td>Standardized 0–100 scale score (e.g. <code>36.0</code>).</td></tr>
+            <tr><td><code>severity_category</code></td><td>Enum</td><td><code>OPTIMAL</code>, <code>MILD_STRAIN</code>, <code>MODERATE_DEPRESSION</code>, <code>SEVERE_ANXIETY</code>.</td></tr>
+            <tr><td><code>submitted_at</code></td><td>Timestamp</td><td>Intake completion timestamp.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <footer>
+      <span>FriendnPal Data Structure Specification · PRD Baseline: <code>requirements.md v2.1.0</code></span>
+      <span>Artifacts: <code>data-structure.md</code> & <code>data-structure.html</code></span>
+    </footer>
+  </div>
+</body>
+</html>

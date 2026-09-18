@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FriendnPal — YC Office Hours Session & Reframed Canvas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0f17;
+      --card-bg: #141926;
+      --card-border: #222c42;
+      --accent-primary: #3b82f6;
+      --accent-secondary: #10b981;
+      --accent-alert: #f43f5e;
+      --accent-warning: #f59e0b;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-soft: #cbd5e1;
+      --code-bg: #1e2638;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 30px;
+      margin-bottom: 40px;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge.red {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fda4af;
+      border-color: rgba(244, 63, 94, 0.3);
+    }
+
+    .badge.green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+
+    .meta-item span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .meta-item strong {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+
+    .hero-pitch {
+      background: #003152;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      border-radius: 16px;
+      padding: 28px;
+      margin: 36px 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-pitch h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #60a5fa;
+      margin-bottom: 12px;
+    }
+
+    .hero-pitch blockquote {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.5;
+      border-left: 4px solid var(--accent-primary);
+      padding-left: 20px;
+    }
+
+    section {
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: var(--accent-primary);
+      border-radius: 2px;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+    }
+
+    .comparison-table th, .comparison-table td {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 0.9rem;
+      vertical-align: top;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .comparison-table th {
+      background: #182030;
+      color: var(--text-soft);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .old-draft {
+      color: #f87171;
+    }
+
+    .reality {
+      color: #34d399;
+      font-weight: 500;
+    }
+
+    .qa-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .qa-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #93c5fd;
+      margin-bottom: 10px;
+    }
+
+    .qa-card p {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      margin-bottom: 10px;
+    }
+
+    .qa-card p strong {
+      color: #ffffff;
+    }
+
+    .triad-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .triad-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .triad-card.highlight {
+      border-color: rgba(59, 130, 246, 0.4);
+      background: #151d2f;
+    }
+
+    .triad-card .num {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.08);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .triad-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .triad-card p {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .roadmap-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .roadmap-item {
+      display: flex;
+      gap: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 16px 20px;
+      border-radius: 10px;
+      align-items: flex-start;
+    }
+
+    .roadmap-step {
+      background: var(--accent-primary);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .roadmap-content strong {
+      display: block;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .roadmap-content p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+      margin-top: 60px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-bar">
+        <span class="badge red">Teardown Completed</span>
+        <span class="badge green">Grounded Reality Locked</span>
+        <span class="badge">YC Office Hours Framework</span>
+      </div>
+      <h1>FriendnPal — Canvas Teardown & Reconstruction</h1>
+      <p class="subtitle">Turning a 1-billion-person macro abstraction into an acute, revenue-backed product wedge.</p>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span>Source File</span>
+          <strong>Business Model Workbook · ACE Nigeria.pdf</strong>
+        </div>
+        <div class="meta-item">
+          <span>Founders</span>
+          <strong>Victoria Ezinwa & Abdullahi Aliyu Jibril</strong>
+        </div>
+        <div class="meta-item">
+          <span>Session Date</span>
+          <strong>15 September 2026</strong>
+        </div>
+      </div>
+    </header>
+
+    <div class="hero-pitch">
+      <h3>The Stranger-Repeatable Test (Passed)</h3>
+      <blockquote>
+        "FriendnPal is a 24/7 low-bandwidth WhatsApp triage companion for high-stress Nigerian remote freelancers that turns 3:00 AM panic and burnout spirals into salvageable workdays—combining culturally grounded clinical de-escalation with vetted human therapy escalation so they protect their foreign-client income without stigma."
+      </blockquote>
+    </div>
+
+    <!-- Section 1: Comparison -->
+    <section>
+      <h2>Original Canvas vs. Grounded Reality</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Canvas Block</th>
+            <th>Original 1st Draft</th>
+            <th>Grounded Reality (Post-Teardown)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>01. Problem</strong></td>
+            <td class="old-draft">Macro WHO stats: 90% of >1B global sufferers, 700k suicides, structural shortage.</td>
+            <td class="reality">3:00 AM panic spirals during night shifts; caretaking fatigue + power outages; burnout directly triggers missed deadlines and lost dollar income.</td>
+          </tr>
+          <tr>
+            <td><strong>02. Solution</strong></td>
+            <td class="old-draft">24/7 multimodal AI, self-guided tools, 32 languages, web, mobile, voice, WhatsApp.</td>
+            <td class="reality">A stealth, low-bandwidth WhatsApp triage contact providing clinical micro-interventions and warm human escalation.</td>
+          </tr>
+          <tr>
+            <td><strong>03. UVP</strong></td>
+            <td class="old-draft">Continuous behavioral surveillance predicting risk before crisis.</td>
+            <td class="reality">Culturally-fluent acute de-escalation that gets you functional to finish client deliverables, with automatic risk triage.</td>
+          </tr>
+          <tr>
+            <td><strong>04. Unfair Moat</strong></td>
+            <td class="old-draft">Describing product features (prediction + AI + human therapy).</td>
+            <td class="reality">Hyper-local context data flywheel + pre-vetted Nigerian clinical triage network on standby.</td>
+          </tr>
+          <tr>
+            <td><strong>05. Segment</strong></td>
+            <td class="old-draft">18–35 professionals juggling multiple roles, prayer coping.</td>
+            <td class="reality">24-year-old female Upwork copywriter in Garki, Abuja, supporting sick family under high-stakes night shifts.</td>
+          </tr>
+          <tr>
+            <td><strong>06. Economics</strong></td>
+            <td class="old-draft">ARPU 5,000 NGN/mo, CAC &lt; 450 NGN via social ads, Ops cost = 0.</td>
+            <td class="reality">Tiered: 5,000 NGN/mo for unlimited AI triage; human therapist handoffs billed pay-per-session (7.5k–15k NGN).</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 2: Forcing Questions -->
+    <section>
+      <h2>The 6 Forcing Questions Deep-Dive</h2>
+      
+      <div class="qa-card">
+        <h4>1. Who EXACTLY is the user?</h4>
+        <p><strong>The Real Human:</strong> A 24-year-old Upwork copywriter living in Garki, Abuja. She works US graveyard shifts through erratic power outages and generator noise. She is the sole caretaker for her younger brother—a sickle-cell warrior. She is wrestling with a failing relationship, severe sleep deprivation, and mounting medical bills. When she burns out, she loses clients and survival income.</p>
+      </div>
+
+      <div class="qa-card">
+        <h4>2. How do you know this is real?</h4>
+        <p><strong>The Evidence:</strong> In Nigeria’s remote gig economy, there is zero safety net—no health insurance, no sick leave. A 3:00 AM panic attack directly triggers a missed Upwork deadline, a 1-star review, contract termination, and inability to purchase hydroxyurea and pain meds for her brother.</p>
+      </div>
+
+      <div class="qa-card">
+        <h4>3. What happens if FriendnPal does not exist?</h4>
+        <p><strong>The Failure State:</strong> She isolates, cries alone in the dark, tries to type incoherently into ChatGPT, misses her morning client delivery, and spirals into acute depression under crushing financial pressure.</p>
+      </div>
+
+      <div class="qa-card">
+        <h4>4. Why FriendnPal over ChatGPT?</h4>
+        <p><strong>The Differentiator:</strong> ChatGPT is not clinically structured for panic triage (lacks WHO-5/PHQ-9 micro-assessment), gives cold corporate disclaimers ("I am an AI, consult a healthcare provider"), has no cultural fluency for Nigerian socioeconomic stressors, and <strong>cannot automatically triage or escalate to a vetted human therapist</strong> when suicide or severe crisis is flagged.</p>
+      </div>
+
+      <div class="qa-card">
+        <h4>5. The 5,000 NGN Wallet Test</h4>
+        <p><strong>Willingness to Pay:</strong> 5,000 NGN (~$3.50) is accessible to an active foreign-gig freelancer, provided it is sold as <strong>income & deadline protection</strong> rather than an abstract "wellness app". Safeguarding a $500 monthly retainer for 5,000 NGN is high ROI.</p>
+      </div>
+
+      <div class="qa-card">
+        <h4>6. Fatal Assumptions Corrected</h4>
+        <p><strong>Economic Realignment:</strong> You cannot provide human therapists inside a 5,000 NGN ($3.50) monthly subscription. FriendnPal must operate as a two-tier model: 5,000 NGN/mo for unlimited AI triage, with human sessions priced separately per session.</p>
+      </div>
+    </section>
+
+    <!-- Section 3: Reframed Triad -->
+    <section>
+      <h2>The Reframed Core Triad</h2>
+      <div class="triad-grid">
+        <div class="triad-card highlight">
+          <div class="num">01</div>
+          <h3>The Customer (ICP)</h3>
+          <p>The <strong>Solitary High-Stakes Remote Worker</strong>. 22–29 year old gig workers (copywriters, devs, designers) working night hours in Nigerian cities with dependent sick family members and no social safety net.</p>
+        </div>
+
+        <div class="triad-card highlight">
+          <div class="num">02</div>
+          <h3>The Problem</h3>
+          <p>Acute 3:00 AM panic and burnout episodes that threaten client deliveries and lifeline dollar revenue, in an environment where friends/prayer lack clinical tools and therapy is unaffordable.</p>
+        </div>
+
+        <div class="triad-card highlight">
+          <div class="num">03</div>
+          <h3>The Value Proposition</h3>
+          <p>A low-bandwidth 24/7 WhatsApp emergency emotional stabilizer that delivers 10-minute clinical micro-de-escalations to save the workday, with instant escalation to vetted human therapists for critical risk.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: Next Guardrails -->
+    <section>
+      <h2>Immediate Product Guardrails</h2>
+      <ul class="roadmap-list">
+        <li class="roadmap-item">
+          <div class="roadmap-step">1</div>
+          <div class="roadmap-content">
+            <strong>Kill 32 Languages & Voice for Launch</strong>
+            <p>Restrict the MVP to English and Nigerian Pidgin on WhatsApp text. Solve the 3:00 AM crisis for 100 Garki/Lagos freelancers before building more dialects.</p>
+          </div>
+        </li>
+        <li class="roadmap-item">
+          <div class="roadmap-step">2</div>
+          <div class="roadmap-content">
+            <strong>Lock Tiered Pricing</strong>
+            <p>5,000 NGN/month for unlimited AI triage. Human clinical escalation billed pay-per-session (7,500 – 15,000 NGN) to protect margins.</p>
+          </div>
+        </li>
+        <li class="roadmap-item">
+          <div class="roadmap-step">3</div>
+          <div class="roadmap-content">
+            <strong>Targeted Freelance Community Wedge</strong>
+            <p>Acquire through Upwork Nigeria groups, tech bootcamps, and remote freelancer communities instead of generic social media ads.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>FriendnPal · YC Office Hours Session Summary · Saved to <code>raw-notes.md</code> and <code>raw-notes.html</code></p>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FriendnPal & OurPadi — Screen Specifications (User Flow Implied)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: #111726;
+      --card-border: #1e283d;
+      --accent-blue: #3b82f6;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-purple: #8b5cf6;
+      --text-main: #f8fafc;
+      --text-soft: #cbd5e1;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 30px;
+      margin-bottom: 36px;
+    }
+
+    .badge-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 5px 12px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-blue {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-purple {
+      background: rgba(139, 92, 246, 0.15);
+      color: #a78bfa;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+    }
+
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+
+    .badge-rose {
+      background: rgba(244, 63, 94, 0.15);
+      color: #fda4af;
+      border: 1px solid rgba(244, 63, 94, 0.35);
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+      background: #003152;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      max-width: 880px;
+    }
+
+    .meta-box {
+      margin-top: 16px;
+      display: flex;
+      gap: 20px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .meta-box span strong {
+      color: var(--text-soft);
+    }
+
+    .screen-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 28px;
+      margin-bottom: 30px;
+      transition: border-color 0.2s ease;
+    }
+
+    .screen-card:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+
+    .screen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .screen-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .screen-num {
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .screen-purpose {
+      background: rgba(59, 130, 246, 0.08);
+      border-left: 3px solid var(--accent-blue);
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.95rem;
+      color: #bfdbfe;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .screen-purpose strong {
+      color: #ffffff;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin: 20px 0 12px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .element-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 22px;
+    }
+
+    .element-list li {
+      padding: 12px 16px;
+      background: #0d1322;
+      border: 1px solid #1e283d;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .element-index {
+      font-family: 'JetBrains Mono', monospace;
+      color: #60a5fa;
+      font-weight: 700;
+      font-size: 0.85rem;
+      min-width: 24px;
+      padding-top: 1px;
+    }
+
+    .element-content {
+      flex: 1;
+    }
+
+    .element-content strong {
+      color: #ffffff;
+    }
+
+    .element-sublist {
+      margin-top: 8px;
+      margin-left: 18px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    .element-sublist li {
+      background: transparent;
+      border: none;
+      padding: 2px 0;
+      margin-bottom: 2px;
+      display: list-item;
+      list-style-type: disc;
+    }
+
+    .interaction-box {
+      background: #090d16;
+      border: 1px solid #1e283d;
+      border-radius: 10px;
+      padding: 18px;
+      font-size: 0.92rem;
+    }
+
+    .interaction-item {
+      margin-bottom: 12px;
+      color: var(--text-soft);
+      line-height: 1.55;
+      padding-left: 14px;
+      border-left: 2px solid #2d3748;
+    }
+
+    .interaction-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .interaction-item strong {
+      color: #f8fafc;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+    }
+
+    .target-screen {
+      color: #34d399;
+      font-weight: 700;
+    }
+
+    footer {
+      margin-top: 60px;
+      border-top: 1px solid var(--card-border);
+      padding-top: 24px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="badge-bar">
+        <span class="badge badge-blue">UI Specification v2.2.0</span>
+        <span class="badge badge-green">Exact 8 Screens Cap</span>
+        <span class="badge badge-purple">OurPadi Mobile (1–7)</span>
+        <span class="badge badge-amber">Clinician RPM Web (8)</span>
+      </div>
+      <h1>FriendnPal & OurPadi — Screen Specifications</h1>
+      <p class="subtitle">
+        Comprehensive functional screen specifications directly derived from the <code>user-flow.md</code> methodology 
+        (<strong>Prediction &rarr; Prevention &rarr; Proactive Intervention</strong>). Models routine intake, midnight acute panic triage, somatic de-escalation, workday rescue sprints, post-shift decompression, and closed-loop clinician oversight.
+      </p>
+      <div class="meta-box">
+        <span><strong>Source Baseline:</strong> <code>user-flow.md</code> (v2.0.0)</span>
+        <span><strong>System Target:</strong> OurPadi iOS/Android v2.1.0 & FriendnPal Clinician RPM</span>
+        <span><strong>Screen Count:</strong> Strictly 8 Essential Screens</span>
+      </div>
+    </header>
+
+    <main>
+      <!-- ==================================================== -->
+      <!-- SCREEN 1: HOME & PREVENTIVE DASHBOARD                -->
+      <!-- ==================================================== -->
+      <article class="screen-card" id="screen-1">
+        <div class="screen-header">
+          <div class="screen-title">
+            <span class="screen-num">Screen 1</span>
+            OurPadi Home &amp; Preventive Dashboard
+          </div>
+          <span class="badge badge-purple">Patient Mobile</span>
+        </div>
+
+        <div class="screen-purpose">
+          <strong>Purpose</strong>
+          Lets the user view their well-being summary, receive proactive preventive CBT nudges, and quickly launch assessments, triage companion chat, or workday rescue.
+        </div>
+
+        <h3>📱 Elements on the Screen (Top to Bottom, Left to Right)</h3>
+        <ol class="element-list">
+          <li>
+            <span class="element-index">1.</span>
+            <div class="element-content">
+              <strong>Top Header Bar:</strong> Profile avatar with user initials ("A"), greeting text ("Good day, Amina"), biometric lock toggle (<code>🔒</code>), notifications bell with unread badge (<code>🔔</code>), and emergency crisis shield button (<code>🛡️ Emergency</code>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">2.</span>
+            <div class="element-content">
+              <strong>Predictive Preventive Nudge Card (Step 3):</strong> High-contrast wellness card featuring lightbulb icon, title (<em>"Padi Preventive Care"</em>), proactive insight (<em>"Padi noticed you've been feeling physically drained lately. Take 3 minutes to try this evening mental decompression exercise."</em>), and action button <code>[Try 3-Min Decompression]</code>.
+            </div>
+          </li>
+          <li>
+            <span class="element-index">3.</span>
+            <div class="element-content">
+              <strong>Well-Being Index (WHO-5) Summary Card (Step 1):</strong> Circular progress gauge displaying current score (e.g. "36/100 · Moderate Strain"), 14-day velocity delta indicator ("↓ 32% this week"), and primary button <code>[Take Full WHO-5 Assessment]</code>.
+            </div>
+          </li>
+          <li>
+            <span class="element-index">4.</span>
+            <div class="element-content">
+              <strong>Daily Mood Quick Check-in Strip (Step 11):</strong> Prompt question (<em>"How are you feeling right now?"</em>), 5 quick-tap mood buttons (<code>[Relieved]</code>, <code>[Calm]</code>, <code>[Exhausted]</code>, <code>[Anxious]</code>, <code>[Heavy]</code>), and active streak badge (<em>"3 Day Streak"</em>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">5.</span>
+            <div class="element-content">
+              <strong>Quick-Action Grid (2x2 Cards):</strong>
+              <ul class="element-sublist">
+                <li><strong>Card 1: "Talk to Padi"</strong> — AI companion de-escalation launcher.</li>
+                <li><strong>Card 2: "Workday Rescue"</strong> — 15-minute micro-sprints launcher.</li>
+                <li><strong>Card 3: "Somatic Reset"</strong> — 4-4-4 box breathing and soothing ASMR audio.</li>
+                <li><strong>Card 4: "Emergency Support"</strong> — Direct 24/7 crisis hotlines.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">6.</span>
+            <div class="element-content">
+              <strong>Bottom Navigation Bar:</strong> 5 persistent tabs: <code>[Home]</code> (active), <code>[Assessments]</code>, <code>[Companion]</code>, <code>[Rescue]</code>, <code>[Crisis Support]</code>.
+            </div>
+          </li>
+        </ol>
+
+        <h3>⚡ Element Interactions &amp; State Transitions</h3>
+        <div class="interaction-box">
+          <div class="interaction-item">
+            <strong>Tapping <code>[Try 3-Min Decompression]</code> or "Somatic Reset":</strong> Navigates to <span class="target-screen">Screen 4 (Somatic De-escalation &amp; Sensory Grounding)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[Take Full WHO-5 Assessment]</code> or [Assessments] in nav bar:</strong> Navigates to <span class="target-screen">Screen 2 (Routine Well-Being Assessment)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping any Mood Button (<code>[Relieved]</code>, <code>[Calm]</code>, etc.):</strong> Updates current mood state, logs entry to <code>MoodLog</code>, and increments the daily streak counter.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping "Talk to Padi" or [Companion] in nav bar:</strong> Navigates to <span class="target-screen">Screen 3 (OurPadi Triage &amp; AI Companion Chat)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping "Workday Rescue" or [Rescue] in nav bar:</strong> Navigates to <span class="target-screen">Screen 6 (Workday Rescue &amp; 15-Minute Focus Sprints)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Emergency Shield (<code>🛡️ Emergency</code>) or [Crisis Support]:</strong> Navigates to <span class="target-screen">Screen 5 (Emergency Crisis Card &amp; Safety Protocol)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Biometric Lock (<code>🔒</code>):</strong> Triggers device biometric authentication modal to decrypt stored clinical data.
+          </div>
+        </div>
+      </article>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 2: ROUTINE ASSESSMENT (WHO-5)                 -->
+      <!-- ==================================================== -->
+      <article class="screen-card" id="screen-2">
+        <div class="screen-header">
+          <div class="screen-title">
+            <span class="screen-num">Screen 2</span>
+            Routine Well-Being Assessment (WHO-5 Clinical Intake)
+          </div>
+          <span class="badge badge-purple">Patient Mobile</span>
+        </div>
+
+        <div class="screen-purpose">
+          <strong>Purpose</strong>
+          Lets the user complete the validated 5-question WHO-5 Well-Being Index to track their longitudinal mental health trajectory and sync telemetry with their clinician.
+        </div>
+
+        <h3>📱 Elements on the Screen (Top to Bottom, Left to Right)</h3>
+        <ol class="element-list">
+          <li>
+            <span class="element-index">1.</span>
+            <div class="element-content">
+              <strong>Top Header Bar:</strong> Back button (<code>←</code>), screen title ("WHO-5 Well-Being Index"), subtitle ("Validated Screening · Past 14 Days Recall"), and item progress badge ("Item 1 of 5").
+            </div>
+          </li>
+          <li>
+            <span class="element-index">2.</span>
+            <div class="element-content">
+              <strong>Linear Stepper Progress Bar:</strong> Animated progress track that increments 20% per completed question.
+            </div>
+          </li>
+          <li>
+            <span class="element-index">3.</span>
+            <div class="element-content">
+              <strong>Assessment Statement Card:</strong> Question category chip (<em>"Question 1 / 5"</em>), instruction text (<em>"Indicate which option is closest to how you felt over the past 2 weeks"</em>), and statement box displaying active prompt (e.g. <em>"I have felt cheerful and in good spirits"</em>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">4.</span>
+            <div class="element-content">
+              <strong>Likert Selection Card Grid (6 Radio Options):</strong>
+              <ul class="element-sublist">
+                <li><code>[All of the time · 5 pts]</code></li>
+                <li><code>[Most of the time · 4 pts]</code></li>
+                <li><code>[More than half of the time · 3 pts]</code></li>
+                <li><code>[Less than half of the time · 2 pts]</code></li>
+                <li><code>[Some of the time · 1 pt]</code></li>
+                <li><code>[At no time · 0 pts]</code></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">5.</span>
+            <div class="element-content">
+              <strong>Navigation Controls Bar:</strong> <code>[← Previous]</code> button, step indicator dots (1, 2, 3, 4, 5), and primary <code>[Next →]</code> button (transitions to <code>[Calculate Score]</code> on question 5).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">6.</span>
+            <div class="element-content">
+              <strong>Results &amp; Diagnostic Feedback Card (Revealed upon completing question 5):</strong>
+              <ul class="element-sublist">
+                <li>Circular score dial showing computed score (0–100 scale, e.g. "36/100").</li>
+                <li>Diagnostic severity title (<em>"Moderate Clinical Strain"</em>).</li>
+                <li>Velocity delta badge (<em>"↓ 32% velocity drop over 14 days"</em>).</li>
+                <li>Risk tier badge (<em>"Risk Tier: MODERATE"</em>).</li>
+                <li>Targeted clinical recommendation body and quick action buttons (<code>[🫁 Somatic Reset]</code>, <code>[⏱️ Workday Rescue]</code>).</li>
+                <li>Primary action button: <code>[📡 Sync Telemetry to Clinician Chart &amp; Return Home]</code>.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+
+        <h3>⚡ Element Interactions &amp; State Transitions</h3>
+        <div class="interaction-box">
+          <div class="interaction-item">
+            <strong>Tapping a Likert Radio Card:</strong> Selects point value (0–5) for the active question and enables the <code>[Next →]</code> button.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[Next →]</code>:</strong> Advances to the next WHO-5 question and animates the progress bar by 20%.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[← Previous]</code>:</strong> Returns to the preceding question to review or modify the response.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[Calculate Score]</code> on Question 5:</strong> Calculates raw score (0–25), normalizes to 0–100, compares against baseline trajectory, and reveals the Results &amp; Diagnostic Feedback Card.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[🫁 Somatic Reset]</code>:</strong> Navigates to <span class="target-screen">Screen 4 (Somatic De-escalation &amp; Sensory Grounding)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[⏱️ Workday Rescue]</code>:</strong> Navigates to <span class="target-screen">Screen 6 (Workday Rescue &amp; 15-Minute Focus Sprints)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[📡 Sync Telemetry to Clinician Chart &amp; Return Home]</code>:</strong> Transmits assessment telemetry to the FriendnPal API backend, moves patient in Clinician RPM from Green to Amber, and navigates to <span class="target-screen">Screen 1 (Home Dashboard)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Back (<code>←</code>):</strong> Prompts exit confirmation and returns to <span class="target-screen">Screen 1 (Home Dashboard)</span>.
+          </div>
+        </div>
+      </article>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 3: TRIAGE & AI COMPANION CHAT                 -->
+      <!-- ==================================================== -->
+      <article class="screen-card" id="screen-3">
+        <div class="screen-header">
+          <div class="screen-title">
+            <span class="screen-num">Screen 3</span>
+            OurPadi Triage &amp; AI Companion Chat
+          </div>
+          <span class="badge badge-purple">Patient Mobile</span>
+        </div>
+
+        <div class="screen-purpose">
+          <strong>Purpose</strong>
+          Lets the user communicate their immediate midnight distress in English or Nigerian Pidgin and select between panic calming or deadline rescue via rapid one-tap triage buttons.
+        </div>
+
+        <h3>📱 Elements on the Screen (Top to Bottom, Left to Right)</h3>
+        <ol class="element-list">
+          <li>
+            <span class="element-index">1.</span>
+            <div class="element-content">
+              <strong>Top Header Bar:</strong> Back button (<code>←</code>), Padi avatar with online pulse dot, companion name ("Padi AI"), status subtitle ("Online · Empathetic Triage"), and emergency crisis shield button (<code>🛡️ Crisis</code>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">2.</span>
+            <div class="element-content">
+              <strong>Security &amp; Privacy Banner:</strong> Encrypted notice (<em>"🔒 Encrypted · Anonymous · Empathetic Nigerian English &amp; Pidgin"</em>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">3.</span>
+            <div class="element-content">
+              <strong>Interactive Message Thread (Scrollable Chat History):</strong>
+              <ul class="element-sublist">
+                <li>Bot empathy bubble (<em>"I dey with you, Amina. You are not alone. Take a slow, gentle breath—we will handle this together step by step. Wetin you need most right now?"</em>).</li>
+                <li>Interactive Triage Mode Cards (Stacked high-contrast action buttons):
+                  <ul style="margin-top: 4px; padding-left: 18px;">
+                    <li>Button A: <strong><code>[🫁 Calm My Panic]</code></strong> (Subtitle: <em>"4-4-4 box breathing, sensory grounding &amp; ASMR soundscapes"</em>).</li>
+                    <li>Button B: <strong><code>[⏱️ Rescue My Deadline]</code></strong> (Subtitle: <em>"Deconstruct urgent work into 15-min focus sprints"</em>).</li>
+                  </ul>
+                </li>
+                <li>User response bubbles and subsequent bot replies.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">4.</span>
+            <div class="element-content">
+              <strong>Bottom Message Input Bar:</strong>
+              <ul class="element-sublist">
+                <li>Text input field (<em>"Type how you feel (e.g. My heart dey beat fast)..."</em>).</li>
+                <li>Dialect toggle button (<code>[Pidgin 🇳🇬 / English 🇬🇧]</code>).</li>
+                <li>Send button (<code>➤</code>).</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+
+        <h3>⚡ Element Interactions &amp; State Transitions</h3>
+        <div class="interaction-box">
+          <div class="interaction-item">
+            <strong>Tapping <code>[🫁 Calm My Panic]</code>:</strong> Initiates somatic de-escalation pathway &rarr; Navigates to <span class="target-screen">Screen 4 (Somatic De-escalation &amp; Sensory Grounding)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[⏱️ Rescue My Deadline]</code>:</strong> Initiates deadline salvage intake &rarr; Navigates to <span class="target-screen">Screen 6 (Workday Rescue &amp; 15-Minute Focus Sprints)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Emergency Crisis Shield (<code>🛡️ Crisis</code>):</strong> Instantly displays <span class="target-screen">Screen 5 (Emergency Crisis Card &amp; Safety Protocol)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Typing Self-Harm or Red-Flag Keywords (e.g. "want to die", "can't live"):</strong> Triggers bot confirmation check (<em>"Amina, are you thinking about hurting yourself right now?"</em>). If user confirms &rarr; locks chat and immediately displays <span class="target-screen">Screen 5 (Emergency Crisis Card &amp; Safety Protocol)</span> while dispatching a high-priority WebSocket alert to the Clinician RPM Dashboard.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Dialect Toggle Button:</strong> Switches Padi's conversational tone between Standard English and Nigerian Pidgin.
+          </div>
+          <div class="interaction-item">
+            <strong>Typing a message and tapping Send (<code>➤</code>):</strong> Appends user message to thread and renders contextual AI de-escalation reply within 1.5 seconds.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Back (<code>←</code>):</strong> Navigates to <span class="target-screen">Screen 1 (Home Dashboard)</span>.
+          </div>
+        </div>
+      </article>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 4: SOMATIC DE-ESCALATION & GROUNDING          -->
+      <!-- ==================================================== -->
+      <article class="screen-card" id="screen-4">
+        <div class="screen-header">
+          <div class="screen-title">
+            <span class="screen-num">Screen 4</span>
+            Somatic De-escalation &amp; Sensory Grounding
+          </div>
+          <span class="badge badge-purple">Patient Mobile</span>
+        </div>
+
+        <div class="screen-purpose">
+          <strong>Purpose</strong>
+          Guides the user through a paced 4-4-4 box breathing sequence, 5-4-3-2-1 sensory grounding, and distress re-rating to physically halt acute panic attacks.
+        </div>
+
+        <h3>📱 Elements on the Screen (Top to Bottom, Left to Right)</h3>
+        <ol class="element-list">
+          <li>
+            <span class="element-index">1.</span>
+            <div class="element-content">
+              <strong>Top Header Bar:</strong> Back button (<code>←</code>), screen title ("Somatic Reset"), category toggle pill (<code>[Somatic Exercises | ASMR Audio]</code>), and crisis shortcut button (<code>🚨</code>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">2.</span>
+            <div class="element-content">
+              <strong>Interactive 4-4-4 Box Breathing Widget:</strong>
+              <ul class="element-sublist">
+                <li>Cycle tracker text (<em>"CYCLE 1 OF 3"</em>).</li>
+                <li>Pulsing luminous breathing circle viewport that visually expands on Inhale (4s), pauses on Hold (4s), contracts on Exhale (4s), and pauses on Empty Hold (4s), synchronized with device haptics.</li>
+                <li>Centered cadence action label (<em>"INHALE"</em>, <em>"HOLD"</em>, <em>"EXHALE"</em>) and large digital countdown number (<em>"4"</em>).</li>
+                <li>Breathing control buttons: <code>[▶ Start 4-4-4 Reset]</code> and <code>[↺ Reset]</code>.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">3.</span>
+            <div class="element-content">
+              <strong>Sensory Anchoring Drawer (5-4-3-2-1 Grounding):</strong>
+              <ul class="element-sublist">
+                <li>Section header (<em>"👁️ 5-4-3-2-1 Sensory Grounding · Anchoring"</em>).</li>
+                <li>Prompt text (<em>"Tell me 3 physical objects you can see around you right now using your phone light:"</em>).</li>
+                <li>3 text input chip fields (<code>1. Water bottle</code>, <code>2. Laptop charger</code>, <code>3. Brother's blanket</code>).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">4.</span>
+            <div class="element-content">
+              <strong>Post-Exercise Distress Re-Rating Box:</strong>
+              <ul class="element-sublist">
+                <li>Slider label displaying selected rating (<em>"Distress Level After Exercise: 2 (Manageable)"</em>).</li>
+                <li>Interactive 1 to 5 distress range slider (1: Calm, 2: Manageable, 3: Shaky, 4: Panicking, 5: Crisis).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">5.</span>
+            <div class="element-content">
+              <strong>ASMR Ambient Soundscape Carousel (Visible when ASMR toggled):</strong>
+              <ul class="element-sublist">
+                <li>Soundscape cards for <em>"Abuja Midnight Rain"</em>, <em>"Deep Atlantic Waves"</em>, and <em>"Nocturnal Brown Noise"</em>.</li>
+                <li>Offline play/pause buttons and 15-minute sleep timer toggle.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">6.</span>
+            <div class="element-content">
+              <strong>Primary Transition Action Button:</strong> <code>[⏱️ Feeling Slower / Ready for Workday Rescue]</code>.
+            </div>
+          </li>
+        </ol>
+
+        <h3>⚡ Element Interactions &amp; State Transitions</h3>
+        <div class="interaction-box">
+          <div class="interaction-item">
+            <strong>Tapping <code>[▶ Start 4-4-4 Reset]</code>:</strong> Activates animated breathing circle, begins 4-second paced breathing intervals, plays soothing phase-transition chimes, and triggers haptic pulses.
+          </div>
+          <div class="interaction-item">
+            <strong>Typing into Sensory Grounding Chips:</strong> Enters physical anchoring items, actively diverting cognitive focus away from panic.
+          </div>
+          <div class="interaction-item">
+            <strong>Adjusting Distress Slider to 1 or 2:</strong> Confirms physiological stabilization.
+          </div>
+          <div class="interaction-item">
+            <strong>Adjusting Distress Slider to 5 (Critical):</strong> Triggers safety alert and prompts user to open <span class="target-screen">Screen 5 (Emergency Crisis Card &amp; Safety Protocol)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[⏱️ Feeling Slower / Ready for Workday Rescue]</code>:</strong> Persists de-escalation telemetry (duration, score drop 5 &rarr; 2) to local storage and backend &rarr; Navigates to <span class="target-screen">Screen 6 (Workday Rescue &amp; 15-Minute Focus Sprints)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[ASMR Audio]</code> in toggle pill:</strong> Switches view to offline synthesized soundscapes.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Crisis Button (<code>🚨</code>):</strong> Opens <span class="target-screen">Screen 5 (Emergency Crisis Card &amp; Safety Protocol)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Back (<code>←</code>):</strong> Returns to <span class="target-screen">Screen 3 (OurPadi Triage &amp; AI Companion Chat)</span>.
+          </div>
+        </div>
+      </article>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 5: EMERGENCY CRISIS CARD & PROTOCOL           -->
+      <!-- ==================================================== -->
+      <article class="screen-card" id="screen-5">
+        <div class="screen-header">
+          <div class="screen-title">
+            <span class="screen-num">Screen 5</span>
+            Emergency Crisis Card &amp; Safety Protocol
+          </div>
+          <span class="badge badge-rose">Patient Mobile / Modal</span>
+        </div>
+
+        <div class="screen-purpose">
+          <strong>Purpose</strong>
+          Lets the user in severe distress instantly connect with on-call human counselors via WhatsApp or direct phone hotline and triggers an automated clinician alert.
+        </div>
+
+        <h3>📱 Elements on the Screen (Top to Bottom, Left to Right)</h3>
+        <ol class="element-list">
+          <li>
+            <span class="element-index">1.</span>
+            <div class="element-content">
+              <strong>Emergency Crisis Alert Banner (High-Visibility Red Accent):</strong>
+              <ul class="element-sublist">
+                <li>Flashing warning badge (<em>"🚨 IMMEDIATE 24/7 CRISIS SUPPORT PROTOCOL"</em>).</li>
+                <li>Empathetic heading (<em>"Amina, Your Life Matters"</em>).</li>
+                <li>Compassionate guidance text (<em>"You do not have to carry this alone. There is human help right this second. Please connect directly with our on-call counselor or call our toll-free hotline:"</em>).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">2.</span>
+            <div class="element-content">
+              <strong>Direct WhatsApp Counselor Action Button (FD-01):</strong> Large green button with WhatsApp icon: <code>[💬 Chat with On-Call Counselor on WhatsApp]</code> (Direct link: <code>https://wa.me/2348003743637?text=Hello...</code>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">3.</span>
+            <div class="element-content">
+              <strong>Direct Toll-Free Phone Hotline Button:</strong> High-contrast phone button: <code>[📞 Call Toll-Free 24/7 Hotline: 0800-FRIENDNPAL]</code>.
+            </div>
+          </li>
+          <li>
+            <span class="element-index">4.</span>
+            <div class="element-content">
+              <strong>Clinical Safety Protocol Notice:</strong> Explanation of confidentiality and priority response (<em>"Your on-call clinician has been notified of high-priority distress and is on standby."</em>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">5.</span>
+            <div class="element-content">
+              <strong>Safety De-escalation / Return Link:</strong> Discreet dismiss link: <code>[Return to App (I am safe right now)]</code>.
+            </div>
+          </li>
+        </ol>
+
+        <h3>⚡ Element Interactions &amp; State Transitions</h3>
+        <div class="interaction-box">
+          <div class="interaction-item">
+            <strong>Tapping <code>[💬 Chat with On-Call Counselor on WhatsApp]</code>:</strong> Immediately launches WhatsApp pre-populated with crisis intake message (<code>wa.me/...</code>), and simultaneously fires an urgent WebSocket crisis alert banner to the Clinician RPM Dashboard.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[📞 Call Toll-Free 24/7 Hotline]</code>:</strong> Opens native mobile dialer pre-populated with toll-free emergency number <code>0800-FRIENDNPAL</code>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[Return to App (I am safe right now)]</code>:</strong> Closes emergency view, logs safety confirmation to local state, and returns to <span class="target-screen">Screen 1 (Home Dashboard)</span> or <span class="target-screen">Screen 4 (Somatic Reset)</span>.
+          </div>
+        </div>
+      </article>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 6: WORKDAY RESCUE & FOCUS SPRINTS             -->
+      <!-- ==================================================== -->
+      <article class="screen-card" id="screen-6">
+        <div class="screen-header">
+          <div class="screen-title">
+            <span class="screen-num">Screen 6</span>
+            Workday Rescue &amp; 15-Minute Focus Sprints
+          </div>
+          <span class="badge badge-purple">Patient Mobile</span>
+        </div>
+
+        <div class="screen-purpose">
+          <strong>Purpose</strong>
+          Lets the user deconstruct overwhelming work deliverables into structured 15-minute micro-sprints with a countdown timer to break task paralysis and beat deadlines.
+        </div>
+
+        <h3>📱 Elements on the Screen (Top to Bottom, Left to Right)</h3>
+        <ol class="element-list">
+          <li>
+            <span class="element-index">1.</span>
+            <div class="element-content">
+              <strong>Sprint Header Bar:</strong> Back button (<code>←</code>), deliverable title (<em>"Upwork Deliverable"</em>), deadline countdown chip (<em>"Due at 06:00 AM · 2h 15m remaining"</em>), and active sprint badge (<em>"Sprint 1 of 4"</em>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">2.</span>
+            <div class="element-content">
+              <strong>Sprint Stepper Indicator:</strong> 4 connected progress dots showing active sprint milestone (Step 1: 3 Subject Lines, Step 2: Opening Hook, Step 3: Body Bullets, Step 4: CTA &amp; Polish).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">3.</span>
+            <div class="element-content">
+              <strong>15-Minute Countdown Timer Widget:</strong>
+              <ul class="element-sublist">
+                <li>Large digital countdown clock display (<em>"14:22"</em>).</li>
+                <li>Subtitle label (<em>"Focused Micro-Sprint Countdown"</em>).</li>
+                <li>Timer controls: <code>[▶ Start Sprint / ⏸️ Pause]</code> and <code>[+5 Mins]</code> extension button.</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">4.</span>
+            <div class="element-content">
+              <strong>Active Micro-Task Directive Card:</strong>
+              <ul class="element-sublist">
+                <li>Card title with target icon (<em>"🎯 Active Micro-Task · Singular Rule"</em>).</li>
+                <li>Strict scope constraint text (<em>"Write 3 headline options only. Do NOT touch body copy or revisions yet."</em>).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">5.</span>
+            <div class="element-content">
+              <strong>Quick Draft / Submission Box:</strong>
+              <ul class="element-sublist">
+                <li>Live word count counter (<em>"34 words"</em>).</li>
+                <li>Auto-saving multiline text area (<em>"Draft your 3 headline options here... (Auto-saved locally)"</em>).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">6.</span>
+            <div class="element-content">
+              <strong>Sprint Action Controls:</strong> Primary action button: <code>[✓ Complete Sprint &amp; Advance to Next Task]</code> and secondary button: <code>[Need 5 More Minutes]</code>.
+            </div>
+          </li>
+        </ol>
+
+        <h3>⚡ Element Interactions &amp; State Transitions</h3>
+        <div class="interaction-box">
+          <div class="interaction-item">
+            <strong>Tapping <code>[▶ Start Sprint]</code>:</strong> Starts the 15-minute countdown clock and records active sprint start time.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[+5 Mins]</code> / <code>[Need 5 More Minutes]</code>:</strong> Extends timer by 300 seconds without breaking momentum.
+          </div>
+          <div class="interaction-item">
+            <strong>Typing in Quick Draft Box:</strong> Auto-saves text locally to device cache and increments the live word counter.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[✓ Complete Sprint &amp; Advance to Next Task]</code> on Sprints 1–3:</strong> Marks current sprint complete, advances stepper indicator to next milestone dot, loads the next micro-task directive (e.g. Opening Hook), and resets timer to 15:00 &rarr; Loops within <span class="target-screen">Screen 6</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[✓ Complete Final Sprint &amp; Submit]</code> on Sprint 4:</strong> Logs all 4 completed sprints, records saved contract earnings ($350 USD), triggers celebration chime &rarr; Navigates to <span class="target-screen">Screen 7 (Post-Shift Decompression &amp; Subscription)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Back (<code>←</code>):</strong> Prompts confirmation to pause sprint and returns to <span class="target-screen">Screen 1 (Home Dashboard)</span>.
+          </div>
+        </div>
+      </article>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 7: POST-SHIFT DECOMPRESSION & SUBSCRIPTION    -->
+      <!-- ==================================================== -->
+      <article class="screen-card" id="screen-7">
+        <div class="screen-header">
+          <div class="screen-title">
+            <span class="screen-num">Screen 7</span>
+            Post-Shift Decompression &amp; Subscription
+          </div>
+          <span class="badge badge-purple">Patient Mobile</span>
+        </div>
+
+        <div class="screen-purpose">
+          <strong>Purpose</strong>
+          Lets the user celebrate their completed work deadline, log their morning post-shift emotional state, and activate a discreet monthly membership to protect peace of mind.
+        </div>
+
+        <h3>📱 Elements on the Screen (Top to Bottom, Left to Right)</h3>
+        <ol class="element-list">
+          <li>
+            <span class="element-index">1.</span>
+            <div class="element-content">
+              <strong>Top Header Bar:</strong> Brand mark ("OurPadi"), time badge ("06:00 AM WAT · Shift End"), and dismiss/close button (<code>✕</code>).
+            </div>
+          </li>
+          <li>
+            <span class="element-index">2.</span>
+            <div class="element-content">
+              <strong>Work Completion &amp; Contract Saved Celebration Banner:</strong>
+              <ul class="element-sublist">
+                <li>Confetti celebration icon (<code>🎉</code>).</li>
+                <li>Heading (<em>"You Did It, Amina!"</em>).</li>
+                <li>Summary text (<em>"You pushed through a blackout and acute panic, protected your client contract, and saved your income. We are proud of you."</em>).</li>
+                <li>Milestone metric badges (<em>"Deliverable Submitted on Time"</em> | <em>"4 Sprints Completed"</em> | <em>"$350 Contract Secured"</em>).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">3.</span>
+            <div class="element-content">
+              <strong>Shift-End Mood Check-in Card (Step 11):</strong> Prompt (<em>"Your shift is officially over. How do you feel entering your sleep window?"</em>) and 3 quick-tap emotional state buttons: <code>[😌 Relieved]</code>, <code>[🥱 Exhausted]</code>, <code>[😰 Anxious]</code>.
+            </div>
+          </li>
+          <li>
+            <span class="element-index">4.</span>
+            <div class="element-content">
+              <strong>Post-Shift Somatic Wind-Down Checklist:</strong>
+              <ul class="element-sublist">
+                <li>☑️ <em>"Shut laptop and mute client Slack"</em></li>
+                <li>🔲 <em>"Drink a full glass of fresh water"</em></li>
+                <li>🔲 <em>"Check on your brother"</em></li>
+                <li>🔲 <em>"Get into bed and start sleep audio"</em></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">5.</span>
+            <div class="element-content">
+              <strong>Discreet Monthly Subscription Card (FR-16 / Step 11):</strong>
+              <ul class="element-sublist">
+                <li>Shield icon, header: <em>"Protect Your Peace &amp; Career · Ongoing Support"</em>.</li>
+                <li>Trial reminder (<em>"Your 7-day trial has 2 days remaining. Enjoy uninterrupted nocturnal de-escalation, priority clinician RPM, and unlimited sprints for 5,000 NGN/month."</em>).</li>
+                <li>Discreet billing guarantee: <em>"🔒 Billed discreetly on your bank statement as 'FNP Services' (Zero stigma)"</em>.</li>
+                <li>Primary subscription button: <code>[🔒 Activate Monthly Membership (5,000 NGN)]</code>.</li>
+                <li>Secondary button: <code>[Continue with Free Trial]</code>.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+
+        <h3>⚡ Element Interactions &amp; State Transitions</h3>
+        <div class="interaction-box">
+          <div class="interaction-item">
+            <strong>Tapping a Mood Button (<code>[Relieved]</code>, <code>[Exhausted]</code>, <code>[Anxious]</code>):</strong> Records shift-end mood to <code>MoodLog</code>, transmits resolution telemetry to backend, and updates Clinician RPM status to <span class="target-screen">Green (Stabilized)</span>.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping Wind-Down Checklist Checkboxes:</strong> Toggles checkbox completion and fires subtle haptic feedback.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[🔒 Activate Monthly Membership (5,000 NGN)]</code>:</strong> Launches secure Paystack/Flutterwave payment modal with discreet 'FNP Services' billing descriptor.
+          </div>
+          <div class="interaction-item">
+            <strong>Tapping <code>[Continue with Free Trial]</code> or Close (<code>✕</code>):</strong> Dismisses screen and returns to <span class="target-screen">Screen 1 (Home Dashboard)</span> with active sleep window reminder.
+          </div>
+        </div>
+      </article>
+
+      <!-- ==================================================== -->
+      <!-- SCREEN 8: CLINICIAN RPM DASHBOARD                    -->
+      <!-- ==================================================== -->
+      <article class="screen-card" id="screen-8">
+        <div class="screen-header">
+          <div class="screen-title">
+            <span class="screen-num">Screen 8</span>
+            FriendnPal Clinician RPM Dashboard
+          </div>
+          <span class="badge badge-amber">Clinician Web Portal</span>
+        </div>
+
+        <div class="screen-purpose">
+          <strong>Purpose</strong>
+          Lets licensed therapists monitor their assigned patient caseload in real-time, inspect longitudinal score curves (WHO-5, GAD-7, PHQ-9), review triage transcripts, and conduct proactive clinical outreach.
+        </div>
+
+        <h3>📱 Elements on the Screen (Top to Bottom, Left to Right)</h3>
+        <ol class="element-list">
+          <li>
+            <span class="element-index">1.</span>
+            <div class="element-content">
+              <strong>Top Portal Navigation Bar:</strong> FriendnPal Clinician Portal logo (<code>🩺 FriendnPal</code>), version tag ("Clinician RPM Portal v2.1.0"), clinician profile badge ("Dr. Chidi Okafor, FWACP · On-Call Clinician"), and audio/visual alert bell with pulsing red indicator.
+            </div>
+          </li>
+          <li>
+            <span class="element-index">2.</span>
+            <div class="element-content">
+              <strong>High-Priority Telemetry Alert Banner:</strong> Audible/visual banner displaying real-time crisis alerts (<em>"🚨 HIGH PRIORITY TELEMETRY ALERT: Patient #8241 (Amina, 26F · Abuja) reported severe nocturnal anxiety &amp; WHO-5 velocity drop &gt;30%"</em>), with action button <code>[Open Counselor WhatsApp]</code>.
+            </div>
+          </li>
+          <li>
+            <span class="element-index">3.</span>
+            <div class="element-content">
+              <strong>Caseload Metrics Strip (4 Metric Tiles):</strong>
+              <ul class="element-sublist">
+                <li>Tile 1: Total Assigned Patients (<em>"48 · Active RPM enrollment"</em>).</li>
+                <li>Tile 2: Critical Risk Alerts (<em>"3 · Requires same-day triage"</em> - Red border).</li>
+                <li>Tile 3: Moderate / Declining Cohort (<em>"11 · Negative score velocity"</em> - Amber border).</li>
+                <li>Tile 4: Cohort Avg WHO-5 (<em>"54.2 · Normalized 0–100 scale"</em> - Blue border).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">4.</span>
+            <div class="element-content">
+              <strong>Monitored Patient Cohort Table (Left 58% Width):</strong>
+              <ul class="element-sublist">
+                <li>Cohort filter tabs: <code>[All (48)]</code>, <code>[Critical (3)]</code>, <code>[Moderate (11)]</code>.</li>
+                <li>Search &amp; sort inputs: Search patient by name or ID.</li>
+                <li>Table columns: Patient (ID, Name, Age, Location), Platform (Android v2.1.0 / iOS), WHO-5 Score (e.g. 36/100), 14-Day Trend (e.g. ↓ 32%), Risk Tier (<code>CRITICAL</code>, <code>MODERATE</code>, <code>NORMAL</code>), Action (<code>[Inspect]</code> button).</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <span class="element-index">5.</span>
+            <div class="element-content">
+              <strong>Patient Detail &amp; Longitudinal Trajectory Panel (Right 42% Width):</strong>
+              <ul class="element-sublist">
+                <li>Patient profile header: Name, ID (#8241), age/gender (26F), location ("Garki, Abuja"), primary diagnosis ("Acute Nocturnal Anxiety &amp; Somatic Stress"), and current risk badge (<code>CRITICAL ALERT</code>).</li>
+                <li><strong>30-Day Multi-Line Chart (SVG Canvas):</strong> Displays WHO-5 well-being curve (blue line) vs GAD-7 anxiety curve (red line) against clinical diagnostic threshold line (50 pts).</li>
+                <li><strong>Recent Telemetry Event Timeline:</strong>
+                  <ul style="margin-top: 4px; padding-left: 18px;">
+                    <li><em>03:15 AM:</em> Completed 4-4-4 Box Breathing (Distress reduced 5 &rarr; 2).</li>
+                    <li><em>03:32 AM:</em> Workday Rescue Sprint 1 completed (3 headlines drafted).</li>
+                    <li><em>05:10 AM:</em> Workday Rescue completed &amp; submitted on time (Stabilized).</li>
+                    <li><em>06:00 AM:</em> Shift-end mood logged: Relieved (Stabilized closed-loop).</li>
+                  </ul>
+                </li>
+                <li><strong>Clinical Action Controls Bar:</strong>
+                  <ul style="margin-top: 4px; padding-left: 18px;">
+                    <li>Primary button: <code>[📝 Log Clinical Note]</code> (opens modal to record diagnosis and progress note).</li>
+                    <li>Secondary button: <code>[⚙️ Adjust Care Plan]</code> (adjusts assessment frequency or CBT recommendations).</li>
+                    <li>Emergency direct button: <code>[💬 Open WhatsApp Counselor Session]</code>.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+
+        <h3>⚡ Element Interactions &amp; State Transitions</h3>
+        <div class="interaction-box">
+          <div class="interaction-item">
+            <strong>Clicking a Patient Row in Cohort Table:</strong> Selects that patient, loads their 30-day longitudinal curves, telemetry timeline, and clinical history into the right panel.
+          </div>
+          <div class="interaction-item">
+            <strong>Clicking Cohort Filter Tabs (<code>[Critical]</code>, <code>[Moderate]</code>):</strong> Filters table view to patients requiring immediate attention.
+          </div>
+          <div class="interaction-item">
+            <strong>Clicking <code>[Open Counselor WhatsApp]</code> or <code>[Open WhatsApp Counselor Session]</code>:</strong> Launches WhatsApp Web with pre-filled clinical outreach message to the patient.
+          </div>
+          <div class="interaction-item">
+            <strong>Clicking <code>[📝 Log Clinical Note]</code>:</strong> Opens modal form to enter clinical assessment notes, which persist to <code>ClinicianNote</code> table and update the patient's audit log.
+          </div>
+          <div class="interaction-item">
+            <strong>Clicking <code>[⚙️ Adjust Care Plan]</code>:</strong> Opens care plan drawer to reassign assessment intervals (e.g. weekly to bi-weekly) or assign specific somatic exercises.
+          </div>
+          <div class="interaction-item">
+            <strong>Receiving Incoming WebSocket Crisis Telemetry:</strong> Plays audible chime, moves affected patient to top of list, flashes alert banner red, and increments the Critical Risk Alerts metric.
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      <div>FriendnPal Mental Health Ecosystem · Dual-Platform UI Specification</div>
+      <div>Aligned with <code>user-flow.md</code> &amp; <code>requirements.md</code></div>
+    </footer>
+  </div>
+</body>
+</html>

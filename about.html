@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>About Us &amp; Clinical Methodology — FriendnPal &amp; OurPadi</title>
+  <meta name="description" content="Learn about the FriendnPal clinical methodology: Prediction -> Prevention -> Proactive Intervention, solving reactive mental health care in Nigeria.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .page-hero {
+      background: #EAF3F8;
+      padding: 40px 24px;
+      border-radius: 28px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
+    }
+    .info-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 28px 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .method-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px;
+      background: #f8fafc;
+      border-radius: 14px;
+      border-left: 4px solid #0284c7;
+    }
+    .method-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #ffffff;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="page-boxed-frame-body">
+
+  <div class="page-boxed-container" style="padding: 30px;">
+    
+    <!-- Top Navigation Bar -->
+    <nav class="replica-nav">
+      <div class="replica-nav-left">
+        <a href="index.html" class="replica-logo-group">
+          <img src="friendnpal-logo.png" alt="FriendnPal Logo" class="replica-logo-img">
+          <span class="replica-logo-text">FriendnPal</span>
+        </a>
+
+        <ul class="replica-nav-links">
+          <li><a href="index.html" class="replica-nav-link">Home</a></li>
+          <li><a href="about.html" class="replica-nav-link active">About Us</a></li>
+          <li><a href="features.html" class="replica-nav-link">Features</a></li>
+          <li><a href="pricing.html" class="replica-nav-link">Pricing</a></li>
+          <li><a href="mobile.html" class="replica-nav-link">OurPadi App</a></li>
+          <li><a href="dashboard.html" class="replica-nav-link">Clinician RPM</a></li>
+          <li><a href="contact.html" class="replica-nav-link">Contacts</a></li>
+        </ul>
+      </div>
+
+      <div class="replica-nav-right">
+        <a href="login.html?role=patient" class="btn-nav-auth btn-nav-login" style="padding: 8px 16px; border-radius: 20px;">Sign In</a>
+        <a href="register.html?role=patient" class="btn-nav-auth btn-nav-register" style="padding: 8px 18px; border-radius: 20px; background: #003152; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">Get Started</a>
+      </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <header class="page-hero" style="margin-top: 20px;">
+      <div class="replica-hero-tag">
+        <span class="live-dot"></span>
+        <span>Clinical Methodology &amp; Ecosystem</span>
+      </div>
+      <h1 style="font-size: 2.4rem; font-weight: 900; color: #1e293b; margin: 0; letter-spacing: -0.02em;">
+        Inverting Mental Health Care from Reactive Crisis to <span style="color: #0284c7;">Proactive Prevention</span>
+      </h1>
+      <p style="font-size: 1.05rem; color: #475569; max-width: 760px; margin: 0; line-height: 1.6;">
+        Traditional mental healthcare operates on a broken model (*"Symptoms &rarr; Crisis &rarr; Emergency Hospitalization"*). FriendnPal replaces this with continuous longitudinal screening, AI companionship, and real-time remote patient monitoring.
+      </p>
+    </header>
+
+    <!-- Core Methodology Pipeline -->
+    <section class="info-card" style="background: #ffffff; margin-top: 24px;">
+      <h2 style="font-size: 1.35rem; font-weight: 800; color: #1e293b; margin: 0;">
+        The Core Paradigm: Prediction &rarr; Prevention &rarr; Proactive Intervention
+      </h2>
+      <p style="font-size: 0.92rem; color: #64748b; margin: 0;">
+        By measuring behavioral signals and clinical screening scores (WHO-5, GAD-7) continuously, the platform intercepts psychological distress before it escalates into an acute emergency.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 10px;">
+        <div class="method-step">
+          <div class="method-num">1</div>
+          <div>
+            <strong style="color: #0284c7; font-size: 0.98rem; display: block;">PREDICTION — Longitudinal Screening &amp; Score Trajectory</strong>
+            <p style="font-size: 0.86rem; color: #475569; margin: 4px 0 0 0;">
+              Patients complete 2-minute WHO-5 Well-Being screening assessments. Our analytics engine detects score drops (>30% decline over 14 days) and triggers early warnings.
+            </p>
+          </div>
+        </div>
+
+        <div class="method-step" style="border-left-color: #f59e0b;">
+          <div class="method-num" style="background: #f59e0b;">2</div>
+          <div>
+            <strong style="color: #d97706; font-size: 0.98rem; display: block;">PREVENTION — Micro-Interventions &amp; Somatic Resets</strong>
+            <p style="font-size: 0.86rem; color: #475569; margin: 4px 0 0 0;">
+              Delivers instant 4-4-4 box breathing exercises, 5-4-3-2-1 sensory room grounding, ASMR soundscapes, and 15-minute Workday Rescue sprints to break acute task paralysis.
+            </p>
+          </div>
+        </div>
+
+        <div class="method-step" style="border-left-color: #e11d48;">
+          <div class="method-num" style="background: #e11d48;">3</div>
+          <div>
+            <strong style="color: #e11d48; font-size: 0.98rem; display: block;">PROACTIVE INTERVENTION — Hybrid Clinician RPM &amp; WhatsApp Handoff</strong>
+            <p style="font-size: 0.86rem; color: #475569; margin: 4px 0 0 0;">
+              When high-risk distress occurs, the system locks chat and serves direct 1-tap WhatsApp counselor access (`wa.me/...`) and toll-free hotlines while dispatching urgent alerts to Clinician RPM.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid Content: Problem & Personas -->
+    <div class="content-grid">
+      
+      <!-- The Beachhead Persona -->
+      <article class="info-card">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.5rem;">🇳🇬</span>
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">Validation Beachhead: Nocturnal Freelancers</h3>
+        </div>
+        <p style="font-size: 0.88rem; color: #475569; line-height: 1.6; margin: 0;">
+          Our high-stress benchmark persona is <strong>Amina</strong>, a 24-year-old nocturnal Upwork copywriter in Garki, Abuja. Facing nocturnal US shifts (10:00 PM – 6:00 AM WAT), erratic power blackouts, generator noise, and family caregiving duties, she experiences severe deadline panic.
+        </p>
+        <p style="font-size: 0.84rem; font-style: italic; color: #0284c7; margin: 0; background: #f0f9ff; padding: 10px; border-radius: 10px;">
+          "If our de-escalation engine can stabilize an isolated gig worker at 3:00 AM under blackouts, it effortlessly serves corporate employees, students, and wellness patients."
+        </p>
+      </article>
+
+      <!-- Regulatory & Governance -->
+      <article class="info-card">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 1.5rem;">⚖️</span>
+          <h3 style="font-size: 1.15rem; font-weight: 800; color: #1e293b; margin: 0;">Clinical Governance &amp; Ethics</h3>
+        </div>
+        <ul style="font-size: 0.88rem; color: #475569; line-height: 1.7; margin: 0; padding-left: 20px;">
+          <li><strong>MDCN Standards:</strong> Clinician RPM Dashboard oversight complies with Medical and Dental Council of Nigeria clinical monitoring standards.</li>
+          <li><strong>NDPR Compliance:</strong> Nigerian Data Protection Regulation compliant with client-side AES encrypted thought journals.</li>
+          <li><strong>Zero Device Surveillance:</strong> Absolute privacy guarantee—zero background keylogging, mic listening, or GPS telemetry.</li>
+          <li><strong>Discreet Billing:</strong> Subscription charges appear under neutral business name (<em>"FNP Services"</em>) to protect user stigma privacy.</li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- Governance Footer -->
+
+  </div>
+
+</body>
+</html>

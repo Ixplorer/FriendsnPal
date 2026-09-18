@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>FriendnPal &amp; OurPadi — Mental Care Stay Healthy</title>
+  <meta name="description"
+    content="Proactive digital mental health ecosystem offering online psychotherapy, continuous AI mood tracking, somatic de-escalation, workday rescue sprints, and clinician remote patient monitoring.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=JetBrains+Mono:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* FAQ Accordion Styling */
+    .faq-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .faq-item {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .faq-question {
+      padding: 18px 22px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      color: #1e293b;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    .faq-question:hover {
+      color: #0284c7;
+      background: #f8fafc;
+    }
+
+    .faq-answer {
+      padding: 0 22px 18px 22px;
+      font-size: 0.88rem;
+      color: #475569;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    .faq-icon {
+      transition: transform 0.2s ease;
+    }
+
+    /* Persona Spotlights Card Styling */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .persona-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.03);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  </style>
+</head>
+
+<body class="page-boxed-frame-body">
+
+  <!-- ========================================================================== -->
+  <!-- ENCLOSED BOX FRAME CONTAINER (MATCHING DESKTOP MOCKUP REFERENCE FRAME)     -->
+  <!-- ========================================================================== -->
+  <div class="page-boxed-container">
+
+    <!-- ADVANCED HERO SLIDER & STATS BANNER SECTION (REPLICA OF USER REFERENCE DESIGN) -->
+    <header id="home" class="hero-slider-section replica-hero-theme">
+
+      <!-- Dynamic Hero Navigation Bar -->
+      <div class="hero-nav-wrapper">
+        <nav class="hero-nav">
+          <a href="index.html" class="hero-brand-logo">
+            <div class="hero-logo-icon-wrap" style="background: #123340; color: #ffffff;">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="10" y1="10" x2="14" y2="10" />
+              </svg>
+            </div>
+            <div>
+              <span class="hero-brand-title" style="color: #123340; font-weight: 900; font-size: 1.25rem; letter-spacing: -0.02em;">FriendnPal</span>
+            </div>
+          </a>
+
+          <ul class="hero-menu-links">
+            <li><a href="index.html" class="hero-menu-link active" style="color: #123340; font-weight: 700;">HOME</a></li>
+            <li><a href="about.html" class="hero-menu-link" style="color: #58707c;">ABOUT US</a></li>
+            <li><a href="features.html" class="hero-menu-link" style="color: #58707c;">FEATURES</a></li>
+            <li><a href="pricing.html" class="hero-menu-link" style="color: #58707c;">PRICING</a></li>
+            <li><a href="mobile.html" class="hero-menu-link" style="color: #58707c;">OURPADI APP</a></li>
+            <li><a href="dashboard.html" class="hero-menu-link" style="color: #58707c;">CLINICIAN RPM</a></li>
+            <li><a href="contact.html" class="hero-menu-link" style="color: #58707c;">CONTACT</a></li>
+          </ul>
+
+          <a href="login.html?role=patient" class="hero-btn-outline-replica">
+            REGISTER
+          </a>
+        </nav>
+      </div>
+
+      <!-- Slide Items Container -->
+      <div class="hero-slide-container">
+
+        <!-- Slide 1: Mental Health Is A Priority (Exact Replica) -->
+        <div class="hero-slide active">
+          <div class="container" style="max-width: 1200px; width: 100%; margin: 0 auto;">
+            <div class="hero-replica-grid">
+              
+              <!-- Left Column Content -->
+              <div class="hero-replica-left">
+                <div class="replica-heart-badge">
+                  <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                
+                <h1 class="replica-hero-title">
+                  Mental Health<br />Is A Priority
+                </h1>
+                
+                <p class="replica-hero-desc">
+                  Empathetic 24/7 mental health triage in English and Nigerian Pidgin, continuous WHO-5 well-being tracking, and clinician remote monitoring.
+                </p>
+                
+                <div class="replica-cta-wrapper">
+                  <a href="login.html?role=patient" class="replica-btn-pink">APPOINTMENTS</a>
+                </div>
+                
+                <div class="replica-learn-more">
+                  <a href="#features"><i class="fa-solid fa-arrow-down"></i> Learn More</a>
+                </div>
+              </div>
+
+              <!-- Right Column Illustration -->
+              <div class="hero-replica-right">
+                <div class="replica-illustration-wrap">
+                  <img src="hero-replica-illustration.jpg" alt="Mental Health Is A Priority Illustration" class="replica-illustration-img" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: Online Psychotherapy & Somatic Reset (Male Representation) -->
+        <div class="hero-slide">
+          <div class="container" style="max-width: 1200px; width: 100%; margin: 0 auto;">
+            <div class="hero-replica-grid">
+              <div class="hero-replica-left">
+                <div class="replica-heart-badge">
+                  <i class="fa-solid fa-lungs"></i>
+                </div>
+                <h2 class="replica-hero-title">
+                  Online Psychotherapy<br />&amp; Somatic Reset
+                </h2>
+                <p class="replica-hero-desc">
+                  Interactive 4-4-4 visual box breathing gauge, 5-4-3-2-1 room sensory grounding inputs, emergency panic escalation, and online video therapy.
+                </p>
+                <div class="replica-cta-wrapper">
+                  <a href="mobile.html" class="replica-btn-pink">SOMATIC RESET</a>
+                </div>
+                <div class="replica-learn-more">
+                  <a href="features.html"><i class="fa-solid fa-arrow-down"></i> Mobile Features</a>
+                </div>
+              </div>
+              <div class="hero-replica-right">
+                <div class="replica-illustration-wrap">
+                  <img src="hero-man-online-therapy.jpg" alt="Male Online Psychotherapy Illustration" class="replica-illustration-img" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Clinician RPM & Telemetry Gateway -->
+        <div class="hero-slide">
+          <div class="container" style="max-width: 1200px; width: 100%; margin: 0 auto;">
+            <div class="hero-replica-grid">
+              <div class="hero-replica-left">
+                <div class="replica-heart-badge">
+                  <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <h2 class="replica-hero-title">
+                  24/7 Standby &amp;<br />Telemetry Sync
+                </h2>
+                <p class="replica-hero-desc">
+                  Real-time risk triage, multi-tier caseload monitoring, longitudinal WHO-5 vs GAD-7 score curves, and direct WhatsApp escalation.
+                </p>
+                <div class="replica-cta-wrapper">
+                  <a href="dashboard.html" class="replica-btn-pink">CLINICIAN RPM</a>
+                </div>
+                <div class="replica-learn-more">
+                  <a href="login.html?role=clinician"><i class="fa-solid fa-arrow-down"></i> Clinician Portal</a>
+                </div>
+              </div>
+              <div class="hero-replica-right">
+                <div class="replica-illustration-wrap">
+                  <img src="hero-virtual-consultation.jpg" alt="Clinician Telehealth Consultation Illustration" class="replica-illustration-img" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Workday Rescue Sprints & Mind Wellness (Male Representation) -->
+        <div class="hero-slide">
+          <div class="container" style="max-width: 1200px; width: 100%; margin: 0 auto;">
+            <div class="hero-replica-grid">
+              <div class="hero-replica-left">
+                <div class="replica-heart-badge">
+                  <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h2 class="replica-hero-title">
+                  Emotional Resilience<br />&amp; Focus Sprints
+                </h2>
+                <p class="replica-hero-desc">
+                  Break task paralysis, protect professional livelihoods, and rebuild work momentum with micro-deliverable sprint timers and resilience tools.
+                </p>
+                <div class="replica-cta-wrapper">
+                  <a href="pricing.html" class="replica-btn-pink">RESCUE SPRINTS</a>
+                </div>
+                <div class="replica-learn-more">
+                  <a href="contact.html"><i class="fa-solid fa-arrow-down"></i> Partner With Us</a>
+                </div>
+              </div>
+              <div class="hero-replica-right">
+                <div class="replica-illustration-wrap">
+                  <img src="hero-man-mental-growth.jpg" alt="Male Mental Resilience Illustration" class="replica-illustration-img" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Floating Controls Bar -->
+      <div class="slider-controls-bar">
+        <div class="container" style="max-width: 1200px; width: 100%; margin: 0 auto;">
+          <div class="slider-controls-inner">
+            <div class="slider-dots-container">
+              <div class="slider-dot-item active" data-index="0">
+                <span class="dot-num">01</span>
+                <span class="dot-label">AI Triage Care</span>
+                <div class="dot-progress">
+                  <div class="dot-progress-fill"></div>
+                </div>
+              </div>
+              <div class="slider-dot-item" data-index="1">
+                <span class="dot-num">02</span>
+                <span class="dot-label">Somatic Reset</span>
+                <div class="dot-progress">
+                  <div class="dot-progress-fill"></div>
+                </div>
+              </div>
+              <div class="slider-dot-item" data-index="2">
+                <span class="dot-num">03</span>
+                <span class="dot-label">Clinician RPM</span>
+                <div class="dot-progress">
+                  <div class="dot-progress-fill"></div>
+                </div>
+              </div>
+              <div class="slider-dot-item" data-index="3">
+                <span class="dot-num">04</span>
+                <span class="dot-label">Workday Sprints</span>
+                <div class="dot-progress">
+                  <div class="dot-progress-fill"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="slider-actions">
+              <button class="slider-action-btn" id="prevHeroBtn" aria-label="Previous Slide" type="button"><i
+                  class="fa-solid fa-chevron-left"></i></button>
+              <button class="slider-action-btn" id="playPauseHeroBtn" aria-label="Pause Auto Slider" type="button"><i
+                  class="fa-solid fa-pause" id="playPauseIcon"></i></button>
+              <button class="slider-action-btn" id="nextHeroBtn" aria-label="Next Slide" type="button"><i
+                  class="fa-solid fa-chevron-right"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </header>
+
+
+
+    <!-- REST OF LANDING PAGE BODY -->
+    <div class="replica-landing-wrapper" style="padding: 40px 48px;">
+
+      <!-- ========================================================================== -->
+      <!-- ENHANCEMENT 1: INTERACTIVE LIVE FEATURE DEMOS                              -->
+      <!-- ========================================================================== -->
+      <section class="landing-section-block" style="margin-top: 10px;">
+        <div class="section-title-wrap" style="text-align: center; margin-bottom: 24px;">
+          <span class="screen-tag" style="margin: 0 auto; background: #e0f2fe; color: #0284c7;">Interactive Sandbox</span>
+          <h2 style="font-size: 1.9rem; font-weight: 800; color: #123340; margin: 8px 0 4px 0;">
+            Experience FriendnPal Features Live
+          </h2>
+          <p style="color: #58707c; font-size: 0.95rem; max-width: 600px; margin: 0 auto;">
+            Try our Pidgin AI Triage companion and 4-4-4 Box Breathing Somatic Reset directly on this page.
+          </p>
+        </div>
+
+        <div class="demos-dual-grid">
+          <!-- Live AI Pidgin Triage Sandbox Card -->
+          <div class="demo-card-panel">
+            <div class="demo-card-header">
+              <div class="demo-header-title">
+                <i class="fa-solid fa-comments" style="color: #f05a8b;"></i>
+                <span>Pidgin AI Triage Sandbox</span>
+              </div>
+              <span class="badge-live-tag"><i class="fa-solid fa-circle"></i> Live AI</span>
+            </div>
+            
+            <div class="sandbox-chat-box" id="sandboxChatBox">
+              <div class="sandbox-msg msg-ai">
+                <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+                <div class="msg-bubble">
+                  How body my padi? I dey here 24/7 to listen to how you dey feel today. Tell me wetin dey do you.
+                </div>
+              </div>
+            </div>
+
+            <div class="sandbox-quick-prompts">
+              <span class="prompt-label">Try Prompt:</span>
+              <button type="button" class="btn-quick-prompt" data-text="I dey feel overwhelmed with work today">"I dey overwhelmed"</button>
+              <button type="button" class="btn-quick-prompt" data-text="How to stop task freeze at 3am?">"Task freeze at 3am"</button>
+              <button type="button" class="btn-quick-prompt" data-text="I need breathing exercise to calm down">"Breathing exercise"</button>
+            </div>
+
+            <div class="sandbox-input-row">
+              <input type="text" id="sandboxInput" placeholder="Type a message in Pidgin or English..." />
+              <button type="button" id="sandboxSendBtn" class="btn-sandbox-send"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+          </div>
+
+          <!-- Interactive 4-4-4 Somatic Breathing Preview Card -->
+          <div class="demo-card-panel">
+            <div class="demo-card-header">
+              <div class="demo-header-title">
+                <i class="fa-solid fa-lungs" style="color: #0284c7;"></i>
+                <span>4-4-4 Somatic Box Breathing</span>
+              </div>
+              <span class="badge-live-tag" style="background: #e0f2fe; color: #0284c7;"><i class="fa-solid fa-heart-pulse"></i> Interactive</span>
+            </div>
+
+            <div class="breathing-widget-body">
+              <div class="breathing-circle-outer" id="breathingCircle">
+                <div class="breathing-circle-inner">
+                  <span class="breathing-phase-text" id="breathingPhaseText">Ready</span>
+                  <span class="breathing-timer-num" id="breathingTimerNum">4</span>
+                </div>
+              </div>
+
+              <div class="breathing-controls">
+                <button type="button" id="btnBreathingToggle" class="btn-breathing-action">
+                  <i class="fa-solid fa-play"></i> Start 4-4-4 Reset
+                </button>
+                <div class="soundscape-selector">
+                  <button type="button" class="btn-sound-chip active" data-sound="rain"><i class="fa-solid fa-cloud-rain"></i> Rain ASMR</button>
+                  <button type="button" class="btn-sound-chip" data-sound="waves"><i class="fa-solid fa-water"></i> Ocean Waves</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================== -->
+      <!-- ENHANCEMENT 2: CLINICAL TRUST & VERIFIED TESTIMONIALS                     -->
+      <!-- ========================================================================== -->
+      <section class="landing-section-block" style="margin-top: 40px;">
+        <!-- Compliance & Privacy Trust Banner -->
+        <div class="compliance-trust-banner">
+          <div class="trust-badge-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div>
+              <strong>NDPR &amp; HIPAA Compliant</strong>
+              <span>End-to-End Data Encryption</span>
+            </div>
+          </div>
+          <div class="trust-badge-item">
+            <i class="fa-solid fa-square-check"></i>
+            <div>
+              <strong>Clinical Protocols</strong>
+              <span>Validated WHO-5 &amp; GAD-7</span>
+            </div>
+          </div>
+          <div class="trust-badge-item">
+            <i class="fa-solid fa-user-doctor"></i>
+            <div>
+              <strong>Licensed Clinicians</strong>
+              <span>24/7 Response Standby</span>
+            </div>
+          </div>
+          <div class="trust-badge-item">
+            <i class="fa-solid fa-lock"></i>
+            <div>
+              <strong>100% Anonymity</strong>
+              <span>Zero Identity Tracking</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-title-wrap" style="text-align: center; margin: 32px 0 20px 0;">
+          <span class="screen-tag" style="margin: 0 auto; background: #fef3c7; color: #d97706;">Clinical Trust &amp; Reviews</span>
+          <h2 style="font-size: 1.8rem; font-weight: 800; color: #123340; margin: 8px 0 4px 0;">
+            Trusted by Patients &amp; Healthcare Leaders
+          </h2>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testi-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-quote">
+              "FriendnPal's WHO-5 telemetry gives us immediate visibility into patient distress trends between sessions. The direct crisis escalation has proven life-saving."
+            </p>
+            <div class="testi-author">
+              <div class="author-avatar"><i class="fa-solid fa-user-doctor"></i></div>
+              <div>
+                <strong>Dr. Chidi Okafor</strong>
+                <span>Consultant Psychiatrist, Abuja</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testi-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-quote">
+              "Being able to talk to an AI companion in Pidgin at 3 AM when task freeze hits changed everything for me. The 15-minute rescue sprints get me back on track."
+            </p>
+            <div class="testi-author">
+              <div class="author-avatar"><i class="fa-solid fa-user-check"></i></div>
+              <div>
+                <strong>Amina K.</strong>
+                <span>Verified Freelancer, Lagos</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testi-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testi-quote">
+              "Somatic box breathing with nocturnal soundscapes is our top recommended de-escalation tool for young adults dealing with nocturnal anxiety."
+            </p>
+            <div class="testi-author">
+              <div class="author-avatar"><i class="fa-solid fa-user-doctor"></i></div>
+              <div>
+                <strong>Dr. Folake Ademola</strong>
+                <span>Clinical Psychologist, Ibadan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================================== -->
+      <!-- ENHANCEMENT 3 & 4: CORPORATE ROI CALCULATOR & WELL-BEING QUIZ             -->
+      <!-- ========================================================================== -->
+      <section class="landing-section-block" style="margin-top: 40px;">
+        <div class="dual-tools-grid">
+          
+          <!-- Corporate Productivity ROI Calculator -->
+          <div class="tool-card-box">
+            <span class="tool-tag" style="background: #ecfdf5; color: #059669;">For Organizations &amp; HR</span>
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #123340; margin: 8px 0 12px 0;">
+              Workforce Burnout ROI Calculator
+            </h3>
+            <p style="font-size: 0.88rem; color: #58707c; margin-bottom: 20px;">
+              Calculate estimated monthly productivity hours saved and burnout reduction when providing your team with FriendnPal Rescue Sprints.
+            </p>
+
+            <div class="roi-slider-group">
+              <div class="roi-label-row">
+                <span>Team Size:</span>
+                <strong id="roiTeamSizeVal">50 Employees</strong>
+              </div>
+              <input type="range" id="roiTeamSlider" min="5" max="500" value="50" step="5" class="roi-range-input" />
+            </div>
+
+            <div class="roi-results-box">
+              <div class="roi-res-item">
+                <span class="res-num" id="roiHoursSaved">200 hrs</span>
+                <span class="res-lbl">Monthly Saved Productivity</span>
+              </div>
+              <div class="roi-res-item">
+                <span class="res-num" id="roiBurnoutRed">45%</span>
+                <span class="res-lbl">Burnout Reduction</span>
+              </div>
+            </div>
+
+            <a href="contact.html" class="btn-roi-request">Request Enterprise Demo <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+
+          <!-- Quick 3-Question Well-Being Quiz -->
+          <div class="tool-card-box">
+            <span class="tool-tag" style="background: #fde8ef; color: #f05a8b;">Quick Self-Check</span>
+            <h3 style="font-size: 1.35rem; font-weight: 800; color: #123340; margin: 8px 0 12px 0;">
+              How Is Your Well-Being Today?
+            </h3>
+            <p style="font-size: 0.88rem; color: #58707c; margin-bottom: 16px;">
+              Answer 3 quick questions for a personalized WHO-5 well-being score and instant care recommendation.
+            </p>
+
+            <div class="quiz-container-box" id="quizContainer">
+              <div class="quiz-step active" data-step="1">
+                <p class="quiz-q-text">1. How has your mood &amp; energy been over the last week?</p>
+                <div class="quiz-options-group">
+                  <button type="button" class="btn-quiz-opt" data-score="5">Full of energy &amp; cheerful</button>
+                  <button type="button" class="btn-quiz-opt" data-score="3">Fair / Moderate fatigue</button>
+                  <button type="button" class="btn-quiz-opt" data-score="1">Low energy / Overwhelmed</button>
+                </div>
+              </div>
+
+              <div class="quiz-step" data-step="2" style="display: none;">
+                <p class="quiz-q-text">2. How often do you experience task freeze or deadline stress?</p>
+                <div class="quiz-options-group">
+                  <button type="button" class="btn-quiz-opt" data-score="5">Rarely or never</button>
+                  <button type="button" class="btn-quiz-opt" data-score="3">Occasionally</button>
+                  <button type="button" class="btn-quiz-opt" data-score="1">Almost every workday</button>
+                </div>
+              </div>
+
+              <div class="quiz-step" data-step="3" style="display: none;">
+                <p class="quiz-q-text">3. How well are you sleeping at night?</p>
+                <div class="quiz-options-group">
+                  <button type="button" class="btn-quiz-opt" data-score="5">Restful 7-8 hours</button>
+                  <button type="button" class="btn-quiz-opt" data-score="3">Disturbed / Light sleep</button>
+                  <button type="button" class="btn-quiz-opt" data-score="1">Insomnia / Late night anxiety</button>
+                </div>
+              </div>
+
+              <div class="quiz-result-card" id="quizResultCard" style="display: none;">
+                <div class="quiz-score-badge" id="quizScoreVal">WHO-5 Score: 80%</div>
+                <h4 id="quizResultTitle" style="color: #123340; margin: 10px 0 6px 0;">You're doing well!</h4>
+                <p id="quizResultDesc" style="font-size: 0.85rem; color: #58707c; margin-bottom: 14px;">Maintain your flourishing trajectory with our daily gratitude journal.</p>
+                <a href="login.html?role=patient" id="quizResultCta" class="replica-btn-pink" style="padding: 10px 24px; font-size: 0.8rem;">START FREE NOW</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Side-by-Side Dual Window Test Launcher -->
+      <div class="gateway-sync-card" style="margin-top: 40px;">
+        <div class="gateway-sync-info">
+          <h4><span class="feat-icon"><svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg></span> Live Cross-Entity Telemetry Synchronizer</h4>
+          <p>
+            The Patient Mobile App and Clinician Dashboard are separate entities linked via a shared client-side backend
+            bus.
+            Open both windows side-by-side to watch assessments, somatic distress changes, and crisis alerts sync
+            instantly.
+          </p>
+        </div>
+        <button class="btn-launch-both" id="btn-launch-both">
+          <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            style="color: #ffffff;">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+          </svg>
+          <span>Open Both Side-by-Side</span>
+        </button>
+      </div>
+
+      <!-- User Persona Journey Section -->
+      <section style="margin-top: 24px;">
+        <div style="text-align: center; margin-bottom: 14px;">
+          <span class="screen-tag" style="margin: 0 auto;">Target User Segments &amp; Use Cases</span>
+          <h2 style="font-size: 1.8rem; font-weight: 800; color: #1e293b; margin: 6px 0 0 0;">
+            Designed for Every Mental Health Journey
+          </h2>
+        </div>
+
+        <div class="persona-grid">
+          <article class="persona-card">
+            <span style="font-size: 0.72rem; font-weight: 800; color: #e11d48; text-transform: uppercase;">Validation
+              Beachhead</span>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: #1e293b; margin: 0;">Amina · Nocturnal Freelancer
+            </h3>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0; line-height: 1.5;">
+              24-year-old Upwork copywriter in Garki, Abuja facing nocturnal US shifts, blackouts, and deadline task
+              freeze at 3:00 AM.
+            </p>
+            <div
+              style="font-size: 0.78rem; font-weight: 700; color: #0284c7; background: #f0f9ff; padding: 6px 10px; border-radius: 8px;">
+              Key Tools: Workday Rescue Sprints &amp; Somatic Reset
+            </div>
+          </article>
+
+          <article class="persona-card">
+            <span style="font-size: 0.72rem; font-weight: 800; color: #f59e0b; text-transform: uppercase;">Caregiver
+              &amp; Tech Lead</span>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: #1e293b; margin: 0;">Emeka · Caregiver Strain</h3>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0; line-height: 1.5;">
+              31-year-old developer in Yaba, Lagos balancing nocturnal engineering deliverables with elder hospital
+              caregiving.
+            </p>
+            <div
+              style="font-size: 0.78rem; font-weight: 700; color: #d97706; background: #fffbeb; padding: 6px 10px; border-radius: 8px;">
+              Key Tools: WHO-5 Intake &amp; ASMR Sleep Audio
+            </div>
+          </article>
+
+          <article class="persona-card">
+            <span style="font-size: 0.72rem; font-weight: 800; color: #10b981; text-transform: uppercase;">Student &amp;
+              Remission</span>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: #1e293b; margin: 0;">Fatima · Student Remission</h3>
+            <p style="font-size: 0.85rem; color: #64748b; margin: 0; line-height: 1.5;">
+              22-year-old student in Kano maintaining morning gratitude journaling and flourishing clinical baseline
+              trajectory.
+            </p>
+            <div
+              style="font-size: 0.78rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 6px 10px; border-radius: 8px;">
+              Key Tools: Gratitude Journal &amp; Peer Groups
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Dual Role-Based Entity Grid -->
+      <div class="gateway-entity-grid" style="margin-top: 24px;">
+
+        <!-- ENTITY 1: PATIENT MOBILE APPLICATION (OURPADI) -->
+        <article class="gateway-entity-card gateway-card-patient">
+          <div class="gateway-card-icon-wrap icon-wrap-patient">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+              <line x1="12" y1="18" x2="12.01" y2="18" />
+            </svg>
+          </div>
+          <span class="gateway-card-role-chip role-chip-patient">Patient Companion App</span>
+          <h2 class="gateway-card-title">OurPadi Mobile</h2>
+          <p class="gateway-card-desc">
+            Empathetic mobile application designed for young adults, nocturnal freelancers, and students navigating
+            acute panic, task freeze, caregiver burnout, and emotional fatigue.
+          </p>
+
+          <div class="gateway-features-checklist">
+            <div class="gateway-feature-item">
+              <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  <path d="m9 12 2 2 4-4" />
+                </svg></span>
+              <span>WHO-5 Well-Being Clinical Intake Assessment</span>
+            </div>
+            <div class="gateway-feature-item">
+              <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg></span>
+              <span>Pidgin &amp; English Empathetic AI Triage Companion</span>
+            </div>
+            <div class="gateway-feature-item">
+              <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></span>
+              <span>4-4-4 Somatic Box Breathing &amp; Ambient ASMR</span>
+            </div>
+            <div class="gateway-feature-item">
+              <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg></span>
+              <span>15-Minute Workday Rescue Pomodoro Sprints</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <a href="login.html?role=patient" class="gateway-launch-btn btn-launch-patient" style="flex: 1;"
+              id="btn-patient-login">
+              <span>Sign In (Patient)</span>
+            </a>
+            <a href="register.html?role=patient" class="gateway-launch-btn"
+              style="background: rgba(225, 29, 72, 0.1); color: #e11d48; border: 1px solid rgba(225, 29, 72, 0.3); flex: 1; text-align: center; text-decoration: none;"
+              id="btn-patient-reg">
+              <span>Register Patient</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- ENTITY 2: CLINICIAN RPM DASHBOARD (FRIENDNPAL) -->
+        <article class="gateway-entity-card gateway-card-clinician">
+          <div class="gateway-card-icon-wrap icon-wrap-clinician">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path
+                d="M4.5 3v5a4.5 4.5 0 0 0 9 0V3M18 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 0v3a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5" />
+            </svg>
+          </div>
+          <span class="gateway-card-role-chip role-chip-clinician">Healthcare Provider Portal</span>
+          <h2 class="gateway-card-title">FriendnPal Clinician RPM</h2>
+          <p class="gateway-card-desc">
+            Clinical command center designed for psychiatrists, psychologists, and care managers to monitor patient
+            caseloads, analyze trajectories, and intervene proactively.
+          </p>
+
+          <div class="gateway-features-checklist">
+            <div class="gateway-feature-item">
+              <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10" />
+                  <line x1="12" y1="20" x2="12" y2="4" />
+                  <line x1="6" y1="20" x2="6" y2="14" />
+                </svg></span>
+              <span>4 Vibrant KPI Metrics (48 Monitored, 3 Critical)</span>
+            </div>
+            <div class="gateway-feature-item">
+              <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                  <polyline points="17 6 23 6 23 12" />
+                </svg></span>
+              <span>Longitudinal Trajectory Chart (WHO-5 vs GAD-7)</span>
+            </div>
+            <div class="gateway-feature-item">
+              <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                </svg></span>
+              <span>Real-Time Alert Triage for Score Velocity Drops</span>
+            </div>
+            <div class="gateway-feature-item">
+              <span class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg></span>
+              <span>Multi-Tier Caseload Table (All / Crit / Mod / Norm)</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 8px;">
+            <a href="login.html?role=clinician" class="gateway-launch-btn btn-launch-clinician" style="flex: 1;"
+              id="btn-clinician-login">
+              <span>Sign In (Clinician)</span>
+            </a>
+            <a href="register.html?role=clinician" class="gateway-launch-btn"
+              style="background: rgba(2, 132, 199, 0.1); color: #0284c7; border: 1px solid rgba(2, 132, 199, 0.3); flex: 1; text-align: center; text-decoration: none;"
+              id="btn-clinician-reg">
+              <span>Register Provider</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Interactive FAQ Section -->
+      <section style="margin-top: 30px;">
+        <div style="text-align: center; margin-bottom: 16px;">
+          <span class="screen-tag" style="margin: 0 auto;">Got Questions?</span>
+          <h2 style="font-size: 1.8rem; font-weight: 800; color: #1e293b; margin: 6px 0 0 0;">
+            Frequently Asked Questions
+          </h2>
+        </div>
+
+        <div class="faq-accordion" id="faq-accordion">
+
+          <div class="faq-item active">
+            <div class="faq-question">
+              <span>What is the difference between OurPadi Mobile and FriendnPal Clinician RPM?</span>
+              <svg class="fnp-icon-sm faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+            <div class="faq-answer">
+              <strong>OurPadi Mobile</strong> is the patient companion app for continuous mood tracking, AI companion
+              triage in Nigerian Pidgin &amp; English, 4-4-4 box breathing, workday rescue sprints, and crisis support.
+              <strong>FriendnPal Clinician RPM</strong> is the web dashboard where licensed psychiatrists and care teams
+              monitor patient caseloads, score trajectories, and triage high-risk alerts.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How does the 24/7 WhatsApp emergency counselor handoff work?</span>
+              <svg class="fnp-icon-sm faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+            <div class="faq-answer">
+              When explicit danger keywords (e.g. self-harm or suicidal ideation) are detected or when the user taps the
+              Emergency Shield (`🛡️ Crisis`), the app locks chat and serves a direct 1-tap WhatsApp link (`wa.me/...`)
+              to an on-call human counselor while dispatching a high-priority alert to the Clinician RPM Dashboard.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>How is my data protected and what appears on my bank statement?</span>
+              <svg class="fnp-icon-sm faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+            <div class="faq-answer">
+              All personal journals and health telemetry are encrypted using client-side AES encryption under NDPR
+              guidelines. To preserve complete privacy and eliminate stigma, all subscription charges appear on your
+              bank statement under the neutral name <strong>"FNP Services"</strong>.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>Is human therapy included in the 5,000 NGN monthly subscription?</span>
+              <svg class="fnp-icon-sm faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+            <div class="faq-answer">
+              The 5,000 NGN monthly subscription covers unlimited AI companion triage, WHO-5 tracking, somatic box
+              breathing, workday rescue sprints, peer communities, and resource libraries. 1-on-1 human therapy sessions
+              with MDCN-certified specialists are billed pay-per-session (7,500 – 15,000 NGN).
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+  
+    <!-- HIGH-PRECISION TESLA-GRADE MULTI-COLUMN FOOTER (FULL WIDTH OF BOX) -->
+    <footer class="app-footer">
+      <div class="footer-top-grid">
+        
+        <!-- Column 1: Brand & Emergency Hotline -->
+        <div class="footer-brand-col">
+          <a href="index.html" class="footer-logo">
+            <div class="footer-logo-icon">
+              <svg class="fnp-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="10" y1="10" x2="14" y2="10"/></svg>
+            </div>
+            <div>
+              <span class="footer-logo-title">FriendnPal</span>
+              <span class="footer-logo-sub" style="display: block;">Mental Health &amp; RPM</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            Proactive digital mental care offering 24/7 AI companion triage in English &amp; Nigerian Pidgin, 4-4-4 somatic box breathing, workday rescue sprints, and clinician remote patient monitoring.
+          </p>
+          <div class="footer-emergency-pill">
+            <i class="fa-solid fa-phone-volume"></i>
+            <span>Emergency 24/7 Hotline: <strong>0800-FRIENDNPAL</strong></span>
+          </div>
+        </div>
+
+        <!-- Column 2: Ecosystem & Applications -->
+        <div>
+          <div class="footer-col-heading">Ecosystem &amp; Apps</div>
+          <ul class="footer-links-list">
+            <li><a href="index.html" class="footer-link">Home Portal</a></li>
+            <li><a href="mobile.html" class="footer-link">OurPadi Mobile App</a></li>
+            <li><a href="dashboard.html" class="footer-link">Clinician RPM Dashboard</a></li>
+            <li><a href="features.html" class="footer-link">Somatic Breath Reset</a></li>
+            <li><a href="features.html" class="footer-link">Workday Rescue Sprints</a></li>
+            <li><a href="mobile.html" class="footer-link">Pidgin AI Companion</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Portals & Account Access -->
+        <div>
+          <div class="footer-col-heading">Access &amp; Pricing</div>
+          <ul class="footer-links-list">
+            <li><a href="about.html" class="footer-link">About FriendnPal</a></li>
+            <li><a href="features.html" class="footer-link">Features Overview</a></li>
+            <li><a href="pricing.html" class="footer-link">Subscription Plans</a></li>
+            <li><a href="login.html?role=patient" class="footer-link">Patient Portal Login</a></li>
+            <li><a href="login.html?role=clinician" class="footer-link">Clinician Dashboard Login</a></li>
+            <li><a href="register.html" class="footer-link">Create Account</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Governance & Compliance -->
+        <div>
+          <div class="footer-col-heading">Clinical Governance</div>
+          <ul class="footer-links-list">
+            <li><a href="contact.html" class="footer-link">MDCN Compliance Protocol</a></li>
+            <li><a href="contact.html" class="footer-link">NDPR Data Privacy</a></li>
+            <li><a href="contact.html" class="footer-link">Crisis Escalation Protocol</a></li>
+            <li><a href="dashboard.html" class="footer-link">WHO-5 &amp; GAD-7 Curves</a></li>
+            <li><a href="contact.html" class="footer-link">24/7 Support Contact</a></li>
+            <li><a href="https://wa.me/2348003743637" class="footer-link" target="_blank">Direct WhatsApp Crisis</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div>
+          FriendnPal Healthcare Systems &copy; 2026. All Rights Reserved. Compliant with MDCN &amp; NDPR Guidelines.
+        </div>
+        <div class="footer-social-row">
+          <a href="#" class="footer-social-icon" title="Facebook" onclick="return false;"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="footer-social-icon" title="Twitter" onclick="return false;"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="footer-social-icon" title="Instagram" onclick="return false;"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="footer-social-icon" title="LinkedIn" onclick="return false;"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://wa.me/2348003743637" class="footer-social-icon" title="WhatsApp Crisis Line" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </footer>
+
+
+  </div>
+
+  <!-- Shared Backend Telemetry Engine & Interactive Hero Slider Controller -->
+  <script src="backend.js"></script>
+  <script>
+    // Hero Slider Controller Engine
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slider-dot-item');
+    const playPauseIcon = document.getElementById('playPauseIcon');
+    const heroSection = document.querySelector('.hero-slider-section');
+    const prevBtn = document.getElementById('prevHeroBtn');
+    const nextBtn = document.getElementById('nextHeroBtn');
+    const pauseBtn = document.getElementById('playPauseHeroBtn');
+
+    let currentHeroIndex = 0;
+    let heroTimer = null;
+    let isHeroAutoplay = true;
+    const HERO_SLIDE_DURATION = 6000;
+
+    function resetHeroProgressBars() {
+      document.querySelectorAll('.dot-progress-fill').forEach(fill => {
+        fill.style.transition = 'none';
+        fill.style.width = '0%';
+      });
+    }
+
+    function startHeroProgressAnimation() {
+      resetHeroProgressBars();
+      if (!isHeroAutoplay) return;
+
+      const activeDot = dots[currentHeroIndex];
+      if (!activeDot) return;
+
+      const activeFill = activeDot.querySelector('.dot-progress-fill');
+      if (!activeFill) return;
+
+      setTimeout(() => {
+        activeFill.style.transition = `width ${HERO_SLIDE_DURATION}ms linear`;
+        activeFill.style.width = '100%';
+      }, 50);
+    }
+
+    function goToHeroSlide(index) {
+      if (!slides.length) return;
+
+      slides.forEach((slide, idx) => {
+        slide.classList.remove('active');
+        if (dots[idx]) dots[idx].classList.remove('active');
+      });
+
+      currentHeroIndex = (index + slides.length) % slides.length;
+      slides[currentHeroIndex].classList.add('active');
+      if (dots[currentHeroIndex]) dots[currentHeroIndex].classList.add('active');
+
+      startHeroProgressAnimation();
+      if (isHeroAutoplay) restartHeroTimer();
+    }
+
+    function nextHeroSlide() { goToHeroSlide(currentHeroIndex + 1); }
+    function prevHeroSlide() { goToHeroSlide(currentHeroIndex - 1); }
+
+    function startHeroTimer() {
+      if (heroTimer) clearInterval(heroTimer);
+      heroTimer = setInterval(() => {
+        if (isHeroAutoplay) nextHeroSlide();
+      }, HERO_SLIDE_DURATION);
+    }
+
+    function restartHeroTimer() { startHeroTimer(); }
+
+    function toggleHeroAutoplay() {
+      isHeroAutoplay = !isHeroAutoplay;
+      if (isHeroAutoplay) {
+        if (playPauseIcon) playPauseIcon.className = 'fa-solid fa-pause';
+        startHeroTimer();
+        startHeroProgressAnimation();
+      } else {
+        if (playPauseIcon) playPauseIcon.className = 'fa-solid fa-play';
+        if (heroTimer) clearInterval(heroTimer);
+        resetHeroProgressBars();
+      }
+    }
+
+    if (dots.length) {
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => goToHeroSlide(Number(dot.dataset.index)));
+      });
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', prevHeroSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextHeroSlide);
+    if (pauseBtn) pauseBtn.addEventListener('click', toggleHeroAutoplay);
+
+    if (slides.length > 0) {
+      goToHeroSlide(0);
+      startHeroTimer();
+
+      if (heroSection) {
+        heroSection.addEventListener('mouseenter', () => {
+          if (isHeroAutoplay && heroTimer) clearInterval(heroTimer);
+        });
+
+        heroSection.addEventListener('mouseleave', () => {
+          if (isHeroAutoplay) startHeroTimer();
+        });
+      }
+    }
+
+    // Stats Counter Animation
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter-val');
+      counters.forEach(counter => {
+        const target = Number(counter.dataset.target || 0);
+        const suffix = counter.dataset.suffix || '';
+        const duration = 1300;
+        const startTime = performance.now();
+
+        function update(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const value = Math.floor(progress * target);
+          counter.textContent = value.toLocaleString() + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+      });
+    }
+
+    const statsSection = document.querySelector('.hero-stats-banner-section');
+    if (statsSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(statsSection);
+    }
+
+    // FAQ Accordion Toggle Handler
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // Side-by-Side Dual Launcher Script
+    const btnLaunchBoth = document.getElementById('btn-launch-both');
+    if (btnLaunchBoth) {
+      btnLaunchBoth.addEventListener('click', () => {
+        const screenW = window.screen.availWidth || 1440;
+        const screenH = window.screen.availHeight || 900;
+        const halfW = Math.floor(screenW / 2);
+
+        window.open('mobile.html', 'OurPadiMobileWindow', `width=${Math.min(halfW, 460)},height=${screenH},left=0,top=0,resizable=yes,scrollbars=yes`);
+
+        setTimeout(() => {
+          window.open('dashboard.html', 'ClinicianRpmWindow', `width=${halfW},height=${screenH},left=${halfW},top=0,resizable=yes,scrollbars=yes`);
+        }, 300);
+      });
+    }
+  </script>
+
+  <!-- ========================================================================== -->
+  <!-- ENHANCEMENT 5: FLOATING CRISIS HOTLINE & EMERGENCY PROTOCOL MODAL           -->
+  <!-- ========================================================================== -->
+  <button type="button" class="floating-crisis-trigger" id="btnCrisisFloating">
+    <i class="fa-solid fa-phone-volume"></i>
+    <span>Emergency Support</span>
+  </button>
+
+  <div class="crisis-modal-overlay" id="crisisModalOverlay">
+    <div class="crisis-modal-content">
+      <button type="button" class="crisis-modal-close" id="btnCrisisClose"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="crisis-modal-header">
+        <div class="crisis-icon-wrap"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div>
+          <h3 style="margin: 0 0 4px 0; color: #123340; font-size: 1.25rem;">Emergency Crisis Protocol</h3>
+          <p style="margin: 0; color: #58707c; font-size: 0.85rem; line-height: 1.4;">If you or someone you know is experiencing acute distress or self-harm risk, immediate help is available.</p>
+        </div>
+      </div>
+
+      <div class="crisis-actions-list">
+        <a href="https://wa.me/2348000000000?text=EMERGENCY%3A%20I%20need%20immediate%20crisis%20support" target="_blank" class="crisis-action-item crisis-whatsapp">
+          <i class="fa-brands fa-whatsapp"></i>
+          <div>
+            <strong>1-Tap WhatsApp Crisis Escalation</strong>
+            <span>Connect directly with standby emergency counselor</span>
+          </div>
+        </a>
+
+        <a href="tel:08008002000" class="crisis-action-item crisis-phone">
+          <i class="fa-solid fa-phone"></i>
+          <div>
+            <strong>24/7 Toll-Free National Mental Helpline</strong>
+            <span>Call 0800-800-2000 for immediate support</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="crisis-grounding-tip">
+        <strong>Quick Grounding Tip (5-4-3-2-1):</strong>
+        <span>Look around your room: Name 5 things you see, 4 things you can touch, 3 things you hear, 2 things you smell, and 1 slow deep breath.</span>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
