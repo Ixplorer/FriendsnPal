@@ -1110,8 +1110,53 @@
   </script>
 
   <!-- ========================================================================== -->
-  <!-- ENHANCEMENT 5: FLOATING CRISIS HOTLINE & EMERGENCY PROTOCOL MODAL           -->
+  <!-- FLOATING PADI AI CHATBOT & EMERGENCY PROTOCOL MODALS                      -->
   <!-- ========================================================================== -->
+  
+  <!-- Floating Padi AI Chatbot Trigger (Bottom Left) -->
+  <button type="button" class="floating-padi-trigger" id="btnPadiChatFloating" title="Chat with Padi AI 24/7">
+    <i class="fa-solid fa-robot"></i>
+    <span>Talk to Padi AI</span>
+  </button>
+
+  <!-- Floating Padi AI Chatbot Modal -->
+  <div class="padi-chat-modal-overlay" id="padiChatModalOverlay">
+    <div class="padi-chat-modal-card">
+      <div class="padi-modal-header">
+        <div class="padi-modal-brand">
+          <div class="padi-avatar-icon"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <strong>Padi AI Assistant</strong>
+            <span class="padi-online-sub"><i class="fa-solid fa-circle"></i> Online · 24/7 Triage &amp; Support</span>
+          </div>
+        </div>
+        <button type="button" class="padi-modal-close" id="btnPadiChatClose" aria-label="Close Chat"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="padi-modal-body" id="padiModalChatBox">
+        <div class="sandbox-msg msg-ai">
+          <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+          <div class="msg-bubble">
+            How body my padi! I be <strong>Padi AI</strong>, your 24/7 empathetic mental health companion. Tell me wetin dey do you today, or pick one quick option below:
+          </div>
+        </div>
+      </div>
+
+      <div class="padi-modal-prompts">
+        <span class="prompt-label">Quick Prompts:</span>
+        <button type="button" class="btn-padi-prompt" data-text="I dey feel overwhelmed with work today">"Overwhelmed"</button>
+        <button type="button" class="btn-padi-prompt" data-text="How to halt panic attack in under 10 minutes?">"Panic Attack"</button>
+        <button type="button" class="btn-padi-prompt" data-text="I need 4-4-4 box breathing exercise">"Breathing Reset"</button>
+      </div>
+
+      <div class="padi-modal-input-row">
+        <input type="text" id="padiModalInput" placeholder="Type a message in Pidgin or English..." />
+        <button type="button" id="padiModalSendBtn" class="btn-sandbox-send"><i class="fa-solid fa-paper-plane"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Emergency Crisis Support Trigger (Bottom Right) -->
   <button type="button" class="floating-crisis-trigger" id="btnCrisisFloating">
     <i class="fa-solid fa-phone-volume"></i>
     <span>Emergency Support</span>
@@ -1130,7 +1175,7 @@
       </div>
 
       <div class="crisis-actions-list">
-        <a href="https://wa.me/2348000000000?text=EMERGENCY%3A%20I%20need%20immediate%20crisis%20support" target="_blank" class="crisis-action-item crisis-whatsapp">
+        <a href="https://wa.me/2348003743637?text=EMERGENCY%3A%20I%20need%20immediate%20crisis%20support" target="_blank" class="crisis-action-item crisis-whatsapp">
           <i class="fa-brands fa-whatsapp"></i>
           <div>
             <strong>1-Tap WhatsApp Crisis Escalation</strong>

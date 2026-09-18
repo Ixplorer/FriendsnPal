@@ -2545,44 +2545,179 @@
   // LANDING PAGE ENHANCEMENT INTERACTIVE HANDLERS
   // ==========================================================================
 
-  // 1. AI PIDGIN TRIAGE SANDBOX
+  // ==========================================================================
+  // LANDING PAGE & GLOBAL AI PIDGIN CHATBOT ENGINE
+  // ==========================================================================
+
+  function generateIntelligentAIResponse(userText) {
+    const lower = userText.toLowerCase().trim();
+
+    // Panic / Hyperventilation / Chest / Anxiety
+    if (lower.includes('panic') || lower.includes('heart') || lower.includes('breath') || lower.includes('chest') || lower.includes('shake') || lower.includes('anxious') || lower.includes('tight')) {
+      return {
+        text: "I dey here with you, my padi. Put one hand for your chest right now. Take a slow deep breath (4s in, 4s hold, 4s out). Your pulse go slow down in 90 seconds. Make we try our 4-4-4 Box Breathing together!",
+        chips: [
+          { label: "🫁 Start 4-4-4 Box Breathing", action: "start-breathing" },
+          { label: "📞 24/7 Crisis Support", action: "trigger-crisis" }
+        ]
+      };
+    }
+
+    // Work / Deadline / Task Freeze / Upwork / Overwhelmed / 3am
+    if (lower.includes('overwhelm') || lower.includes('work') || lower.includes('freeze') || lower.includes('deadline') || lower.includes('upwork') || lower.includes('client') || lower.includes('3am') || lower.includes('generator')) {
+      return {
+        text: "Executive task freeze na normal thing when brain don tire for 3:00 AM. Listen to me: no try to finish everything tonight. Make we break am into one 15-minute micro-sprint! Draft 3 lines only without editing.",
+        chips: [
+          { label: "⏱️ Workday Rescue Sprints", action: "open-rescue" },
+          { label: "📲 Open OurPadi Mobile App", action: "open-mobile" }
+        ]
+      };
+    }
+
+    // Caregiver / Sickle cell / Brother / Family guilt
+    if (lower.includes('brother') || lower.includes('sickle') || lower.includes('care') || lower.includes('family') || lower.includes('guilt') || lower.includes('pressure')) {
+      return {
+        text: "Caring for a loved one while managing client deadlines is an extraordinary load. You are a strong, compassionate sister, but your body needs rest too. Setting boundaries is self-care, not guilt.",
+        chips: [
+          { label: "📖 Boundary Setting Guide", action: "open-mobile" },
+          { label: "📲 Clinician RPM Dashboard", action: "open-dashboard" }
+        ]
+      };
+    }
+
+    // Sad / Depressed / Crying / Heavy / Lonely
+    if (lower.includes('sad') || lower.includes('depress') || lower.includes('cry') || lower.includes('heavy') || lower.includes('lonely') || lower.includes('tired')) {
+      return {
+        text: "I dey hear you clearly. You no need to pretend say everything dey okay. Take things one small step at a time. Tell me how long you don dey feel this way, or make we log your WHO-5 well-being score.",
+        chips: [
+          { label: "📊 WHO-5 Assessment Quiz", action: "open-quiz" },
+          { label: "🧘 Somatic Reset", action: "start-breathing" }
+        ]
+      };
+    }
+
+    // Crisis / Harm / Suicide
+    if (lower.includes('die') || lower.includes('suicide') || lower.includes('kill') || lower.includes('end my life') || lower.includes('hurt myself')) {
+      return {
+        text: "<strong>Amina, your life is precious and you do not have to carry this alone.</strong><br>I am immediately triggering our 24/7 human crisis standby. Please connect directly with an on-call counselor on WhatsApp or call our toll-free hotline:",
+        chips: [
+          { label: "💬 WhatsApp Counselor Now", action: "open-whatsapp" },
+          { label: "🚨 Emergency Crisis Protocol", action: "trigger-crisis" }
+        ]
+      };
+    }
+
+    // Greeting / Hello / Who are you
+    if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey') || lower.includes('how far') || lower.includes('who are you') || lower.includes('padi')) {
+      return {
+        text: "How body my padi! I be <strong>Padi AI</strong>, your 24/7 empathetic mental health triage companion. I dey here to help you navigate acute panic, task freeze, and WHO-5 well-being screening in Pidgin or English. Wetin dey do you today?",
+        chips: [
+          { label: "🫁 4-4-4 Box Breathing", action: "start-breathing" },
+          { label: "⏱️ 15-Min Rescue Sprint", action: "open-rescue" }
+        ]
+      };
+    }
+
+    // Default empathetic response
+    return {
+      text: "Thank you for sharing that with me. I hear you loud and clear. No carry this heavy load alone. Would you like to ground your body with 4-4-4 box breathing, or tackle your deliverable step-by-step?",
+      chips: [
+        { label: "🫁 4-4-4 Box Breathing", action: "start-breathing" },
+        { label: "⏱️ Workday Rescue Sprints", action: "open-rescue" }
+      ]
+    };
+  }
+
+  function handleChipAction(action) {
+    if (action === 'start-breathing') {
+      const breathingSec = document.getElementById('breathingCircle');
+      if (breathingSec) breathingSec.scrollIntoView({ behavior: 'smooth' });
+      const btnToggle = document.getElementById('btnBreathingToggle');
+      if (btnToggle) btnToggle.click();
+    } else if (action === 'trigger-crisis') {
+      const overlay = document.getElementById('crisisModalOverlay');
+      if (overlay) overlay.classList.add('active');
+    } else if (action === 'open-rescue' || action === 'open-mobile') {
+      window.location.href = 'mobile.html#view-rescue';
+    } else if (action === 'open-dashboard') {
+      window.location.href = 'dashboard.html';
+    } else if (action === 'open-quiz') {
+      const quizSec = document.getElementById('quizStep1');
+      if (quizSec) quizSec.scrollIntoView({ behavior: 'smooth' });
+    } else if (action === 'open-whatsapp') {
+      window.open('https://wa.me/2348003743637?text=Hello%20FriendnPal%2C%20I%20need%20to%20speak%20with%20an%20on-call%20counselor.', '_blank');
+    }
+  }
+
+  // 1. AI PIDGIN TRIAGE SANDBOX (LANDING PAGE)
   const sandboxInput = document.getElementById('sandboxInput');
   const sandboxSendBtn = document.getElementById('sandboxSendBtn');
   const sandboxChatBox = document.getElementById('sandboxChatBox');
 
-  const pidginResponses = [
-    "No worry my padi, I hear you. Take one deep breath first. Wetin dey cause this stress for your mind today?",
-    "E dey happen to everyone. Task freeze na normal thing when brain don tire. Make we break the work into 15-minute small pieces.",
-    "I dey here with you 24/7. You wan try our 4-4-4 box breathing or make I connect you with standby doctor?",
-    "Well done as you reach out! Your WHO-5 well-being score dey stable (68%). Make we do small grounding exercise together."
-  ];
-
   function sendSandboxMsg(userText) {
     if (!userText || !sandboxChatBox) return;
 
+    // Render User Message
     const userMsgDiv = document.createElement('div');
     userMsgDiv.className = 'sandbox-msg msg-user';
     userMsgDiv.innerHTML = `
       <div class="msg-avatar"><i class="fa-solid fa-user"></i></div>
-      <div class="msg-bubble">${userText}</div>
+      <div class="msg-bubble">${escapeHTML(userText)}</div>
     `;
     sandboxChatBox.appendChild(userMsgDiv);
     sandboxChatBox.scrollTop = sandboxChatBox.scrollHeight;
 
     if (sandboxInput) sandboxInput.value = '';
 
+    // Render Typing Indicator
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'sandbox-msg msg-ai msg-typing';
+    typingDiv.innerHTML = `
+      <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+      <div class="msg-bubble" style="font-style: italic; opacity: 0.8;"><i class="fa-solid fa-ellipsis fa-beat"></i> Padi is typing...</div>
+    `;
+    sandboxChatBox.appendChild(typingDiv);
+    sandboxChatBox.scrollTop = sandboxChatBox.scrollHeight;
+
     setTimeout(() => {
-      const randomResp = pidginResponses[Math.floor(Math.random() * pidginResponses.length)];
+      if (typingDiv.parentNode) typingDiv.parentNode.removeChild(typingDiv);
+
+      const resp = generateIntelligentAIResponse(userText);
       const aiMsgDiv = document.createElement('div');
       aiMsgDiv.className = 'sandbox-msg msg-ai';
+      
+      let chipsHTML = '';
+      if (resp.chips && resp.chips.length > 0) {
+        chipsHTML = `<div class="padi-triage-chip-group">` +
+          resp.chips.map(c => `<button type="button" class="padi-chip-btn" data-action="${c.action}">${c.label}</button>`).join('') +
+          `</div>`;
+      }
+
       aiMsgDiv.innerHTML = `
         <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
-        <div class="msg-bubble">${randomResp}</div>
+        <div class="msg-bubble">${resp.text}${chipsHTML}</div>
       `;
       sandboxChatBox.appendChild(aiMsgDiv);
       sandboxChatBox.scrollTop = sandboxChatBox.scrollHeight;
       sound.playChime(587.33, 'sine', 0.25);
+
+      // Bind chips
+      aiMsgDiv.querySelectorAll('.padi-chip-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          handleChipAction(btn.getAttribute('data-action'));
+        });
+      });
     }, 450);
+  }
+
+  function escapeHTML(str) {
+    return str.replace(/[&<>'"]/g, tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag] || tag));
   }
 
   if (sandboxSendBtn && sandboxInput) {
@@ -2601,9 +2736,102 @@
     });
   });
 
+  // 1B. GLOBAL FLOATING AI CHATBOT CONTROLLER
+  const btnPadiChatFloating = document.getElementById('btnPadiChatFloating');
+  const padiChatModalOverlay = document.getElementById('padiChatModalOverlay');
+  const btnPadiChatClose = document.getElementById('btnPadiChatClose');
+  const padiModalChatBox = document.getElementById('padiModalChatBox');
+  const padiModalInput = document.getElementById('padiModalInput');
+  const padiModalSendBtn = document.getElementById('padiModalSendBtn');
+
+  function openPadiFloatModal() {
+    if (padiChatModalOverlay) padiChatModalOverlay.classList.add('active');
+  }
+
+  function closePadiFloatModal() {
+    if (padiChatModalOverlay) padiChatModalOverlay.classList.remove('active');
+  }
+
+  if (btnPadiChatFloating) btnPadiChatFloating.addEventListener('click', openPadiFloatModal);
+  if (btnPadiChatClose) btnPadiChatClose.addEventListener('click', closePadiFloatModal);
+  if (padiChatModalOverlay) {
+    padiChatModalOverlay.addEventListener('click', (e) => {
+      if (e.target === padiChatModalOverlay) closePadiFloatModal();
+    });
+  }
+
+  function sendPadiFloatMsg(userText) {
+    if (!userText || !padiModalChatBox) return;
+
+    const userMsgDiv = document.createElement('div');
+    userMsgDiv.className = 'sandbox-msg msg-user';
+    userMsgDiv.innerHTML = `
+      <div class="msg-avatar"><i class="fa-solid fa-user"></i></div>
+      <div class="msg-bubble">${escapeHTML(userText)}</div>
+    `;
+    padiModalChatBox.appendChild(userMsgDiv);
+    padiModalChatBox.scrollTop = padiModalChatBox.scrollHeight;
+
+    if (padiModalInput) padiModalInput.value = '';
+
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'sandbox-msg msg-ai msg-typing';
+    typingDiv.innerHTML = `
+      <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+      <div class="msg-bubble" style="font-style: italic; opacity: 0.8;"><i class="fa-solid fa-ellipsis fa-beat"></i> Padi is typing...</div>
+    `;
+    padiModalChatBox.appendChild(typingDiv);
+    padiModalChatBox.scrollTop = padiModalChatBox.scrollHeight;
+
+    setTimeout(() => {
+      if (typingDiv.parentNode) typingDiv.parentNode.removeChild(typingDiv);
+
+      const resp = generateIntelligentAIResponse(userText);
+      const aiMsgDiv = document.createElement('div');
+      aiMsgDiv.className = 'sandbox-msg msg-ai';
+      
+      let chipsHTML = '';
+      if (resp.chips && resp.chips.length > 0) {
+        chipsHTML = `<div class="padi-triage-chip-group">` +
+          resp.chips.map(c => `<button type="button" class="padi-chip-btn" data-action="${c.action}">${c.label}</button>`).join('') +
+          `</div>`;
+      }
+
+      aiMsgDiv.innerHTML = `
+        <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+        <div class="msg-bubble">${resp.text}${chipsHTML}</div>
+      `;
+      padiModalChatBox.appendChild(aiMsgDiv);
+      padiModalChatBox.scrollTop = padiModalChatBox.scrollHeight;
+      sound.playChime(587.33, 'sine', 0.25);
+
+      aiMsgDiv.querySelectorAll('.padi-chip-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          handleChipAction(btn.getAttribute('data-action'));
+        });
+      });
+    }, 450);
+  }
+
+  if (padiModalSendBtn && padiModalInput) {
+    padiModalSendBtn.addEventListener('click', () => {
+      sendPadiFloatMsg(padiModalInput.value.trim());
+    });
+    padiModalInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendPadiFloatMsg(padiModalInput.value.trim());
+    });
+  }
+
+  document.querySelectorAll('.btn-padi-prompt').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const promptText = btn.getAttribute('data-text');
+      sendPadiFloatMsg(promptText);
+    });
+  });
+
   // 2. INTERACTIVE 4-4-4 SOMATIC BREATHING PREVIEW
   const btnBreathingToggle = document.getElementById('btnBreathingToggle');
-  const breathingCircle = document.getElementById('breathingCircle');
+  const landingBreathingCircle = document.getElementById('breathingCircle');
   const breathingPhaseText = document.getElementById('breathingPhaseText');
   const breathingTimerNum = document.getElementById('breathingTimerNum');
 
@@ -2630,8 +2858,8 @@
 
       if (breathingPhaseText) breathingPhaseText.textContent = currentPhase.name;
       if (breathingTimerNum) breathingTimerNum.textContent = breathSecondsLeft;
-      if (breathingCircle) {
-        breathingCircle.className = `breathing-circle-outer ${currentPhase.class}`;
+      if (landingBreathingCircle) {
+        landingBreathingCircle.className = `breathing-circle-outer ${currentPhase.class}`;
       }
       sound.playChime(currentPhase.freq, 'sine', 0.35);
     }
@@ -2647,7 +2875,7 @@
         breathSecondsLeft = 4;
         if (breathingPhaseText) breathingPhaseText.textContent = 'Inhale';
         if (breathingTimerNum) breathingTimerNum.textContent = '4';
-        if (breathingCircle) breathingCircle.className = 'breathing-circle-outer inhale';
+        if (landingBreathingCircle) landingBreathingCircle.className = 'breathing-circle-outer inhale';
         sound.playChime(440, 'sine', 0.35);
         breathingInterval = setInterval(stepBreathingTimer, 1000);
       } else {
@@ -2656,7 +2884,7 @@
         clearInterval(breathingInterval);
         if (breathingPhaseText) breathingPhaseText.textContent = 'Ready';
         if (breathingTimerNum) breathingTimerNum.textContent = '4';
-        if (breathingCircle) breathingCircle.className = 'breathing-circle-outer';
+        if (landingBreathingCircle) landingBreathingCircle.className = 'breathing-circle-outer';
       }
     });
   }

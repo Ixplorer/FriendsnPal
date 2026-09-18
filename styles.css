@@ -7100,6 +7100,217 @@ body {
   border-radius: 50px;
 }
 
+/* ENHANCEMENT 5B: FLOATING PADI AI CHATBOT WIDGET */
+.floating-padi-trigger {
+  position: fixed;
+  bottom: 28px;
+  left: 28px;
+  z-index: 999;
+  background: #003152;
+  color: #ffffff;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 22px;
+  border-radius: 50px;
+  font-weight: 800;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 49, 82, 0.35);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.floating-padi-trigger:hover {
+  background: #00233c;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(0, 49, 82, 0.5);
+}
+
+.padi-chat-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 24px;
+}
+
+.padi-chat-modal-overlay.active {
+  display: flex;
+}
+
+.padi-chat-modal-card {
+  background: #ffffff;
+  border-radius: 24px;
+  max-width: 420px;
+  width: 100%;
+  height: 540px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 49, 82, 0.3);
+  border: 1px solid #e2e8f0;
+  animation: slideUpFloat 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpFloat {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.padi-modal-header {
+  background: #003152;
+  color: #ffffff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.padi-modal-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.padi-avatar-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.padi-modal-brand strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.padi-online-sub {
+  font-size: 0.72rem;
+  color: #4ade80;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.padi-modal-close {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.padi-modal-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.padi-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.padi-modal-prompts {
+  padding: 8px 12px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.padi-modal-prompts::-webkit-scrollbar { display: none; }
+
+.btn-padi-prompt {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #003152;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-padi-prompt:hover {
+  background: #003152;
+  color: #ffffff;
+  border-color: #003152;
+}
+
+.padi-modal-input-row {
+  padding: 10px 14px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.padi-modal-input-row input {
+  flex: 1;
+  border: 1px solid #cbd5e1;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.padi-modal-input-row input:focus {
+  border-color: #003152;
+}
+
+.padi-triage-chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.padi-chip-btn {
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+  color: #1e40af;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.padi-chip-btn:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+  border-color: #1d4ed8;
+}
+
 /* ENHANCEMENT 5: FLOATING CRISIS HOTLINE MODAL */
 .floating-crisis-trigger {
   position: fixed;
