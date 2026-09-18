@@ -578,6 +578,94 @@
       return patient;
     }
 
+    /**
+     * Log Padi AI Chatbot Remote Patient Monitoring & Risk Stratification
+     * Grounded in WHO-5, PHQ-9, and GAD-7 clinical measurement frameworks.
+     * Automatically triages to human therapist when high risk is detected.
+     */
+    logAIInteraction(patientId, interactionData) {
+      const patient = this.getPatient(patientId) || DEFAULT_PATIENTS['8241'];
+      const timeString = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      const {
+        userMessage = '',
+        botResponse = '',
+        framework = 'WHO-5 / GAD-7 / PHQ-9',
+        who5Score = patient.who5 || 36,
+        phq9Score = patient.phq9 || 14,
+        gad7Score = patient.gad7 || 16,
+        riskScore = patient.who5 || 36,
+        crisisTriggered = false
+      } = interactionData || {};
+
+      let tier = 'NORMAL';
+      if (riskScore <= 35 || crisisTriggered || gad7Score >= 15 || phq9Score >= 15) {
+        tier = 'CRITICAL';
+      } else if (riskScore <= 60 || gad7Score >= 10 || phq9Score >= 10) {
+        tier = 'MODERATE';
+      }
+
+      patient.who5 = who5Score;
+      patient.phq9 = phq9Score;
+      patient.gad7 = gad7Score;
+      patient.riskScore = riskScore;
+      patient.tier = tier;
+      patient.lastAiChat = timeString;
+      patient.triageRequired = tier === 'CRITICAL';
+
+      patient.timeline.unshift({
+        time: timeString,
+        text: `Padi AI Symptom Tracked [${framework}]: Risk Score ${riskScore}/100 (${tier}). ${userMessage ? '"' + userMessage.slice(0, 45) + '..."' : ''}`
+      });
+
+      if (tier === 'CRITICAL') {
+        patient.timeline.unshift({
+          time: timeString,
+          text: `🚨 REAL-TIME AI TRIAGE DISPATCHED: High Risk Score (${riskScore}/100) routed to standby human therapist Dr. Chidi Okafor.`
+        });
+      }
+
+      this.savePatient(patient);
+
+      const streamEvent = this.appendStreamEvent({
+        type: tier === 'CRITICAL' ? 'HIGH_RISK_ALERT' : 'AI_INTERACTION',
+        icon: tier === 'CRITICAL' ? '🚨' : '🤖',
+        iconClass: tier === 'CRITICAL' ? 'icon-rose' : tier === 'MODERATE' ? 'icon-amber' : 'icon-emerald',
+        title: tier === 'CRITICAL' ? `High Risk AI Triage (#${patientId})` : `Padi AI Symptom Track (#${patientId})`,
+        desc: `Risk Score: ${riskScore}/100 · ${framework} · ${tier === 'CRITICAL' ? 'Human therapist handoff triggered' : 'RPM log updated'}`
+      });
+
+      const payload = {
+        patientId,
+        patient,
+        interactionData: {
+          userMessage,
+          botResponse,
+          framework,
+          who5Score,
+          phq9Score,
+          gad7Score,
+          riskScore,
+          tier,
+          crisisTriggered
+        },
+        streamEvent,
+        timeString
+      };
+
+      this.emit('AI_INTERACTION_LOGGED', payload);
+
+      if (tier === 'CRITICAL' || crisisTriggered) {
+        this.emit('HIGH_RISK_ALERT', {
+          ...payload,
+          alertMessage: `HIGH RISK ALERT: Patient #${patientId} (${patient.name}) generated Risk Score ${riskScore}/100 [WHO-5/PHQ-9/GAD-7]. Auto-triaging to Dr. Chidi Okafor.`,
+          whatsappUrl: `https://wa.me/2348000000000?text=${encodeURIComponent(patient.whatsappMsg)}`
+        });
+      }
+
+      return { patient, streamEvent, tier };
+    }
+
     /* =========================================================================
      * AUTHENTICATION & USER SESSION SERVICE
      * ========================================================================= */

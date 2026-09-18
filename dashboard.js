@@ -575,6 +575,52 @@
         time: payload.timeString || 'Just now'
       });
     });
+
+    // 7. Padi AI Interaction & Symptom Tracking Logged
+    FriendnPalBackend.on('AI_INTERACTION_LOGGED', (payload) => {
+      const { patientId, patient, interactionData, timeString } = payload;
+      const { userMessage, framework, riskScore, tier } = interactionData || {};
+
+      prependStreamItem({
+        icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+        iconClass: tier === 'CRITICAL' ? 'icon-rose' : tier === 'MODERATE' ? 'icon-amber' : 'icon-emerald',
+        title: `Padi AI Symptom Track (#${patientId})`,
+        desc: `Risk Score: ${riskScore}/100 [${framework || 'WHO-5/PHQ-9/GAD-7'}] · User: "${userMessage ? userMessage.slice(0, 35) + '...' : 'Interaction logged'}"`,
+        time: timeString || 'Just now'
+      });
+
+      if (activeRpmPatientId === patientId && typeof inspectRpmPatient === 'function') {
+        inspectRpmPatient(patientId);
+      }
+    });
+
+    // 8. HIGH RISK REAL-TIME AI TRIAGE ALERT
+    FriendnPalBackend.on('HIGH_RISK_ALERT', (payload) => {
+      const { patientId, patient, interactionData } = payload;
+      const { riskScore, framework } = interactionData || {};
+
+      const rowScore = document.getElementById(`row-score-${patientId}`);
+      const rowBadge = document.getElementById(`row-badge-${patientId}`);
+      if (rowScore) {
+        rowScore.textContent = `${riskScore} / 100`;
+        rowScore.className = 'score-text text-rose';
+      }
+      if (rowBadge) {
+        rowBadge.textContent = 'CRITICAL';
+        rowBadge.className = 'risk-badge-bright risk-crit';
+      }
+
+      prependStreamItem({
+        icon: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+        iconClass: 'icon-rose',
+        title: `🚨 HIGH RISK AI TRIAGE DISPATCH (#${patientId})`,
+        desc: `Risk Score ${riskScore}/100 [${framework || 'WHO-5/PHQ-9/GAD-7'}] · Auto-triaged to Dr. Chidi Okafor for 1-tap therapist handoff.`,
+        time: 'Just now'
+      });
+
+      sound.playChime(349.23, 'sawtooth', 0.8);
+      showToast(`🚨 REAL-TIME AI TRIAGE: Patient #${patientId} (${patient ? patient.name : 'Amina'}) score ${riskScore}/100 triggered automatic therapist escalation!`, 7000);
+    });
   }
 
   function prependStreamItem(item) {

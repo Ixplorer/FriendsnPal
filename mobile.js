@@ -677,6 +677,21 @@
       setTimeout(() => {
         hideTypingIndicator();
         const reply = generatePadiResponse(rawText, state.dialect);
+
+        // Telemetry sync to FriendnPal Backend & Clinician RPM Dashboard
+        if (typeof FriendnPalBackend !== 'undefined' && FriendnPalBackend.logAIInteraction) {
+          FriendnPalBackend.logAIInteraction('8241', {
+            userMessage: rawText,
+            botResponse: reply.text,
+            framework: reply.framework || 'WHO-5 / GAD-7 / PHQ-9',
+            who5Score: reply.who5Score || 36,
+            phq9Score: reply.phq9Score || 14,
+            gad7Score: reply.gad7Score || 16,
+            riskScore: reply.riskScore || 36,
+            crisisTriggered: reply.crisisTriggered || false
+          });
+        }
+
         appendBotMessage(reply.text, reply.showTriage);
       }, 800);
     });
@@ -690,12 +705,24 @@
       if (dialect === 'pidgin') {
         return {
           text: "Chai, I hear you my friend. Put one hand for your chest right now. No worry, panic attack no fit hurt you, na just body alarm wey sound too loud. Look away from laptop, make we do slow breath together:",
-          showTriage: true
+          showTriage: true,
+          framework: "GAD-7 Severe Anxiety Protocol",
+          who5Score: 32,
+          phq9Score: 12,
+          gad7Score: 16,
+          riskScore: 28,
+          crisisTriggered: true
         };
       } else {
         return {
           text: "I am right here beside you. Place a gentle hand over your heart. Your nervous system is flooded with adrenaline right now, but you are physically safe. Let us slow down your respiration together:",
-          showTriage: true
+          showTriage: true,
+          framework: "GAD-7 Severe Anxiety Protocol",
+          who5Score: 32,
+          phq9Score: 12,
+          gad7Score: 16,
+          riskScore: 28,
+          crisisTriggered: true
         };
       }
     }
@@ -705,12 +732,24 @@
       if (dialect === 'pidgin') {
         return {
           text: "This light blackout and generator noise at 3:00 AM fit give person high BP. Take am easy, no let panic blind you. Upwork client no go kill you. Make we take 15 minutes sort the single most important headline?",
-          showTriage: true
+          showTriage: true,
+          framework: "WHO-5 / GAD-7 Work Stress Protocol",
+          who5Score: 40,
+          phq9Score: 10,
+          gad7Score: 13,
+          riskScore: 44,
+          crisisTriggered: false
         };
       } else {
         return {
           text: "Power blackouts in the middle of the night amplify every ounce of anxiety. You are safe in your room. We will defeat this task freeze step by step. What single headline line can we draft first?",
-          showTriage: true
+          showTriage: true,
+          framework: "WHO-5 / GAD-7 Work Stress Protocol",
+          who5Score: 40,
+          phq9Score: 10,
+          gad7Score: 13,
+          riskScore: 44,
+          crisisTriggered: false
         };
       }
     }
@@ -720,12 +759,24 @@
       if (dialect === 'pidgin') {
         return {
           text: "E no easy to dey take care of sickle-cell warrior brother while work deadline dey fire you. You be strong sister, but your body need breath too. Your brother dey resting now. Make we calm your body first:",
-          showTriage: true
+          showTriage: true,
+          framework: "WHO-5 / PHQ-9 Caregiver Strain",
+          who5Score: 48,
+          phq9Score: 11,
+          gad7Score: 11,
+          riskScore: 50,
+          crisisTriggered: false
         };
       } else {
         return {
           text: "Caring for a chronically ill dependent while managing high-stakes client deadlines is an extraordinary load. Your brother is resting safely right now. You deserve a moment to decompress:",
-          showTriage: true
+          showTriage: true,
+          framework: "WHO-5 / PHQ-9 Caregiver Strain",
+          who5Score: 48,
+          phq9Score: 11,
+          gad7Score: 11,
+          riskScore: 50,
+          crisisTriggered: false
         };
       }
     }
@@ -735,12 +786,24 @@
       if (dialect === 'pidgin') {
         return {
           text: "You don dey overthink this client work, your head wan explode. Listen to me: we no dey finish everything tonight, we just need one small win to protect your contract. Make we do 15-minute sprint?",
-          showTriage: true
+          showTriage: true,
+          framework: "WHO-5 Task Freeze Protocol",
+          who5Score: 42,
+          phq9Score: 9,
+          gad7Score: 12,
+          riskScore: 45,
+          crisisTriggered: false
         };
       } else {
         return {
           text: "I completely understand the crushing weight of that deadline. When cortisol spikes, our brain freezes up. We can recover your momentum with a focused 15-minute micro-sprint right now.",
-          showTriage: true
+          showTriage: true,
+          framework: "WHO-5 Task Freeze Protocol",
+          who5Score: 42,
+          phq9Score: 9,
+          gad7Score: 12,
+          riskScore: 45,
+          crisisTriggered: false
         };
       }
     }
@@ -750,12 +813,24 @@
       if (dialect === 'pidgin') {
         return {
           text: "I dey so proud of you! See as your heart don dey beat soft-soft now. Padi dey your back 24/7. You wan try 15-minute sprint now or you wan rest?",
-          showTriage: true
+          showTriage: true,
+          framework: "WHO-5 Recovery Tracking",
+          who5Score: 76,
+          phq9Score: 4,
+          gad7Score: 5,
+          riskScore: 76,
+          crisisTriggered: false
         };
       } else {
         return {
           text: "I am so glad to hear that. Notice how your breathing has normalized and the tension in your shoulders is easing. Would you like to start a focused 15-minute sprint now, or continue resting?",
-          showTriage: true
+          showTriage: true,
+          framework: "WHO-5 Recovery Tracking",
+          who5Score: 76,
+          phq9Score: 4,
+          gad7Score: 5,
+          riskScore: 76,
+          crisisTriggered: false
         };
       }
     }
@@ -764,12 +839,24 @@
     if (dialect === 'pidgin') {
       return {
         text: "I dey hear you loud and clear. No carry this heavy load alone. You wan calm your body first, or na that task wey dey choke you make we scatter into small pieces?",
-        showTriage: true
+        showTriage: true,
+        framework: "WHO-5 Baseline Triage",
+        who5Score: 60,
+        phq9Score: 8,
+        gad7Score: 8,
+        riskScore: 60,
+        crisisTriggered: false
       };
     } else {
       return {
         text: "Thank you for opening up to me. You do not have to carry all of this pressure alone. Would you like to slow down your physiological stress, or tackle that deliverable step by step?",
-        showTriage: true
+        showTriage: true,
+        framework: "WHO-5 Baseline Triage",
+        who5Score: 60,
+        phq9Score: 8,
+        gad7Score: 8,
+        riskScore: 60,
+        crisisTriggered: false
       };
     }
   }

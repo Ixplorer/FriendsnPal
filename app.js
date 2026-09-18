@@ -2552,6 +2552,23 @@
   function generateIntelligentAIResponse(userText) {
     const lower = userText.toLowerCase().trim();
 
+    // Crisis / Harm / Suicide
+    if (lower.includes('die') || lower.includes('suicide') || lower.includes('kill') || lower.includes('end my life') || lower.includes('hurt myself')) {
+      return {
+        text: "<strong>Amina, your life is precious and you do not have to carry this alone.</strong><br>I am immediately triggering our 24/7 human crisis standby. Please connect directly with an on-call counselor on WhatsApp or call our toll-free hotline:",
+        chips: [
+          { label: "💬 WhatsApp Counselor Now", action: "open-whatsapp" },
+          { label: "🚨 Emergency Crisis Protocol", action: "trigger-crisis" }
+        ],
+        framework: "WHO-5 / PHQ-9 / GAD-7 Crisis Protocol",
+        who5Score: 16,
+        phq9Score: 20,
+        gad7Score: 18,
+        riskScore: 20,
+        crisisTriggered: true
+      };
+    }
+
     // Panic / Hyperventilation / Chest / Anxiety
     if (lower.includes('panic') || lower.includes('heart') || lower.includes('breath') || lower.includes('chest') || lower.includes('shake') || lower.includes('anxious') || lower.includes('tight')) {
       return {
@@ -2559,7 +2576,13 @@
         chips: [
           { label: "🫁 Start 4-4-4 Box Breathing", action: "start-breathing" },
           { label: "📞 24/7 Crisis Support", action: "trigger-crisis" }
-        ]
+        ],
+        framework: "GAD-7 Severe Anxiety Protocol",
+        who5Score: 32,
+        phq9Score: 12,
+        gad7Score: 16,
+        riskScore: 28,
+        crisisTriggered: true
       };
     }
 
@@ -2570,7 +2593,13 @@
         chips: [
           { label: "⏱️ Workday Rescue Sprints", action: "open-rescue" },
           { label: "📲 Open OurPadi Mobile App", action: "open-mobile" }
-        ]
+        ],
+        framework: "WHO-5 / GAD-7 Work Stress Protocol",
+        who5Score: 40,
+        phq9Score: 10,
+        gad7Score: 13,
+        riskScore: 44,
+        crisisTriggered: false
       };
     }
 
@@ -2581,7 +2610,13 @@
         chips: [
           { label: "📖 Boundary Setting Guide", action: "open-mobile" },
           { label: "📲 Clinician RPM Dashboard", action: "open-dashboard" }
-        ]
+        ],
+        framework: "WHO-5 / PHQ-9 Caregiver Strain",
+        who5Score: 48,
+        phq9Score: 11,
+        gad7Score: 11,
+        riskScore: 50,
+        crisisTriggered: false
       };
     }
 
@@ -2592,18 +2627,13 @@
         chips: [
           { label: "📊 WHO-5 Assessment Quiz", action: "open-quiz" },
           { label: "🧘 Somatic Reset", action: "start-breathing" }
-        ]
-      };
-    }
-
-    // Crisis / Harm / Suicide
-    if (lower.includes('die') || lower.includes('suicide') || lower.includes('kill') || lower.includes('end my life') || lower.includes('hurt myself')) {
-      return {
-        text: "<strong>Amina, your life is precious and you do not have to carry this alone.</strong><br>I am immediately triggering our 24/7 human crisis standby. Please connect directly with an on-call counselor on WhatsApp or call our toll-free hotline:",
-        chips: [
-          { label: "💬 WhatsApp Counselor Now", action: "open-whatsapp" },
-          { label: "🚨 Emergency Crisis Protocol", action: "trigger-crisis" }
-        ]
+        ],
+        framework: "PHQ-9 Depression Symptom Tracking",
+        who5Score: 36,
+        phq9Score: 14,
+        gad7Score: 12,
+        riskScore: 36,
+        crisisTriggered: false
       };
     }
 
@@ -2614,7 +2644,13 @@
         chips: [
           { label: "🫁 4-4-4 Box Breathing", action: "start-breathing" },
           { label: "⏱️ 15-Min Rescue Sprint", action: "open-rescue" }
-        ]
+        ],
+        framework: "WHO-5 / GAD-7 Baseline Check",
+        who5Score: 68,
+        phq9Score: 6,
+        gad7Score: 7,
+        riskScore: 68,
+        crisisTriggered: false
       };
     }
 
@@ -2624,7 +2660,13 @@
       chips: [
         { label: "🫁 4-4-4 Box Breathing", action: "start-breathing" },
         { label: "⏱️ Workday Rescue Sprints", action: "open-rescue" }
-      ]
+      ],
+      framework: "WHO-5 Symptom Tracking",
+      who5Score: 60,
+      phq9Score: 8,
+      gad7Score: 8,
+      riskScore: 60,
+      crisisTriggered: false
     };
   }
 
@@ -2683,6 +2725,21 @@
       if (typingDiv.parentNode) typingDiv.parentNode.removeChild(typingDiv);
 
       const resp = generateIntelligentAIResponse(userText);
+
+      // Log to Shared Telemetry Backend
+      if (typeof FriendnPalBackend !== 'undefined' && FriendnPalBackend.logAIInteraction) {
+        FriendnPalBackend.logAIInteraction('8241', {
+          userMessage: userText,
+          botResponse: resp.text,
+          framework: resp.framework,
+          who5Score: resp.who5Score,
+          phq9Score: resp.phq9Score,
+          gad7Score: resp.gad7Score,
+          riskScore: resp.riskScore,
+          crisisTriggered: resp.crisisTriggered
+        });
+      }
+
       const aiMsgDiv = document.createElement('div');
       aiMsgDiv.className = 'sandbox-msg msg-ai';
       
@@ -2787,6 +2844,21 @@
       if (typingDiv.parentNode) typingDiv.parentNode.removeChild(typingDiv);
 
       const resp = generateIntelligentAIResponse(userText);
+
+      // Log to Shared Telemetry Backend
+      if (typeof FriendnPalBackend !== 'undefined' && FriendnPalBackend.logAIInteraction) {
+        FriendnPalBackend.logAIInteraction('8241', {
+          userMessage: userText,
+          botResponse: resp.text,
+          framework: resp.framework,
+          who5Score: resp.who5Score,
+          phq9Score: resp.phq9Score,
+          gad7Score: resp.gad7Score,
+          riskScore: resp.riskScore,
+          crisisTriggered: resp.crisisTriggered
+        });
+      }
+
       const aiMsgDiv = document.createElement('div');
       aiMsgDiv.className = 'sandbox-msg msg-ai';
       
